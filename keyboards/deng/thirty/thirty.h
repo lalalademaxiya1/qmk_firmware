@@ -1,4 +1,5 @@
-/*
+/* Copyright 2022 Leo Deng (@myst729)
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
@@ -14,24 +15,17 @@
  */
 #pragma once
 
-#include "config_common.h"
-#define BACKLIGHT_PWM_DRIVER PWMD1
-#define BACKLIGHT_PWM_CHANNEL 2
-#define BACKLIGHT_PAL_MODE 2
+#include "quantum.h"
 
-
-#ifdef OLED_ENABLE
-
-/* I2C for OLED - only enable defines if driver is enabled */
-#define I2C_DRIVER I2CD2
-#define I2C1_SCL_PIN        B10
-#define I2C1_SDA_PIN        B11
-#define I2C1_SCL_PAL_MODE   1
-#define I2C1_SDA_PAL_MODE   1
-#define I2C1_TIMINGR_PRESC  0U
-#define I2C1_TIMINGR_SCLDEL 3U
-#define I2C1_TIMINGR_SDADEL 1U
-#define I2C1_TIMINGR_SCLH   3U
-#define I2C1_TIMINGR_SCLL   9U
-
-#endif
+#define LAYOUT_ortho_3x10( \
+    K00, K01, K02, K03, K04, K34, K33, K32, K31, K30, \
+    K10, K11, K12, K13, K14, K44, K43, K42, K41, K40, \
+    K20, K21, K22, K23, K24, K54, K53, K52, K51, K50  \
+) { \
+    { K00, K01, K02, K03, K04 }, \
+    { K10, K11, K12, K13, K14 }, \
+    { K20, K21, K22, K23, K24 }, \
+    { K30, K31, K32, K33, K34 }, \
+    { K40, K41, K42, K43, K44 }, \
+    { K50, K51, K52, K53, K54 }  \
+}

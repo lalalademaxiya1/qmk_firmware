@@ -1,4 +1,4 @@
-/* Copyright 2022 Moritz Plattner
+/* Copyright 2022 DZTECH <moyi4681@live.cn>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,4 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "e80_1800.h"
+#pragma once
+
+#define HAL_USE_I2C TRUE
+
+#include_next <halconf.h>

@@ -1,4 +1,5 @@
-/*
+/* Copyright 2022 Mechlovin' Studio
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
@@ -12,26 +13,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
 
-#include "config_common.h"
-#define BACKLIGHT_PWM_DRIVER PWMD1
-#define BACKLIGHT_PWM_CHANNEL 2
-#define BACKLIGHT_PAL_MODE 2
+#include "orion.h"
 
+void led_init_ports(void) {
+  setPinOutput(B5);
+  setPinOutput(B6);
+  setPinOutput(B7);
+  setPinOutput(B8);
+  setPinOutput(B9);
 
-#ifdef OLED_ENABLE
+}
 
-/* I2C for OLED - only enable defines if driver is enabled */
-#define I2C_DRIVER I2CD2
-#define I2C1_SCL_PIN        B10
-#define I2C1_SDA_PIN        B11
-#define I2C1_SCL_PAL_MODE   1
-#define I2C1_SDA_PAL_MODE   1
-#define I2C1_TIMINGR_PRESC  0U
-#define I2C1_TIMINGR_SCLDEL 3U
-#define I2C1_TIMINGR_SDADEL 1U
-#define I2C1_TIMINGR_SCLH   3U
-#define I2C1_TIMINGR_SCLL   9U
-
-#endif
+layer_state_t layer_state_set_kb(layer_state_t state) {
+    state = layer_state_set_user(state);
+    writePin(B7, layer_state_cmp(state, 0));
+    writePin(B6, layer_state_cmp(state, 1));
+    writePin(B5, layer_state_cmp(state, 2));
+    writePin(B8, layer_state_cmp(state, 3));
+    writePin(B9, layer_state_cmp(state, 4));
+    return state;
+}
