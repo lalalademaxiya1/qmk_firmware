@@ -16,6 +16,8 @@
 
 #include "quantum.h"
 
+// clang-format off
+
 const matrix_row_t matrix_mask[] = {
     0b111111111111101,
     0b111111111111111,
@@ -26,7 +28,6 @@ const matrix_row_t matrix_mask[] = {
 };
 
 #ifdef RGB_MATRIX_ENABLE
-
 const is31_led PROGMEM g_is31_leds[RGB_MATRIX_LED_COUNT] = {
 /* Refer to IS31 manual for these locations
  *   driver
@@ -154,5 +155,6 @@ led_config_t g_led_config = {
         1, 1, 1,          4,          1, 4, 1, 1, 1, 1,
     }
 };
-
 #endif
+
+// clang-format on
