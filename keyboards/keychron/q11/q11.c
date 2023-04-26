@@ -94,7 +94,6 @@ static void encoder_pad_cb(void *param) {
 
 void keyboard_post_init_kb(void) {
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
-
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
