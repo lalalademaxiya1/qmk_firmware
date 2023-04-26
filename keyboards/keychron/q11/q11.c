@@ -88,7 +88,7 @@ static int16_t analogReadPin_my(pin_t pin) {
 
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 static void encoder_pad_cb(void *param) {
-    encoder_inerrupt_read((uint32_t)param & 0XFF);
+    encoder_interrupt_read((uint32_t)param & 0XFF);
 }
 #endif
 

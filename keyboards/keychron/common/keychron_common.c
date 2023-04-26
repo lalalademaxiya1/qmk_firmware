@@ -191,7 +191,7 @@ bool led_update_kb(led_t led_state) {
 
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 static void encoder_pad_cb(void *param) {
-    encoder_inerrupt_read((uint32_t)param & 0XFF);
+    encoder_interrupt_read((uint32_t)param & 0XFF);
 }
 
 __attribute__((weak)) void keyboard_post_init_kb(void) {
