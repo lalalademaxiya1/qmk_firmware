@@ -30,6 +30,14 @@
 #    define BL_TEST_KEY2 KC_HOME
 #endif
 
+#ifndef F_RESET_KEY1
+#    define BL_TEST_KEY1 KC_J
+#endif
+
+#ifndef F_RESET_KEY2
+#    define F_RESET_KEY2 KC_Z
+#endif
+
 // clang-format off
 enum {
     OS_SWITCH = 0x01,
@@ -75,7 +83,7 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
             }
             return true;
 #endif
-        case KC_J:
+        case F_RESET_KEY1:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_1;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
@@ -86,7 +94,7 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
                 timer_3s_buffer = 0;
             }
             return true;
-        case KC_Z:
+        case F_RESET_KEY2:
             if (record->event.pressed) {
                 key_press_status |= KEY_PRESS_STEP_2;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {

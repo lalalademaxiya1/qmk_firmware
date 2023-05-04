@@ -99,4 +99,5 @@
 // #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 
 /* Factory test keys */
+#define F_RESET_KEY1 KC_9
 #define FN_KEY1 MO(4)
