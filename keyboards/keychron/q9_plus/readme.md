@@ -6,7 +6,7 @@ A customizable 40% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q9 Plus
-* Hardware Availability: []()
+* Hardware Availability:
 
 Make example for this keyboard (after setting up your build environment):
 
