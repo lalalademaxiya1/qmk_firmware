@@ -170,7 +170,7 @@ void keyboard_post_init_kb(void) {
 }
 
 ISR(PCINT0_vect) {
-    encoder_inerrupt_read(0);
+    encoder_interrupt_read(0);
 }
 
 #endif

@@ -6,7 +6,7 @@
     "usb": {
         "vid": "0x3434",
         "pid": "0x0103",
-        "device_version": "1.0.3"
+        "device_version": "1.0.4"
     },
     "features": {
         "bootmagic": true,
@@ -15,7 +15,7 @@
         "dip_switch": true,
         "encoder": true,
         "extrakey": true,
-        "mousekey": false,
+        "mousekey": true,
         "nkro": true,
         "rgb_matrix": true,
         "lto": true

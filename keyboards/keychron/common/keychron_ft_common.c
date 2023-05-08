@@ -31,7 +31,7 @@
 #endif
 
 #ifndef F_RESET_KEY1
-#    define BL_TEST_KEY1 KC_J
+#    define F_RESET_KEY1 KC_J
 #endif
 
 #ifndef F_RESET_KEY2
@@ -229,48 +229,48 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(i, factory_reset_count % 2 ? 0 : RGB_RED);
             }
         }
-    } else if (led_test_mode) {
-        switch (led_test_mode) {
-            case LED_TEST_MODE_WHITE:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_WHITE);
-                } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_WHITE);
-                    }
-                }
-                break;
-            case LED_TEST_MODE_RED:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_RED);
-                } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_RED);
-                    }
-                }
-                break;
-            case LED_TEST_MODE_GREEN:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-                } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_GREEN);
-                    }
-                }
-                break;
-            case LED_TEST_MODE_BLUE:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-                } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_BLUE);
-                    }
-                }
-                break;
-            default:
-                break;
+//    } else if (led_test_mode) {
+//        switch (led_test_mode) {
+//            case LED_TEST_MODE_WHITE:
+//                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+//                    rgb_matrix_sethsv_noeeprom(HSV_WHITE);
+//                } else {
+//                    for (uint8_t i = led_min; i <= led_max; i++) {
+//                        rgb_matrix_set_color(i, RGB_WHITE);
+//                    }
+//                }
+//                break;
+//            case LED_TEST_MODE_RED:
+//                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+//                    rgb_matrix_sethsv_noeeprom(HSV_RED);
+//                } else {
+//                    for (uint8_t i = led_min; i <= led_max; i++) {
+//                        rgb_matrix_set_color(i, RGB_RED);
+//                    }
+//                }
+//                break;
+//            case LED_TEST_MODE_GREEN:
+//                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+//                    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+//                } else {
+//                    for (uint8_t i = led_min; i <= led_max; i++) {
+//                        rgb_matrix_set_color(i, RGB_GREEN);
+//                    }
+//                }
+//                break;
+//            case LED_TEST_MODE_BLUE:
+//                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
+//                    rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+//                } else {
+//                    for (uint8_t i = led_min; i <= led_max; i++) {
+//                        rgb_matrix_set_color(i, RGB_BLUE);
+//                    }
+//                }
+//                break;
+//            default:
+//                break;
         }
-    }
+//    }
     return true;
 }
 #endif
@@ -284,91 +284,91 @@ void housekeeping_task_keychron_ft(void) {
     }
 }
 
-static void system_switch_state_report(uint8_t index, bool active) {
-    uint16_t checksum         = 0;
-    uint8_t  data[RAW_EPSIZE] = {0};
-    uint8_t  payload[3]       = {0};
-
-    if (report_os_sw_state) {
-        payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
-        payload[1] = OS_SWITCH;
-#if defined(OS_SWITCH_REVERSE)
-        payload[2] = !active;
-#else
-        payload[2] = active;
-#endif
-        data[0] = 0xAB;
-        memcpy(&data[1], payload, 3);
-        for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
-            checksum += data[i];
-        }
-        data[RAW_EPSIZE - 2] = checksum & 0xFF;
-        data[RAW_EPSIZE - 1] = (checksum >> 8) & 0xFF;
-        raw_hid_send(data, RAW_EPSIZE);
-    }
-}
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    /* Send default layer state to host */
-    system_switch_state_report(index, active);
-    return true;
-}
-
-bool via_command_kb(uint8_t *data, uint8_t length) {
-    if (data[0] == 0xAB) {
-        uint16_t checksum = 0;
-        for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
-            checksum += data[i];
-        }
-        /* Verify checksum */
-        if ((checksum & 0xFF) != data[RAW_EPSIZE - 2] || checksum >> 8 != data[RAW_EPSIZE - 1]) {
-            return true;
-        }
-        switch (data[1]) {
-#if defined(RGB_MATRIX_ENABLE)
-            case FACTORY_TEST_CMD_BACKLIGHT:
-                led_test_mode = data[2];
-#    if defined(SPLIT_KEYBOARD)
-                if (led_test_mode) {
-                    light_test_state += 1;
-                    if (light_test_state == 1) {
-                        led_state = rgb_matrix_get_mode();
-                        hsv       = rgb_matrix_get_hsv();
-                    }
-                    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-                } else {
-                    if (light_test_state) {
-                        light_test_state = 0;
-                        rgb_matrix_mode_noeeprom(led_state);
-                        rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
-                    }
-                }
-#    endif
-                timer_3s_buffer = 0;
-                break;
-#endif
-#if defined(DIP_SWITCH_ENABLE)
-            case FACTORY_TEST_CMD_OS_SWITCH:
-                report_os_sw_state = data[2];
-                if (report_os_sw_state) {
-                    dip_switch_read(true);
-                }
-                break;
-#endif
-            case FACTORY_TEST_CMD_JUMP_TO_BL:
-                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
-                    if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0) bootloader_jump();
-                }
-                break;
-            case FACTORY_TEST_CMD_EEPROM_CLEAR:
-                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
-                    if (data[2]) {
-                        factory_reset();
-                    }
-                }
-                break;
-        }
-        return true;
-    }
-    return false;
-}
+//static void system_switch_state_report(uint8_t index, bool active) {
+//    uint16_t checksum         = 0;
+//    uint8_t  data[RAW_EPSIZE] = {0};
+//    uint8_t  payload[3]       = {0};
+//
+//    if (report_os_sw_state) {
+//        payload[0] = FACTORY_TEST_CMD_OS_SWITCH;
+//        payload[1] = OS_SWITCH;
+//#if defined(OS_SWITCH_REVERSE)
+//        payload[2] = !active;
+//#else
+//        payload[2] = active;
+//#endif
+//        data[0] = 0xAB;
+//        memcpy(&data[1], payload, 3);
+//        for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
+//            checksum += data[i];
+//        }
+//        data[RAW_EPSIZE - 2] = checksum & 0xFF;
+//        data[RAW_EPSIZE - 1] = (checksum >> 8) & 0xFF;
+//        raw_hid_send(data, RAW_EPSIZE);
+//    }
+//}
+//
+//bool dip_switch_update_user(uint8_t index, bool active) {
+//    /* Send default layer state to host */
+//    system_switch_state_report(index, active);
+//    return true;
+//}
+//
+//bool via_command_kb(uint8_t *data, uint8_t length) {
+//    if (data[0] == 0xAB) {
+//        uint16_t checksum = 0;
+//        for (uint8_t i = 1; i < RAW_EPSIZE - 3; i++) {
+//            checksum += data[i];
+//        }
+//        /* Verify checksum */
+//        if ((checksum & 0xFF) != data[RAW_EPSIZE - 2] || checksum >> 8 != data[RAW_EPSIZE - 1]) {
+//            return true;
+//        }
+//        switch (data[1]) {
+//#if defined(RGB_MATRIX_ENABLE)
+//            case FACTORY_TEST_CMD_BACKLIGHT:
+//                led_test_mode = data[2];
+//#    if defined(SPLIT_KEYBOARD)
+//                if (led_test_mode) {
+//                    light_test_state += 1;
+//                    if (light_test_state == 1) {
+//                        led_state = rgb_matrix_get_mode();
+//                        hsv       = rgb_matrix_get_hsv();
+//                    }
+//                    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+//                } else {
+//                    if (light_test_state) {
+//                        light_test_state = 0;
+//                        rgb_matrix_mode_noeeprom(led_state);
+//                        rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
+//                    }
+//                }
+//#    endif
+//                timer_3s_buffer = 0;
+//                break;
+//#endif
+//#if defined(DIP_SWITCH_ENABLE)
+//            case FACTORY_TEST_CMD_OS_SWITCH:
+//                report_os_sw_state = data[2];
+//                if (report_os_sw_state) {
+//                    dip_switch_read(true);
+//                }
+//                break;
+//#endif
+//            case FACTORY_TEST_CMD_JUMP_TO_BL:
+//                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
+//                    if (memcmp(&data[2], "JumpToBootloader", strlen("JumpToBootloader")) == 0) bootloader_jump();
+//                }
+//                break;
+//            case FACTORY_TEST_CMD_EEPROM_CLEAR:
+//                if (matrix[0] & 0x1 && matrix[MATRIX_ROWS - 1] & (0x1 << (MATRIX_COLS - 1))) {
+//                    if (data[2]) {
+//                        factory_reset();
+//                    }
+//                }
+//                break;
+//        }
+//        return true;
+//    }
+//    return false;
+//}
