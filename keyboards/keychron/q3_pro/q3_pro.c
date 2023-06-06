@@ -36,7 +36,9 @@ typedef struct PACKED {
 } key_combination_t;
 
 static uint32_t factory_timer_buffer;
+#ifdef BAT_LOW_LED_PIN
 static uint32_t power_on_indicator_timer_buffer;
+#endif
 static uint32_t siri_timer_buffer = 0;
 static uint8_t  mac_keycode[4]    = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
