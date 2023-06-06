@@ -1,6 +1,6 @@
 # Keychron K4 Pro
 
-![Keychron K4 Pro](https://drive.google.com/file/d/1zkIRtf7GCvkOeq1oT07D9WXIPmoieS8p/view?usp=share_link)
+![Keychron K4 Pro]([img]<https://i.imgur.com/qHe8OMH.jpg)
 
 A customizable 100 keys keyboard.
 
@@ -11,10 +11,20 @@ A customizable 100 keys keyboard.
 Make example for this keyboard (after setting up your build environment):
 
     make keychron/k4_pro/ansi/rgb:default
+    make keychron/k4_pro/ansi/white:default
+    make keychron/k4_pro/iso/rgb:default
+    make keychron/k4_pro/iso/white:default
+    make keychron/k4_pro/jis/rgb:default
+    make keychron/k4_pro/jis/white:default
 
 Flashing example for this keyboard:
 
     make keychron/k4_pro/ansi/rgb:default:flash
+    make keychron/k4_pro/ansi/white:default:flash
+    make keychron/k4_pro/iso/rgb:default:flash
+    make keychron/k4_pro/iso/white:default:flash
+    make keychron/k4_pro/jis/rgb:default:flash
+    make keychron/k4_pro/jis/white:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 

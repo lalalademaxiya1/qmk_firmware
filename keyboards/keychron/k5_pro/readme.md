@@ -1,20 +1,26 @@
 # Keychron K5 Pro
 
-![Keychron K5 Pro](https://drive.google.com/file/d/1Sfc0C-Ye0S2wW6eYiaJfluRCJI-b-UKE/view?usp=share_link)
+![Keychron K5 Pro]([img]<https://i.imgur.com/R1lcavH.jpg)
 
 A customizable 100% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron K5 Pro
-* Hardware Availability: [Keychron K5 Pro]()
+* Hardware Availability: [Keychron K5 Pro QMK/VIA Wireless Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-k5-pro-qmk-via-wireless-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
     make keychron/k5_pro/ansi/rgb:default
+    make keychron/k5_pro/ansi/white:default
+    make keychron/k5_pro/iso/rgb:default
+    make keychron/k5_pro/iso/white:default
 
 Flashing example for this keyboard:
 
     make keychron/k5_pro/ansi/rgb:default:flash
+    make keychron/k5_pro/ansi/white:default:flash
+    make keychron/k5_pro/iso/rgb:default:flash
+    make keychron/k5_pro/iso/white:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 
