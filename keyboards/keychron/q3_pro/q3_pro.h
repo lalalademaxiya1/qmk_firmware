@@ -21,6 +21,8 @@
 #    include "via.h"
 #endif
 
+#define ___ KC_NO
+
 #ifdef VIA_ENABLE
 #    define USER_START QK_KB_0
 #else

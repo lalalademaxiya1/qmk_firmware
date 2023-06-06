@@ -1,7 +1,7 @@
 // Suggested extensions
 {
   "recommendations": [
-    "EditorConfig.EditorConfig",
+    "editorconfig.editorconfig",
     "xaver.clang-format",
     "ms-vscode.cpptools",
     "bierner.github-markdown-preview",

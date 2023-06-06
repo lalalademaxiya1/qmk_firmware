@@ -19,7 +19,6 @@
 #ifdef RGB_MATRIX_ENABLE
 /* RGB Matrix driver configuration */
 #    define DRIVER_COUNT 2
-
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
 #    define DRIVER_1_LED_COUNT 47
@@ -34,6 +33,7 @@
 /* Turn off backlight on low brightness to save power */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 32
 
+/* Indication led */
 #    define CAPS_LOCK_INDEX 50
 #    define LOW_BAT_IND_INDEX 79
 
@@ -56,12 +56,10 @@
 #    define BAT_LOW_LED_PIN_ON_STATE 1
 
 #    if defined(RGB_MATRIX_ENABLE)
-#    define HOST_DEVICES_COUNT 3
-
-#   define HOST_LED_MATRIX_LIST \
-        { 17, 18, 19 }
-
-#   define BAT_LEVEL_LED_LIST \
-        { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
-        #endif
+#        define HOST_DEVICES_COUNT 3
+#        define HOST_LED_MATRIX_LIST \
+            { 17, 18, 19 }
+#        define BAT_LEVEL_LED_LIST \
+            { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+#    endif
 #endif

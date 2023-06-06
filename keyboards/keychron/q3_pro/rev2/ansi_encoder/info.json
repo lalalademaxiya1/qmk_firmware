@@ -12,7 +12,6 @@
         "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
         "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]
     },
-    "diode_direction": "ROW2COL",
     "layouts": {
         "LAYOUT_tkl_f13_ansi": {
             "layout": [
