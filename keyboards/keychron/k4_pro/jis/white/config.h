@@ -40,6 +40,7 @@
 // #if defined(LED_MATRIX_KEYPRESSES) || defined(LED_MATRIX_KEYRELEASES)
 #    define LED_MATRIX_KEYPRESSES
 #    define LED_MATRIX_KEYRELEASES
+
 /* Use first 7 channels of LED driver */
 #    define PHASE_CHANNEL MSKPHASE_7CHANNEL
 

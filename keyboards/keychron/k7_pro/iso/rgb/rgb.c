@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {0, A_11,   C_11,   B_11},
     {0, A_12,   C_12,   B_12},
     {0, A_13,   C_13,   B_13},
-    {0, A_14,   C_14,   B_14},
     {0, A_16,   C_16,   B_16},
 
     {1, I_1,    G_1,    H_1},
@@ -70,9 +69,11 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {1, I_11,   G_11,   H_11},
     {1, I_12,   G_12,   H_12},
     {1, I_14,   G_14,   H_14},
+    {0, A_14,   C_14,   B_14},
     {1, I_16,   G_16,   H_16},
 
     {1, C_1,    A_1,    B_1},
+    {1, C_2,    A_2,    B_2},
     {1, C_3,    A_3,    B_3},
     {1, C_4,    A_4,    B_4},
     {1, C_5,    A_5,    B_5},

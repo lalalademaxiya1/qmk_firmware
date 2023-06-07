@@ -1,7 +1,7 @@
 {
-  "name": "Keychron K7 Pro ANSI White",
+  "name": "Keychron K7 Pro ISO White",
   "vendorId": "0x3434",
-  "productId": "0x0273",
+  "productId": "0x0274",
   "keycodes": ["qmk_lighting"],
   "customKeycodes": [
     {"name": "Left Option", "title": "Left Option", "shortName": "LOpt"},
@@ -69,10 +69,18 @@
         "1,11",
         "1,12",
         {
-          "c": "#aaaaaa",
-          "w": 1.5
+          "x": 0.25,
+          "c": "#777777",
+          "w": 1.25,
+          "h": 2,
+          "w2": 1.5,
+          "h2": 1,
+          "x2": -0.25
         },
         "1,13",
+        {
+          "c": "#aaaaaa"
+        },
         "1,15"
       ],
       [
@@ -95,20 +103,20 @@
         "2,10",
         "2,11",
         {
-          "c": "#777777",
-          "w": 2.25
+          "c": "#aaaaaa"
         },
         "2,13",
         {
-          "c": "#aaaaaa"
+          "x": 1.25
         },
         "2,15"
       ],
       [
         {
-          "w": 2.25
+          "w": 1.25
         },
         "3,0",
+        "3,1",
         {
           "c": "#cccccc"
         },

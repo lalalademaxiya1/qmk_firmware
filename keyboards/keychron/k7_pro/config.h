@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,32 +16,12 @@
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 16
-
-/* Key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C15, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
-/* Use SPI to drive 74HC595 shift register */
-#define DRIVE_SHRIFT_REGISTER_WITH_SPI
-
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define LED_DISABLE_WHEN_USB_SUSPENDED
 
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
-
 /* DIP switch for Mac/win OS switch */
-#define DIP_SWITCH_PINS \
-    { A8 }
+#define DIP_SWITCH_PINS { A8 }
 
 /* Caps lock LED Pin */
 #define LED_CAPS_LOCK_PIN A0
@@ -94,16 +74,18 @@
 #    define BLUETOOTH_NKRO_ENABLE
 
 /* Raw hid command for factory test and bluetooth DFU */
-#   define RAW_HID_CMD 0xAA ... 0xAB
+#    define RAW_HID_CMD 0xAA ... 0xAB
 #else
 /* Raw hid command for factory test */
-#   define RAW_HID_CMD 0xAB
+#    define RAW_HID_CMD 0xAB
 #endif
 
 /* Emulated EEPROM configuration */
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
-#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR  2047
+#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
+
+/* Old default behavior of mod-taps */
+#define HOLD_ON_OTHER_KEY_PRESS
 
 /* Factory test keys */
-#define FN_KEY1 MO(2)
-#define FN_KEY2 MO(3)
+#define FN_KEY1 MO(4)
