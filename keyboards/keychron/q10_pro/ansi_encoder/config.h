@@ -22,7 +22,6 @@
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
-
 /* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 2
 #    define DRIVER_ADDR_1 0b1110111
@@ -40,9 +39,10 @@
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #    define PHASE_CHANNEL MSKPHASE_9CHANNEL
+
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F, 0x7F }
+        { 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30 }
 
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
@@ -52,6 +52,7 @@
 /* Turn off backlight on low brightness to save power */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 32
 
+/* Indication led */
 #    define CAPS_LOCK_INDEX 48
 #    define LOW_BAT_IND_INDEX 81
 
@@ -61,5 +62,4 @@
  */
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-
 #endif
