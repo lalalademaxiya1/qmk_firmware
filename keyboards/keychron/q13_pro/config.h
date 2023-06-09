@@ -17,8 +17,7 @@
 #pragma once
 
 /* DIP switch for Mac/win OS switch */
-#define DIP_SWITCH_PINS \
-    { A8 }
+#define DIP_SWITCH_PINS { A8 }
 
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
@@ -26,6 +25,8 @@
 #ifdef KC_BLUETOOTH_ENABLE
 /* Hardware configuration */
 #    define USB_BT_MODE_SELECT_PIN C15
+
+#    define CKBT51_RESET_PIN A9
 #    define CKBT51_INT_INPUT_PIN A5
 #    define BLUETOOTH_INT_INPUT_PIN A6
 
@@ -39,10 +40,10 @@
 #        define LED_DRIVER_SHUTDOWN_PIN C14
 
 #        define HOST_LED_MATRIX_LIST \
-            { 17, 18, 19 }
+            { 20, 21, 22 }
 
 #        define BAT_LEVEL_LED_LIST \
-            { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+            { 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 }
 
 /* Backlit disable timeout when keyboard is disconnected(unit: second) */
 #        define DISCONNECTED_BACKLIGHT_DISABLE_TIMEOUT 40
@@ -68,9 +69,10 @@
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
+/* Old default behavior of mod-taps */
+#define HOLD_ON_OTHER_KEY_PRESS
+
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
-
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
+#define BL_TEST_KEY2 KC_DEL

@@ -31,10 +31,10 @@ static inline void HC595_delay(uint16_t n) {
     };
 }
 
-static void HC595_output(uint16_t data, bool bit) {
+static void HC595_output(uint32_t data, bool bit) {
     uint8_t i;
     uint8_t n = 1;
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < (MATRIX_COLS - DIRECT_COL_NUM); i++) {
         writePinLow(HC595_SHCP);
 
         if (data & 0x1) {
@@ -74,17 +74,17 @@ static void unselect_col(void) {
 }
 
 static void unselect_cols(void) {
-    HC595_output(0xFFFF, 0);
+    HC595_output(0xFFFFFFFF, 0);
 }
 
 void select_all_cols(void) {
-    HC595_output(0x0000, 0);
+    HC595_output(0x00000000, 0);
 }
 
 void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col) {
     // Select col
     select_col(current_col); // select col
-    HC595_delay(100);
+    HC595_delay(200);
 
     // For each row...
     for (uint8_t row_index = 0; row_index < MATRIX_ROWS; row_index++) {
@@ -99,7 +99,7 @@ void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col)
     }
 
     unselect_col();
-    HC595_delay(100);
+    HC595_delay(200);
 }
 
 void matrix_init_custom(void) {
