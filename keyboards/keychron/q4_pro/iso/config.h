@@ -20,7 +20,7 @@
 /* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 1
 #    define DRIVER_ADDR_1 0b1110100
-#    define DRIVER_1_LED_TOTAL 61
+#    define DRIVER_1_LED_TOTAL 62
 #    define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
 
 /* Set to infinit, which is use in USB mode by default */
@@ -32,8 +32,9 @@
 /* Turn off backllit if brightness value is low */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
-#    define CAPS_LOCK_INDEX 28   // Caps Lock
-#    define LOW_BAT_IND_INDEX 56 // Space
+/* Indication led */
+#    define CAPS_LOCK_INDEX 27   // Caps Lock
+#    define LOW_BAT_IND_INDEX 57 // Space
 
 /* RGB Matrix Animation modes. Explicitly enabled
  * For full list of effects, see:

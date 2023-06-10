@@ -1,20 +1,22 @@
 # Keychron Q4 Pro
 
-![Keychron Q4 Pro]()
+![Keychron Q4 Pro]
 
 A customizable 60% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q4 Pro
-* Hardware Availability:[]()
+* Hardware Availability:
 
 Make example for this keyboard (after setting up your build environment):
 
     make keychron/q4_pro/ansi:default
+    make keychron/q4_pro/iso:default
 
 Flashing example for this keyboard:
 
     make keychron/q4_pro/ansi:default:flash
+    make keychron/q4_pro/iso:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 

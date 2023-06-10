@@ -143,12 +143,14 @@ void keyboard_post_init_kb(void) {
     dip_switch_read(true);
 
 #ifdef KC_BLUETOOTH_ENABLE
+    /* Currently we don't use this reset pin */
+    palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
+    palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
+
     /* IMPORTANT: DO NOT enable internal pull-up resistor
      * as there is an external pull-down resistor.
      */
     palSetLineMode(USB_BT_MODE_SELECT_PIN, PAL_MODE_INPUT);
-    palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
-    palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
 
     ckbt51_init(false);
     bluetooth_init();
