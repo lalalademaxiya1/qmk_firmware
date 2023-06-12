@@ -18,8 +18,9 @@
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+#define LED_DISABLE_WHEN_USB_SUSPENDED
 
-/* DIP switch for Mac/win OS switch */
+/* DIP switch */
 #define DIP_SWITCH_PINS \
     { A8 }
 
@@ -32,7 +33,7 @@
 
 #ifdef KC_BLUETOOTH_ENABLE
 /* Hardware configuration */
-#    define USB_BT_MODE_SELECT_PIN C15
+#    define USB_BT_MODE_SELECT_PIN A4
 
 #    define CKBT51_RESET_PIN A9
 #    define CKBT51_INT_INPUT_PIN A5
@@ -41,15 +42,26 @@
 #    define USB_POWER_SENSE_PIN B1
 #    define USB_POWER_CONNECTED_LEVEL 0
 
+#    define BAT_LOW_LED_PIN B5
+#    define BAT_LOW_LED_PIN_ON_STATE 1
+
+#    define HOST_DEVICES_COUNT 3
+
 #    if defined(RGB_MATRIX_ENABLE)
 
 #        define LED_DRIVER_SHUTDOWN_PIN C14
+
+#        define HOST_LED_MATRIX_LIST \
+            { 16, 17, 18 }
+
+#        define BAT_LEVEL_LED_LIST \
+            { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
 
 /* Backlit disable timeout when keyboard is disconnected(unit: second) */
 #        define DISCONNECTED_BACKLIGHT_DISABLE_TIMEOUT 40
 
 /* Backlit disable timeout when keyboard is connected(unit: second) */
-#        define CONNECTED_BACKLIGHT_DISABLE_TIMEOUT 600
+#        define CONNECTED_BACKLIGHT_DISABLE_TIMEOUT 30
 #    endif
 
 /* Keep USB connection in blueooth mode */
@@ -63,10 +75,7 @@
 #else
 /* Raw hid command for factory test */
 #    define RAW_HID_CMD 0xAB
-#endif // KC_BLUETOOTH_ENABLE
-
-/* Encoder Configuration */
-#define ENCODER_DEFAULT_POS 0x3
+#endif
 
 /* Emulated EEPROM configuration */
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
@@ -75,9 +84,5 @@
 /* Old default behavior of mod-taps */
 #define HOLD_ON_OTHER_KEY_PRESS
 
-/* For automatic testing to pass */
-#define MATRIX_DELAY_ENABLE
-
 /* Factory test keys */
-#define FN_KEY1 MO(1)
-#define FN_KEY2 MO(3)
+#define FN_KEY1 MO(4)

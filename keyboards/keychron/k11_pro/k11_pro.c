@@ -1,4 +1,4 @@
-/* Copyright 2023 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,8 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q3_pro.h"
-
+#include "k11_pro.h"
 #ifdef KC_BLUETOOTH_ENABLE
 #    include "ckbt51.h"
 #    include "bluetooth.h"
@@ -30,15 +29,15 @@
 #    include "factory_test.h"
 #endif
 
+#define POWER_ON_LED_DURATION 3000
+
 typedef struct PACKED {
     uint8_t len;
     uint8_t keycode[3];
 } key_combination_t;
 
 static uint32_t factory_timer_buffer;
-#ifdef BAT_LOW_LED_PIN
 static uint32_t power_on_indicator_timer_buffer;
-#endif
 static uint32_t siri_timer_buffer = 0;
 static uint8_t  mac_keycode[4]    = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
@@ -60,16 +59,14 @@ static void pairing_key_timer_cb(void *arg) {
 }
 #endif
 
-#ifdef DIP_SWITCH_ENABLE
 bool dip_switch_update_kb(uint8_t index, bool active) {
     if (index == 0) {
-        default_layer_set(1UL << (active ? 2 : 0));
+        default_layer_set(1UL << (active ? 0 : 1));
     }
     dip_switch_update_user(index, active);
 
     return true;
 }
-#endif
 
 #ifdef KC_BLUETOOTH_ENABLE
 bool process_record_kb_bt(uint16_t keycode, keyrecord_t *record) {
@@ -136,10 +133,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#ifdef KC_BLUETOOTH_ENABLE
+#if defined(KC_BLUETOOTH_ENABLE) && defined(ENCODER_ENBALE)
 static void encoder0_pad_cb(void *param) {
-    (void)param;
-    encoder_inerrupt_read(0);
+    encoder_inerrupt_read((uint32_t)param);
 }
 #endif
 
@@ -160,21 +156,21 @@ void keyboard_post_init_kb(void) {
     ckbt51_init(false);
     bluetooth_init();
 
+#    ifdef ENCODER_ENBALE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
         palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
         palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
-        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
-        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, &i);
+        palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, &i);
     }
+#    endif
+
 #endif
 
-#ifdef BAT_LOW_LED_PIN
     power_on_indicator_timer_buffer = sync_timer_read32() | 1;
     writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
-#endif
-
     keyboard_post_init_user();
 }
 
@@ -189,6 +185,15 @@ void matrix_scan_kb(void) {
         }
     }
 
+    if (power_on_indicator_timer_buffer) {
+        if (sync_timer_elapsed32(power_on_indicator_timer_buffer) > POWER_ON_LED_DURATION) {
+            power_on_indicator_timer_buffer = 0;
+            writePin(BAT_LOW_LED_PIN, !BAT_LOW_LED_PIN_ON_STATE);
+        } else {
+            writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
+        }
+    }
+
     if (siri_timer_buffer && sync_timer_elapsed32(siri_timer_buffer) > 500) {
         siri_timer_buffer = 0;
         unregister_code(KC_LGUI);
@@ -198,7 +203,6 @@ void matrix_scan_kb(void) {
 #ifdef FACTORY_RESET_TASK
     FACTORY_RESET_TASK();
 #endif
-
     matrix_scan_user();
 }
 
@@ -237,18 +241,18 @@ void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
 }
 
 void ckbt51_default_ack_handler(uint8_t *data, uint8_t len) {
-    if (data[1] == 0x45) {
-        module_param_t param = {.event_mode             = 0x02,
-                                .connected_idle_timeout = 7200,
-                                .pairing_timeout        = 180,
-                                .pairing_mode           = 0,
-                                .reconnect_timeout      = 5,
-                                .report_rate            = 90,
-                                .vendor_id_source       = 1,
-                                .verndor_id             = 0, // Must be 0x3434
-                                .product_id             = PRODUCT_ID};
-        ckbt51_set_param(&param);
-    }
+    // if (data[1] == 0x45) {
+    //     module_param_t param = {.event_mode             = 0x02,
+    //                             .connected_idle_timeout = 7200,
+    //                             .pairing_timeout        = 180,
+    //                             .pairing_mode           = 0,
+    //                             .reconnect_timeout      = 5,
+    //                             .report_rate            = 90,
+    //                             .vendor_id_source       = 1,
+    //                             .verndor_id             = 0, // Must be 0x3434
+    //                             .product_id             = PRODUCT_ID};
+    //     ckbt51_set_param(&param);
+    // }
 }
 
 void bluetooth_pre_task(void) {
@@ -261,7 +265,7 @@ void bluetooth_pre_task(void) {
         }
     }
 }
-#endif // KC_BLUETOOTH_ENABLE
+#endif
 
 void battery_calculte_voltage(uint16_t value) {
     uint16_t voltage = ((uint32_t)value) * 2246 / 1000;
@@ -277,7 +281,6 @@ void battery_calculte_voltage(uint16_t value) {
         voltage += (30 * totalBuf / LED_MATRIX_LED_COUNT / 255);
     }
 #endif
-
 #ifdef RGB_MATRIX_ENABLE
     if (rgb_matrix_is_enabled()) {
         uint32_t totalBuf = 0;
