@@ -1,10 +1,11 @@
 {
     "usb": {
-        "pid": "0x0640",
-        "device_version": "1.0.1"
+        "pid": "0x02B6",
+        "device_version": "1.0.0"
     },
     "features": {
-        "encoder": true
+        "encoder": true,
+        "rgb_matrix": true
     },
     "encoder": {
         "rotary": [
@@ -91,6 +92,30 @@
         }
     },
     "rgb_matrix": {
+        "driver": "CKLED2001",
+        "animations": {
+            "breathing": true,
+            "band_spiral_val": true,
+            "cycle_all": true,
+            "cycle_left_right": true,
+            "cycle_up_down": true,
+            "rainbow_moving_chevron": true,
+            "cycle_out_in": true,
+            "cycle_out_in_dual": true,
+            "cycle_pinwheel": true,
+            "cycle_spiral": true,
+            "dual_beacon": true,
+            "rainbow_beacon": true,
+            "jellybean_raindrops": true,
+            "pixel_rain": true,
+            "typing_heatmap": true,
+            "digital_rain": true,
+            "solid_reactive_simple": true,
+            "solid_reactive_multiwide": true,
+            "solid_reactive_multinexus": true,
+            "splash": true,
+            "solid_splash": true
+        },
         "layout": [
             {"matrix":[0, 0],  "flags":1, "x":7,   "y":1},
             {"matrix":[0, 1],  "flags":4, "x":20,  "y":1},

@@ -1,10 +1,10 @@
 {
     "usb": {
-        "pid": "0x02B0",
+        "pid": "0x02B3",
         "device_version": "1.0.0"
     },
     "features": {
-        "rgb_matrix": true
+        "led_matrix": true
     },
     "layouts": {
         "LAYOUT_69_ansi": {
@@ -85,30 +85,25 @@
             ]
         }
     },
-    "rgb_matrix": {
+    "led_matrix": {
         "driver": "CKLED2001",
         "animations": {
+            "none": true,
+            "solid": true,
             "breathing": true,
-            "band_spiral_val": true,
-            "cycle_all": true,
+            "band_pinwheel": true,
+            "band_spiral": true,
             "cycle_left_right": true,
             "cycle_up_down": true,
-            "rainbow_moving_chevron": true,
             "cycle_out_in": true,
-            "cycle_out_in_dual": true,
-            "cycle_pinwheel": true,
-            "cycle_spiral": true,
             "dual_beacon": true,
-            "rainbow_beacon": true,
-            "jellybean_raindrops": true,
-            "pixel_rain": true,
-            "typing_heatmap": true,
-            "digital_rain": true,
             "solid_reactive_simple": true,
             "solid_reactive_multiwide": true,
             "solid_reactive_multinexus": true,
-            "splash": true,
-            "solid_splash": true
+            "solid_splash": true,
+            "wave_left_right": true,
+            "wave_up_down": true,
+            "effect_max": true
         },
         "layout": [
             {"matrix":[0, 0],  "flags":1, "x":7,   "y":1},

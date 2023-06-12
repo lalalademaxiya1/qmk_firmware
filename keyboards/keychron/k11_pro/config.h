@@ -47,7 +47,7 @@
 
 #    define HOST_DEVICES_COUNT 3
 
-#    if defined(RGB_MATRIX_ENABLE)
+#    if defined(RGB_MATRIX_ENABLE) || defined(LED_MATRIX_ENABLE)
 
 #        define LED_DRIVER_SHUTDOWN_PIN C14
 
