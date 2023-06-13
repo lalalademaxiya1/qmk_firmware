@@ -34,6 +34,7 @@
 /* Turn off backllit if brightness value is low */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
+/* Indication led */
 #    define NUM_LOCK_INDEX 37    // NumLock
 #    define LOW_BAT_IND_INDEX 99 // Space
 
@@ -46,5 +47,5 @@
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14 }
+        { 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15 }
 #endif

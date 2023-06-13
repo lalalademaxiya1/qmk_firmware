@@ -49,7 +49,9 @@
     },
     "matrix_pins": {
         "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-        "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]
+        "rows": ["B5", "B4", "B3", "A15", "A14", "A13"],
+        "custom": true,
+        "custom_lite": true
     },
     "diode_direction": "ROW2COL",
     "encoder": {

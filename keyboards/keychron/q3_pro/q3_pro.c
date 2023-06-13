@@ -35,12 +35,14 @@ typedef struct PACKED {
     uint8_t keycode[3];
 } key_combination_t;
 
-static uint32_t factory_timer_buffer;
 #ifdef BAT_LOW_LED_PIN
 static uint32_t power_on_indicator_timer_buffer;
+#    define POWER_ON_LED_DURATION 3000
 #endif
-static uint32_t siri_timer_buffer = 0;
-static uint8_t  mac_keycode[4]    = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
+
+static uint32_t factory_timer_buffer = 0;
+static uint32_t siri_timer_buffer    = 0;
+static uint8_t  mac_keycode[4]       = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_TAB}},        // Task (win)
@@ -136,7 +138,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#ifdef KC_BLUETOOTH_ENABLE
+#if defined(KC_BLUETOOTH_ENABLE) && defined(ENCODER_ENBALE)
 static void encoder0_pad_cb(void *param) {
     (void)param;
     encoder_inerrupt_read(0);
@@ -160,6 +162,7 @@ void keyboard_post_init_kb(void) {
     ckbt51_init(false);
     bluetooth_init();
 
+#    ifdef ENCODER_ENBALE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
@@ -168,6 +171,7 @@ void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
         palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
     }
+#    endif
 #endif
 
 #ifdef BAT_LOW_LED_PIN
@@ -186,6 +190,15 @@ void matrix_scan_kb(void) {
             palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
             wait_ms(5);
             palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
+        }
+    }
+
+    if (power_on_indicator_timer_buffer) {
+        if (sync_timer_elapsed32(power_on_indicator_timer_buffer) > POWER_ON_LED_DURATION) {
+            power_on_indicator_timer_buffer = 0;
+            writePin(BAT_LOW_LED_PIN, !BAT_LOW_LED_PIN_ON_STATE);
+        } else {
+            writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
         }
     }
 

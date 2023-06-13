@@ -1,69 +1,8 @@
 {
-  "name": "Keychron Q6 Pro ANSI Knob",
+  "name": "Keychron K5 Pro JIS White",
   "vendorId": "0x3434",
-  "productId": "0x0660",
+  "productId": "0x0255",
   "keycodes": ["qmk_lighting"],
-  "menus": [
-    {
-      "label": "Lighting",
-      "content": [
-        {
-          "label": "Backlight",
-          "content": [
-            {
-              "label": "Brightness",
-              "type": "range",
-              "options": [0, 255],
-              "content": ["id_qmk_rgb_matrix_brightness", 3, 1]
-            },
-            {
-              "label": "Effect",
-              "type": "dropdown",
-              "content": ["id_qmk_rgb_matrix_effect", 3, 2],
-              "options": [
-                ["None", 0],
-                ["Solid Color", 1],
-                ["Breathing", 2],
-                ["Band Spiral Val", 3],
-                ["Cycle All", 4],
-                ["Cycle Left Right", 5],
-                ["Cycle Up Down", 6],
-                ["Rainbow Moving Chevron", 7],
-                ["Cycle Out In", 8],
-                ["Cycle Out In Dual", 9],
-                ["Cycle Pinwheel", 10],
-                ["Cycle Spiral", 11],
-                ["Dual Beacon", 12],
-                ["Rainbow Beacon", 13],
-                ["Jellybean Raindrops", 14],
-                ["Pixel Rain", 15],
-                ["Typing Heatmap", 16],
-                ["Digital Rain", 17],
-                ["Reactive Simple", 18],
-                ["Reactive Multiwide", 19],
-                ["Reactive Multinexus", 20],
-                ["Splash", 21],
-                ["Solid Splash", 22]
-              ]
-            },
-            {
-              "showIf": "{id_qmk_rgb_matrix_effect} > 1",
-              "label": "Effect Speed",
-              "type": "range",
-              "options": [0, 255],
-              "content": ["id_qmk_rgb_matrix_effect_speed", 3, 3]
-            },
-            {
-              "showIf": "{id_qmk_rgb_matrix_effect} != 0 && ( {id_qmk_rgb_matrix_effect} < 4 || {id_qmk_rgb_matrix_effect} == 18 || ({id_qmk_rgb_matrix_effect} > 17 && {id_qmk_rgb_matrix_effect} != 21) ) ",
-              "label": "Color",
-              "type": "color",
-              "content": ["id_qmk_rgb_matrix_color", 3, 4]
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "customKeycodes": [
     {"name": "Left Option", "title": "Left Option", "shortName": "LOpt"},
     {"name": "Right Option", "title": "Right Option", "shortName": "ROpt"},
@@ -86,9 +25,9 @@
         {
           "c": "#777777"
         },
-        "0,0\nESC",
+        "0,0",
         {
-          "x": 0.25,
+          "x": 1,
           "c": "#cccccc"
         },
         "0,1",
@@ -96,7 +35,7 @@
         "0,3",
         "0,4",
         {
-          "x": 0.25,
+          "x": 0.5,
           "c": "#aaaaaa"
         },
         "0,5",
@@ -104,17 +43,13 @@
         "0,7",
         "0,8",
         {
-          "x": 0.25,
+          "x": 0.5,
           "c": "#cccccc"
         },
         "0,9",
         "0,10",
         "0,11",
         "0,12",
-        {
-          "x": 0.25
-        },
-        "0,13\n\n\n\n\n\n\n\n\ne0",
         {
           "x": 0.25,
           "c": "#aaaaaa"
@@ -153,10 +88,10 @@
         "1,11",
         "1,12",
         {
-          "c": "#aaaaaa",
-          "w": 2
+          "c": "#aaaaaa"
         },
         "1,13",
+        "0,13",
         {
           "x": 0.25
         },
@@ -194,12 +129,18 @@
         "2,11",
         "2,12",
         {
-          "c": "#aaaaaa",
-          "w": 1.5
+          "x": 0.25,
+          "c": "#777777",
+          "w": 1.25,
+          "h": 2,
+          "w2": 1.5,
+          "h2": 1,
+          "x2": -0.25
         },
         "2,13",
         {
-          "x": 0.25
+          "x": 0.25,
+          "c": "#aaaaaa"
         },
         "2,14",
         "2,15",
@@ -237,12 +178,11 @@
         "3,10",
         "3,11",
         {
-          "c": "#777777",
-          "w": 2.25
+          "c": "#aaaaaa"
         },
         "3,13",
         {
-          "x": 3.5,
+          "x": 4.75,
           "c": "#cccccc"
         },
         "3,17",
@@ -269,8 +209,11 @@
         "4,10",
         "4,11",
         {
-          "c": "#aaaaaa",
-          "w": 2.75
+          "c": "#aaaaaa"
+        },
+        "4,12",
+        {
+          "w": 1.75
         },
         "4,13",
         {
@@ -296,31 +239,26 @@
           "w": 1.25
         },
         "5,0",
-        {
-          "w": 1.25
-        },
         "5,1",
         {
           "w": 1.25
         },
         "5,2",
+        "5,3",
         {
           "c": "#cccccc",
-          "w": 6.25
+          "w": 5
         },
         "5,6",
         {
-          "c": "#aaaaaa",
+          "c": "#aaaaaa"
+        },
+        "5,9",
+        {
           "w": 1.25
         },
         "5,10",
-        {
-          "w": 1.25
-        },
         "5,11",
-        {
-          "w": 1.25
-        },
         "5,12",
         {
           "w": 1.25
@@ -338,7 +276,7 @@
           "c": "#cccccc",
           "w": 2
         },
-        "5,18",
+        "5,17",
         "5,19"
       ]
     ]
