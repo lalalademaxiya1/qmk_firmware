@@ -21,7 +21,8 @@
 #define LED_DISABLE_WHEN_USB_SUSPENDED
 
 /* DIP switch for Mac/win OS switch */
-#define DIP_SWITCH_PINS { A8 }
+#define DIP_SWITCH_PINS \
+    { A8 }
 
 /* Caps lock LED Pin */
 #define LED_CAPS_LOCK_PIN A0

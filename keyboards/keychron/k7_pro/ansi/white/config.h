@@ -41,10 +41,10 @@
 #    define LED_MATRIX_KEYPRESSES
 #    define LED_MATRIX_KEYRELEASES
 
-/* Use first 6 channels of LED driver */
-#    define PHASE_CHANNEL MSKPHASE_6CHANNEL
+/* Use first 5 channels of LED driver */
+#    define PHASE_CHANNEL MSKPHASE_5CHANNEL
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60 }
+        { 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18 }
 #endif
