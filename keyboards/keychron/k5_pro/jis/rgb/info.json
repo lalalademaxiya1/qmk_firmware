@@ -1,6 +1,6 @@
 {
     "usb": {
-        "pid": "0x0251",
+        "pid": "0x0252",
         "device_version": "1.0.0"
     },
     "features": {

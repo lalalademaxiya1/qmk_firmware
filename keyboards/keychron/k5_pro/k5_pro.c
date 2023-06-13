@@ -221,18 +221,18 @@ static void ckbt51_param_init(void) {
 }
 
 void ckbt51_default_ack_handler(uint8_t *data, uint8_t len) {
-    // if (data[1] == 0x45) {
-    //     module_param_t param = {.event_mode             = 0x02,
-    //                             .connected_idle_timeout = 7200,
-    //                             .pairing_timeout        = 180,
-    //                             .pairing_mode           = 0,
-    //                             .reconnect_timeout      = 5,
-    //                             .report_rate            = 90,
-    //                             .vendor_id_source       = 1,
-    //                             .verndor_id             = 0, // Must be 0x3434
-    //                             .product_id             = PRODUCT_ID};
-    //     ckbt51_set_param(&param);
-    // }
+    if (data[1] == 0x45) {
+        module_param_t param = {.event_mode             = 0x02,
+                                .connected_idle_timeout = 7200,
+                                .pairing_timeout        = 180,
+                                .pairing_mode           = 0,
+                                .reconnect_timeout      = 5,
+                                .report_rate            = 90,
+                                .vendor_id_source       = 1,
+                                .verndor_id             = 0, // Must be 0x3434
+                                .product_id             = PRODUCT_ID};
+        ckbt51_set_param(&param);
+    }
 }
 
 void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
