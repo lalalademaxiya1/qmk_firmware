@@ -31,7 +31,6 @@
 
 #ifdef BAT_LOW_LED_PIN
 static uint32_t power_on_indicator_timer_buffer;
-static uint32_t power_on_indicator_timer_buffer;
 #    define POWER_ON_LED_DURATION 3000
 #endif
 

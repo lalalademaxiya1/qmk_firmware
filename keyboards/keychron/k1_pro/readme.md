@@ -1,6 +1,6 @@
 # Keychron K1 Pro
 
-![Keychron K1 Pro](https://drive.google.com/file/d/132Qd8etzeb0t0GjfxGxMZ2h9Irr-XUj_/view?usp=share_link)
+![Keychron K1 Pro](https://i.imgur.com/E6KPWBD.jpg)
 
 A customizable 80% TKL keyboard.
 
@@ -11,10 +11,16 @@ A customizable 80% TKL keyboard.
 Make example for this keyboard (after setting up your build environment):
 
     make keychron/k1_pro/ansi/rgb:default
+    make keychron/k1_pro/ansi/white:default
+    make keychron/k1_pro/iso/rgb:default
+    make keychron/k1_pro/iso/white:default
 
 Flashing example for this keyboard:
 
     make keychron/k1_pro/ansi/rgb:default:flash
+    make keychron/k1_pro/ansi/white:default:flash
+    make keychron/k1_pro/iso/rgb:default:flash
+    make keychron/k1_pro/iso/white:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 

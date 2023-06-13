@@ -1,7 +1,7 @@
 {
-  "name": "Keychron K1 Pro",
+  "name": "Keychron K1 Pro ISO White",
   "vendorId": "0x3434",
-  "productId": "0x0213",
+  "productId": "0x0214",
   "keycodes": ["qmk_lighting"],
   "customKeycodes": [
     {"name": "Left Option", "title": "Left Option", "shortName": "LOpt"},
@@ -111,12 +111,18 @@
         "2,11",
         "2,12",
         {
-          "c": "#aaaaaa",
-          "w": 1.5
+          "x": 0.25,
+          "c": "#777777",
+          "w": 1.25,
+          "h": 2,
+          "w2": 1.5,
+          "h2": 1,
+          "x2": -0.25
         },
         "2,13",
         {
-          "x": 0.25
+          "x": 0.25,
+          "c": "#aaaaaa"
         },
         "2,14",
         "2,15",
@@ -142,17 +148,16 @@
         "3,10",
         "3,11",
         {
-          "c": "#777777",
-          "w": 2.25
+          "c": "#aaaaaa"
         },
         "3,13"
       ],
       [
         {
-          "c": "#aaaaaa",
-          "w": 2.25
+          "w": 1.25
         },
         "4,0",
+        "4,1",
         {
           "c": "#cccccc"
         },

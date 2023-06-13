@@ -30,7 +30,8 @@
 #    include "factory_test.h"
 #endif
 
-#ifndef POWER_ON_LED_DURATION
+#ifdef BAT_LOW_LED_PIN
+static uint32_t power_on_indicator_timer_buffer;
 #    define POWER_ON_LED_DURATION 3000
 #endif
 
@@ -39,10 +40,9 @@ typedef struct PACKED {
     uint8_t keycode[3];
 } key_combination_t;
 
-static uint32_t factory_timer_buffer;
-static uint32_t power_on_indicator_timer_buffer;
-static uint32_t siri_timer_buffer = 0;
-static uint8_t  mac_keycode[4]    = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
+static uint32_t factory_timer_buffer = 0;
+static uint32_t siri_timer_buffer    = 0;
+static uint8_t  mac_keycode[4]       = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_TAB}},        // Task (win)
@@ -64,7 +64,11 @@ static void pairing_key_timer_cb(void *arg) {
 
 bool dip_switch_update_kb(uint8_t index, bool active) {
     if (index == 0) {
+#ifdef INVERT_OS_SWITCH_STATTE
+        default_layer_set(1UL << (!active ? 0 : 2));
+#else
         default_layer_set(1UL << (active ? 0 : 2));
+#endif
     }
     dip_switch_update_user(index, active);
 

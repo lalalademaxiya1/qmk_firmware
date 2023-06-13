@@ -71,7 +71,6 @@ const ckled2001_led g_ckled2001_leds[LED_MATRIX_LED_COUNT] = {
     {0, D_11},
     {0, D_12},
     {0, D_13},
-    {0, D_14},
     {0, D_15},
     {0, D_16},
     {0, A_6},
@@ -89,8 +88,10 @@ const ckled2001_led g_ckled2001_leds[LED_MATRIX_LED_COUNT] = {
     {0, C_11},
     {0, C_12},
     {0, C_14},
+    {0, D_14},
 
     {0, B_1},
+    {0, B_2},
     {0, B_3},
     {0, B_4},
     {0, B_5},
