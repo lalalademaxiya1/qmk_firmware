@@ -32,39 +32,16 @@
 /* Turn off backllit if brightness value is low */
 #    define LED_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
-#    define LOW_BAT_IND_INDEX 98
+/* Indication led */
+#    define NUM_LOCK_INDEX 37    // NumLock
+#    define LOW_BAT_IND_INDEX 98 // Space
 
 // LED Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_led_matrix?id=led-matrix-effects
-
+// #if defined(LED_MATRIX_KEYPRESSES) || defined(LED_MATRIX_KEYRELEASES)
 #    define LED_MATRIX_KEYPRESSES
-
-#    define ENABLE_LED_MATRIX_NONE
-#    define ENABLE_LED_MATRIX_SOLID
-// #define ENABLE_LED_MATRIX_ALPHAS_MODS
-#    define ENABLE_LED_MATRIX_BREATHING
-// #define ENABLE_LED_MATRIX_BAND
-#    define ENABLE_LED_MATRIX_BAND_PINWHEEL
-#    define ENABLE_LED_MATRIX_BAND_SPIRAL
-#    define ENABLE_LED_MATRIX_CYCLE_LEFT_RIGHT
-#    define ENABLE_LED_MATRIX_CYCLE_UP_DOWN
-#    define ENABLE_LED_MATRIX_CYCLE_OUT_IN
-#    define ENABLE_LED_MATRIX_DUAL_BEACON
-
-#    define ENABLE_LED_MATRIX_SOLID_REACTIVE_SIMPLE
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_WIDE
-#    define ENABLE_LED_MATRIX_SOLID_REACTIVE_MULTIWIDE
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_CROSS
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_MULTICROSS
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_NEXUS
-#    define ENABLE_LED_MATRIX_SOLID_REACTIVE_MULTINEXUS
-#    define ENABLE_LED_MATRIX_SOLID_SPLASH
-// #define ENABLE_LED_MATRIX_SOLID_MULTISPLASH
-
-#    define ENABLE_LED_MATRIX_WAVE_LEFT_RIGHT
-#    define ENABLE_LED_MATRIX_WAVE_UP_DOWN
-#    define ENABLE_LED_MATRIX_EFFECT_MAX
+#    define LED_MATRIX_KEYRELEASES
 
 /* Use first 9 channels of LED driver */
 #    define PHASE_CHANNEL MSKPHASE_9CHANNEL
