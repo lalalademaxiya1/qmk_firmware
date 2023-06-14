@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q6_pro.h"
+#include "q5_pro.h"
 #ifdef KC_BLUETOOTH_ENABLE
 #    include "ckbt51.h"
 #    include "bluetooth.h"
@@ -93,9 +93,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return false; // Skip all further processing of this key)
         case KC_TASK:
-            if (record->event.pressed) {
-                ckbt51_factory_reset();
-            }
         case KC_FILE:
         case KC_SNAP:
         case KC_CTANA:
@@ -165,9 +162,6 @@ void keyboard_post_init_kb(void) {
     ckbt51_init(false);
     bluetooth_init();
 
-    power_on_indicator_timer_buffer = sync_timer_read32() | 1;
-    writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
-
 #    ifdef ENCODER_ENABLE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
@@ -183,8 +177,6 @@ void keyboard_post_init_kb(void) {
     keyboard_post_init_user();
 }
 
-static void ckbt51_param_init(void);
-
 void matrix_scan_kb(void) {
     if (factory_timer_buffer && timer_elapsed32(factory_timer_buffer) > 2000) {
         factory_timer_buffer = 0;
@@ -193,15 +185,6 @@ void matrix_scan_kb(void) {
             palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
             wait_ms(10);
             palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
-        }
-    }
-
-    if (power_on_indicator_timer_buffer) {
-        if (sync_timer_elapsed32(power_on_indicator_timer_buffer) > POWER_ON_LED_DURATION) {
-            power_on_indicator_timer_buffer = 0;
-            writePin(BAT_LOW_LED_PIN, !BAT_LOW_LED_PIN_ON_STATE);
-        } else {
-            writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
         }
     }
 
