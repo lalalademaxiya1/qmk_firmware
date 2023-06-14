@@ -228,7 +228,6 @@ void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
         ckbt51_param_init();
         factory_timer_buffer = timer_read32();
     }
-
     /* CKBT51 bluetooth module boot time is slower, it enters disconnected after boot,
        so we place initialization here. */
     if (firstDisconnect && sync_timer_read32() < 1000 && get_transport() == TRANSPORT_BLUETOOTH) {

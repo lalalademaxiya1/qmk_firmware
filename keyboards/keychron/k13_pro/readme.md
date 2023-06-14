@@ -1,20 +1,26 @@
 # Keychron K13 Pro
 
-![Keychron K13 Pro](https://drive.google.com/file/d/17S4Afhfs4DmwBcnkvo94ipLIVgL3rsy7/view?usp=share_link)
+![Keychron K13 Pro](https://i.imgur.com/JCyRwoS.jpg)
 
-A customizable 80% TKL keyboard.
+A low profile wireless mechanical keyboard with a numpad TKL layout.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron K13 Pro
-* Hardware Availability: [Keychron K13 Pro]()
+* Hardware Availability: [Keychron K13 Pro QMK/VIA Wireless Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-k13-pro-qmk-via-wireless-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
     make keychron/k13_pro/ansi/rgb:default
+    make keychron/k13_pro/ansi/white:default
+    make keychron/k13_pro/iso/rgb:default
+    make keychron/k13_pro/iso/white:default
 
 Flashing example for this keyboard:
 
     make keychron/k13_pro/ansi/rgb:default:flash
+    make keychron/k13_pro/ansi/white:default:flash
+    make keychron/k13_pro/iso/rgb:default:flash
+    make keychron/k13_pro/iso/white:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 
