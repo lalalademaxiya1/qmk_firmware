@@ -27,8 +27,10 @@
 
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
+
 /* Allow shutdown of led driver to save power */
 #    define RGB_MATRIX_DRIVER_SHUTDOWN_ENABLE
+
 /* Turn off backlight on low brightness to save power */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 

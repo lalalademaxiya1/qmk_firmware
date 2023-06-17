@@ -3,14 +3,11 @@
     "manufacturer": "Keychron",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
+    "processor": "STM32L432",
+    "bootloader": "stm32-dfu",
     "usb": {
     	"vid": "0x3434"
     },
-    "matrix_pins": {
-        "cols": [ "B0", "A7", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ],
-        "rows": [ "B5", "B4", "B3", "A15", "A14", "A13" ]
-    },
-    "diode_direction": "ROW2COL",
     "features": {
         "bootmagic": true,
         "command": false,
@@ -22,6 +19,11 @@
         "bluetooth": false,
         "raw": true
     },
-    "processor": "STM32L432",
-    "bootloader": "stm32-dfu"
+    "matrix_pins": {
+        "cols": [ "B0", "A7", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ],
+        "rows": [ "B5", "B4", "B3", "A15", "A14", "A13" ],
+        "custom": true,
+        "custom_lite": true
+    },
+    "diode_direction": "ROW2COL"
 }

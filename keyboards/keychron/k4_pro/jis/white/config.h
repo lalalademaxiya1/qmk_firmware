@@ -24,8 +24,10 @@
 
 /* Set to infinit, which is use in USB mode by default */
 #    define LED_MATRIX_TIMEOUT LED_MATRIX_TIMEOUT_INFINITE
+
 /* Allow shutdown of led driver to save power */
 #    define LED_MATRIX_DRIVER_SHUTDOWN_ENABLE
+
 /* Turn off backlight on low brightness to save power */
 #    define LED_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
@@ -49,5 +51,5 @@
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60, 0x60 }
+        { 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50 }
 #endif
