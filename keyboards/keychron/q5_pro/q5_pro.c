@@ -183,7 +183,7 @@ void matrix_scan_kb(void) {
         if (bt_factory_reset) {
             bt_factory_reset = false;
             palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
-            wait_ms(10);
+            wait_ms(5);
             palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
         }
     }

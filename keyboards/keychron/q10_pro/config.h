@@ -16,11 +16,12 @@
 
 #pragma once
 
-/* DIP switch for Mac/win OS switch */
-#define DIP_SWITCH_PINS { A8 }
-
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+
+/* DIP switch for Mac/win OS switch */
+#define DIP_SWITCH_PINS \
+    { A8 }
 
 #ifdef KC_BLUETOOTH_ENABLE
 /* Hardware configuration */

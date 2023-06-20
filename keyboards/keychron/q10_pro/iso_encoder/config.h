@@ -27,7 +27,7 @@
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
 #    define DRIVER_1_LED_TOTAL 47
-#    define DRIVER_2_LED_TOTAL 42
+#    define DRIVER_2_LED_TOTAL 43
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Increase I2C speed to 1000 KHz */
@@ -54,8 +54,8 @@
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 32
 
 /* Indication led */
-#    define CAPS_LOCK_INDEX 48
-#    define LOW_BAT_IND_INDEX 81
+#    define CAPS_LOCK_INDEX 47
+#    define LOW_BAT_IND_INDEX 82
 
 /* RGB Matrix Animation modes. Explicitly enabled
  * For full list of effects, see:

@@ -58,7 +58,11 @@ static void pairing_key_timer_cb(void *arg) {
 
 bool dip_switch_update_kb(uint8_t index, bool active) {
     if (index == 0) {
+#ifdef INVERT_OS_SWITCH_STATE
+        default_layer_set(1UL << (!active ? 2 : 0));
+#else
         default_layer_set(1UL << (active ? 2 : 0));
+#endif
     }
     dip_switch_update_user(index, active);
 
@@ -130,10 +134,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#ifdef KC_BLUETOOTH_ENABLE
-static void encoder0_pad_cb(void *param) {
-    (void)param;
-    encoder_inerrupt_read(0);
+#if defined(KC_BLUETOOTH_ENABLE) && defined(ENCODER_ENABLE)
+static void encoder_pad_cb(void *param) {
+    encoder_inerrupt_read((uint32_t)param & 0XFF);
 }
 #endif
 
@@ -152,21 +155,32 @@ void keyboard_post_init_kb(void) {
 
     ckbt51_init(false);
     bluetooth_init();
-
+#    ifdef ENCODER_ENABLE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
-    for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
+    for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
         palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
         palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
-        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
-        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, (void *)i);
+        palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
     }
+#    endif
 #endif
 
     keyboard_post_init_user();
 }
 
 void matrix_scan_kb(void) {
+    if (factory_timer_buffer && timer_elapsed32(factory_timer_buffer) > 2000) {
+        factory_timer_buffer = 0;
+        if (bt_factory_reset) {
+            bt_factory_reset = false;
+            palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
+            wait_ms(5);
+            palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
+        }
+    }
+
     if (factory_timer_buffer && timer_elapsed32(factory_timer_buffer) > 2000) {
         factory_timer_buffer = 0;
         if (bt_factory_reset) {
@@ -206,7 +220,6 @@ static void ckbt51_param_init(void) {
                             .verndor_id             = 0, // Must be 0x3434
                             .product_id             = PRODUCT_ID};
     ckbt51_set_param(&param);
-    wait_ms(10);
 }
 
 void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
