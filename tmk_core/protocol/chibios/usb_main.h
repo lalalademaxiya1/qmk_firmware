@@ -39,6 +39,9 @@ void usb_wakeup(USBDriver *usbp);
 /* Start the USB driver */
 void usb_start(USBDriver *usbp);
 
+/* Restart the USB driver and bus */
+void restart_usb_driver(USBDriver *usbp);
+
 /* ---------------
  * USB Event queue
  * ---------------
