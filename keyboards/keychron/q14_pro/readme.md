@@ -1,6 +1,6 @@
 # Keychron Q14 Pro
 
-![Keychron Q14 Pro]()
+![Keychron Q14 Pro]
 
 A customizable 96% keyboard.
 
