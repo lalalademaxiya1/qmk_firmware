@@ -80,6 +80,11 @@
 /* Old default behavior of mod-taps */
 #define HOLD_ON_OTHER_KEY_PRESS
 
+/* Encoder Configuration */
+#ifdef ENCODER_ENABLE
+#    define ENCODER_DEFAULT_POS 0x3
+#endif
+
 /* Factory test keys */
 #define FN_KEY1 MO(2)
 #define FN_KEY2 MO(3)

@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron(https://www.keychron.com)
+/* Copyright 2023 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,12 @@
 
 #pragma once
 
-/* DIP switch for Mac/win OS switch */
-#define DIP_SWITCH_PINS { A8 }
-
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+
+/* DIP switch for Mac/win OS switch */
+#define DIP_SWITCH_PINS \
+    { A8 }
 
 #ifdef KC_BLUETOOTH_ENABLE
 /* Hardware configuration */
@@ -71,6 +72,11 @@
 
 /* Old default behavior of mod-taps */
 #define HOLD_ON_OTHER_KEY_PRESS
+
+/* Encoder Configuration */
+#ifdef ENCODER_ENABLE
+#    define ENCODER_DEFAULT_POS 0x3
+#endif
 
 /* Factory test keys */
 #define FN_KEY1 MO(1)

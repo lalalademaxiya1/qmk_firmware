@@ -18,7 +18,6 @@
         "encoder": true,
         "nkro": true,
         "rgb_matrix": true,
-        "bluetooth": false,
         "raw": true
     },
     "rgb_matrix": {
@@ -47,6 +46,9 @@
             "solid_splash": true
         }
     },
+    "bootmagic": {
+        "matrix": [0, 1]
+    },
     "matrix_pins": {
         "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
         "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]
@@ -56,8 +58,5 @@
         "rotary": [
             {"pin_a": "A0", "pin_b": "A10"}
         ]
-    },
-    "bootmagic": {
-        "matrix": [0, 1]
     }
 }

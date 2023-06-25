@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,6 @@
 
 #pragma once
 
-/* Encoder Configuration */
-#ifdef ENCODER_ENABLE
-#    define ENCODER_DEFAULT_POS 0x3
-#endif
-
 #ifdef RGB_MATRIX_ENABLE
 /* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 2
@@ -36,10 +31,6 @@
 #    define I2C1_TIMINGR_SDADEL 0U
 #    define I2C1_TIMINGR_SCLH 15U
 #    define I2C1_TIMINGR_SCLL 51U
-
-/* Set LED driver current */
-#    define CKLED2001_CURRENT_TUNE \
-        { 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30 }
 
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
@@ -61,4 +52,8 @@
  */
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+
+/* Set LED driver current */
+#    define CKLED2001_CURRENT_TUNE \
+        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
 #endif
