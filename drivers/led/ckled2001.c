@@ -123,7 +123,7 @@ void CKLED2001_init(uint8_t addr) {
 
     // Set PWM PAGE (Page 1)
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, LED_PWM_PAGE);
-    for (int i = 0; i < LED_CURRENT_TUNE_LENGTH; i++) {
+    for (int i = 0; i < LED_PWM_LENGTH; i++) {
         CKLED2001_write_register(addr, i, 0x00);
     }
 

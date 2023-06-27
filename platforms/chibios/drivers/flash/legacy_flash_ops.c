@@ -16,12 +16,8 @@
  * Modifications for QMK and STM32F303 by Yiancar
  */
 
-<<<<<<< HEAD:platforms/chibios/drivers/flash/flash_stm32.c
-#include "flash_stm32.h"
-=======
 #include <hal.h>
 #include "legacy_flash_ops.h"
->>>>>>> temp:platforms/chibios/drivers/flash/legacy_flash_ops.c
 
 #if defined(STM32F1XX)
 #    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
