@@ -16,7 +16,6 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-        "bluetooth": false,
         "raw": true
     },
     "matrix_pins": {
