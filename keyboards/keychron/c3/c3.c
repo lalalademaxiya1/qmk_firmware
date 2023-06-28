@@ -22,24 +22,31 @@ static uint8_t  os_switch_indicate_count = 0;
 void keyboard_post_init_kb(void) {
     setPinOutputPushPull(LED_MAC_OS_PIN);
     setPinOutputPushPull(LED_WIN_OS_PIN);
+    writePin(LED_MAC_OS_PIN, !LED_PIN_ON_STATE);
+    writePin(LED_WIN_OS_PIN, !LED_PIN_ON_STATE);
 
-    default_layer_set(1U << 2);
+    layer_state_t last_layer = eeconfig_read_default_layer();
+    if (last_layer) {
+        default_layer_set(last_layer);
+    } else {
+        default_layer_set(1U << 2);
+    }
 
     keyboard_post_init_user();
 }
 
 void housekeeping_task_kb(void) {
-    if (default_layer_state == (1 << 0)) {
+    if (default_layer_state == (1U << 0)) {
         writePin(LED_MAC_OS_PIN, LED_PIN_ON_STATE);
         writePin(LED_WIN_OS_PIN, !LED_PIN_ON_STATE);
     }
-    if (default_layer_state == (1 << 2)) {
+    if (default_layer_state == (1U << 2)) {
         writePin(LED_MAC_OS_PIN, !LED_PIN_ON_STATE);
         writePin(LED_WIN_OS_PIN, LED_PIN_ON_STATE);
     }
 
     if (os_switch_timer_buffer && timer_elapsed32(os_switch_timer_buffer) > 300) {
-        if (os_switch_indicate_count++ > 6) {
+        if (os_switch_indicate_count++ > 5) {
             os_switch_indicate_count = 0;
             os_switch_timer_buffer   = 0;
         } else {
@@ -60,6 +67,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 default_layer_xor(1U << 0);
                 default_layer_xor(1U << 2);
+                eeconfig_update_default_layer(default_layer_state);
                 os_switch_timer_buffer = timer_read32();
             }
             return false;
