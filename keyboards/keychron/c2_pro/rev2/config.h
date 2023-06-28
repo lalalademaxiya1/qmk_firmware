@@ -31,14 +31,17 @@
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
-/* Increase I2C speed to 1000 KHz */
-#define I2C1_CLOCK_SPEED 400000
-#define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
-// #define I2C1_TIMINGR_PRESC 0U
-// #define I2C1_TIMINGR_SCLDEL 3U
-// #define I2C1_TIMINGR_SDADEL 0U
-// #define I2C1_TIMINGR_SCLH 15U
-// #define I2C1_TIMINGR_SCLL 51U
+/* The I2C Driver Configuration */
+// #define I2C1_CLOCK_SPEED 400000
+// #define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
+
+/* The SPI Driver Configuration */
+#define SPI_DRIVER SPID1
+#define SPI_SCK_PIN A5
+#define SPI_MOSI_PIN A7
+#define SPI_MISO_PIN A6
+#define SPI_CS1 A4
+#define SPI_CS2 C14
 
 /* Old default behavior of mod-taps */
 #define HOLD_ON_OTHER_KEY_PRESS
