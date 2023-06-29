@@ -261,6 +261,8 @@ bool mmc_lld_is_write_protected(MMCDriver *mmcp) {
  * @brief   Board-specific initialization code.
  * @note    You can add your board-specific code here.
  */
-void boardInit(void) {
+void boardInit(void) {}
 
+void restart_usb_driver(USBDriver *usbp) {
+  // Do nothing. Restarting the USB driver on these boards breaks it.
 }
