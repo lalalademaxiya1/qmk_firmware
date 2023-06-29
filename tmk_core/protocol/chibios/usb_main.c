@@ -818,6 +818,27 @@ __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
     usbConnectBus(usbp);
 }
 
+__attribute__((weak)) void usb_wakeup(USBDriver *usbp) {
+#if STM32_USB_USE_OTG1
+    stm32_otg_t *otgp = usbp->otg;
+
+    osalSysLock();
+    /* If clocks are gated off, turn them back on (may be the case if
+     coming out of suspend mode).*/
+    if (otgp->PCGCCTL & (PCGCCTL_STPPCLK | PCGCCTL_GATEHCLK)) {
+        /* Set to zero to un-gate the USB core clocks.*/
+        otgp->PCGCCTL &= ~(PCGCCTL_STPPCLK | PCGCCTL_GATEHCLK);
+    }
+    _usb_wakeup(usbp);
+    osalSysUnlock();
+#endif
+}
+
+__attribute__((weak)) void usb_start(USBDriver *usbp) {
+    usbStart(usbp, &usbcfg);
+    usbConnectBus(usbp);
+}
+
 /* ---------------------------------------------------------
  *                  Keyboard functions
  * ---------------------------------------------------------

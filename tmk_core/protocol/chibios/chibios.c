@@ -189,9 +189,10 @@ void protocol_pre_task(void) {
             /* Remote wakeup */
             if (suspend_wakeup_condition()) {
                 usbWakeupHost(&USB_DRIVER);
-                restart_usb_driver(&USB_DRIVER);
+                usb_wakeup(&USB_DRIVER);
             }
         }
+        wait_ms(200);
         /* Woken up */
         // variables has been already cleared by the wakeup hook
         send_keyboard_report();
