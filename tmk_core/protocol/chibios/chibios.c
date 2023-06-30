@@ -34,6 +34,12 @@
 #include "debug.h"
 #include "print.h"
 
+#define USB_WAKEUP_WATI_MS 200
+
+#ifndef USB_WAKEUP_WATI_MS
+#    define USB_WAKEUP_WATI_MS 0
+#endif
+
 #ifndef EARLY_INIT_PERFORM_BOOTLOADER_JUMP
 // Change this to be TRUE once we've migrated keyboards to the new init system
 // Remember to change docs/platformdev_chibios_earlyinit.md as well.
@@ -192,7 +198,7 @@ void protocol_pre_task(void) {
                 usb_wakeup(&USB_DRIVER);
             }
         }
-        wait_ms(200);
+        wait_ms(USB_WAKEUP_WATI_MS);
         /* Woken up */
         // variables has been already cleared by the wakeup hook
         send_keyboard_report();
