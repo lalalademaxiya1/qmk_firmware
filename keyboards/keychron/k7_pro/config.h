@@ -16,6 +16,9 @@
 
 #pragma once
 
+/* Use SPI to drive 74HC595 shift register */
+#define DRIVE_SHRIFT_REGISTER_WITH_SPI
+
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define LED_DISABLE_WHEN_USB_SUSPENDED

@@ -154,7 +154,6 @@ void keyboard_post_init_kb(void) {
 
     power_on_indicator_timer_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
     writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
-    writePin(LED_CAPS_LOCK_PIN, !LED_PIN_ON_STATE);
 
     keyboard_post_init_user();
 }

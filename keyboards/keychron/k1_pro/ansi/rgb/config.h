@@ -41,7 +41,7 @@
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
 #    define RGB_MATRIX_KEYPRESSES
-#    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+#    define RGB_MATRIX_FRAMEBUFFER_EFFECT
 
 /* Use first 9 channels of LED driver */
 #    define PHASE_CHANNEL MSKPHASE_9CHANNEL

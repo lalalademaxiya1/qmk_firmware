@@ -1,4 +1,1 @@
-RGB_MATRIX_ENABLE = yes
-RGB_MATRIX_DRIVER = CKLED2001
-ENCODER_ENABLE = yes        # Enable Encoder
-ENCODER_MAP_ENABLE = yes
+# This file intentionally blank

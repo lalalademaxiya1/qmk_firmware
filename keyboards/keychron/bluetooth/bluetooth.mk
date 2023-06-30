@@ -1,3 +1,6 @@
+
+OPT_DEFS += -DKC_BLUETOOTH_ENABLE
+
 BLUETOOTH_DIR = bluetooth
 SRC += \
      $(BLUETOOTH_DIR)/bluetooth.c \

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MCU name
 MCU = STM32L432
 
@@ -24,12 +25,12 @@ AUDIO_ENABLE = no           # Audio output on port C6
 DIP_SWITCH_ENABLE = yes
 RAW_ENABLE = yes
 
+=======
+>>>>>>> temp
 # Enter lower-power sleep mode when on the ChibiOS idle thread
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
 OPT_DEFS += -DNO_USB_STARTUP_CHECK -DENABLE_FACTORY_TEST
-OPT_DEFS += -DKC_BLUETOOTH_ENABLE
 
-CUSTOM_MATRIX = lite
 SRC += matrix.c
 
 include keyboards/keychron/bluetooth/bluetooth.mk

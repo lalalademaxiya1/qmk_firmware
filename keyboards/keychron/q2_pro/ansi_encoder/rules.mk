@@ -1,3 +1,1 @@
-ENCODER_ENABLE = yes        # Enable Encoder
-RGB_MATRIX_ENABLE = yes
-RGB_MATRIX_DRIVER = CKLED2001
+# This file intentionally blank

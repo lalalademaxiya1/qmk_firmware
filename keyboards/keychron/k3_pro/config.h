@@ -16,28 +16,12 @@
 
 #pragma once
 
-/* key matrix size */
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 16
-
-/* Key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B5, B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { C15, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
 /* Use SPI to drive 74HC595 shift register */
 #define DRIVE_SHRIFT_REGISTER_WITH_SPI
 
 /* Turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define LED_DISABLE_WHEN_USB_SUSPENDED
-
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
 
 /* DIP switch for Mac/win OS switch */
 #define DIP_SWITCH_PINS \

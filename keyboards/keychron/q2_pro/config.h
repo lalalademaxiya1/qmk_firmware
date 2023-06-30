@@ -16,21 +16,9 @@
 
 #pragma once
 
-/* key matrix pins */
-#define MATRIX_ROW_PINS \
-    { B4, B3, A15, A14, A13 }
-#define MATRIX_COL_PINS \
-    { NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN, NO_PIN }
-
-/* COL2ROW or ROW2COL */
-#define DIODE_DIRECTION ROW2COL
-
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define LED_DISABLE_WHEN_USB_SUSPENDED
-
-/* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
 
 /* DIP switch */
 #define DIP_SWITCH_PINS \
