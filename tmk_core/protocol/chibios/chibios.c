@@ -195,7 +195,8 @@ void protocol_pre_task(void) {
             /* Remote wakeup */
             if (suspend_wakeup_condition()) {
                 usbWakeupHost(&USB_DRIVER);
-                usb_wakeup(&USB_DRIVER);
+                // usb_wakeup(&USB_DRIVER);
+                restart_usb_driver(&USB_DRIVER);
             }
         }
         wait_ms(USB_WAKEUP_WATI_MS);
