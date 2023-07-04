@@ -36,10 +36,6 @@
 
 #define USB_WAKEUP_WATI_MS 200
 
-#ifndef USB_WAKEUP_WATI_MS
-#    define USB_WAKEUP_WATI_MS 0
-#endif
-
 #ifndef EARLY_INIT_PERFORM_BOOTLOADER_JUMP
 // Change this to be TRUE once we've migrated keyboards to the new init system
 // Remember to change docs/platformdev_chibios_earlyinit.md as well.
@@ -195,11 +191,16 @@ void protocol_pre_task(void) {
             /* Remote wakeup */
             if (suspend_wakeup_condition()) {
                 usbWakeupHost(&USB_DRIVER);
-                // usb_wakeup(&USB_DRIVER);
-                restart_usb_driver(&USB_DRIVER);
+#    if STM32_USB_USE_OTG1
+                usb_wakeup(&USB_DRIVER);
             }
         }
         wait_ms(USB_WAKEUP_WATI_MS);
+#    else
+                restart_usb_driver(&USB_DRIVER);
+            }
+        }
+#    endif
         /* Woken up */
         // variables has been already cleared by the wakeup hook
         send_keyboard_report();
