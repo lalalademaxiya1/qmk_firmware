@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "c3.h"
+#include "c3_pro.h"
 
 static uint32_t os_switch_timer_buffer   = 0;
 static uint8_t  os_switch_indicate_count = 0;

@@ -75,6 +75,9 @@
         "transport": {
             "protocol": "serial_usart",
             "sync_matrix_state": false
+        },
+        "bootmagic": {
+            "matrix": [6, 7]
         }
     },
     "usb": {
