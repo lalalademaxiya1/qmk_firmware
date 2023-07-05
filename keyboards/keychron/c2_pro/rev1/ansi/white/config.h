@@ -16,55 +16,22 @@
 
 #pragma once
 
-/* RGB Matrix Driver Configuration */
-#define DRIVER_COUNT 1
-#define DRIVER_ADDR_1 0b1110100
-
-/* Set LED driver current */
-#define CKLED2001_CURRENT_TUNE \
-    { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
+#ifdef LED_MATRIX_ENABLE
+/* LED Matrix Driver Configuration */
+#    define DRIVER_COUNT 1
+#    define DRIVER_ADDR_1 0b1110100
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 108
-#define LED_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
+#    define LED_MATRIX_LED_COUNT 108
 
-/* Enable indicator LED*/
-#define NUM_LOCK_INDEX 16
-#define CAPS_LOCK_INDEX 17
-#define MAC_OS_LED_INDEX 18
-#define WIN_OS_LED_INDEX 19
-
-/* turn off effects when suspended */
-#define LED_DISABLE_WHEN_USB_SUSPENDED
+/* Set LED driver current */
+#    define CKLED2001_CURRENT_TUNE \
+        { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
 
 // LED Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_led_matrix?id=led-matrix-effects
-#define ENABLE_LED_MATRIX_NONE
-#define ENABLE_LED_MATRIX_SOLID // Static single val, no speed support
-// #define ENABLE_LED_MATRIX_ALPHAS_MODS              // Static dual val, speed is val for LEDs marked as modifiers
-#define ENABLE_LED_MATRIX_BREATHING // Cycling brightness animation
-// #define ENABLE_LED_MATRIX_BAND                     // Band fading brightness scrolling left to right
-#define ENABLE_LED_MATRIX_BAND_PINWHEEL    // 3 blade spinning pinwheel fades brightness
-#define ENABLE_LED_MATRIX_BAND_SPIRAL      // Spinning spiral fades brightness
-#define ENABLE_LED_MATRIX_CYCLE_LEFT_RIGHT // Full gradient scrolling left to right
-#define ENABLE_LED_MATRIX_CYCLE_UP_DOWN    // Full gradient scrolling top to bottom
-#define ENABLE_LED_MATRIX_CYCLE_OUT_IN     // Full gradient scrolling out to in
-#define ENABLE_LED_MATRIX_DUAL_BEACON      // Full gradient spinning around center of keyboard
 // #if defined(LED_MATRIX_KEYPRESSES) || defined(LED_MATRIX_KEYRELEASES)
-#define LED_MATRIX_KEYPRESSES
-#define LED_MATRIX_KEYRELEASES
-
-#define ENABLE_LED_MATRIX_SOLID_REACTIVE_SIMPLE // Pulses keys hit then fades out
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_WIDE       // Value pulses near a single key hit then fades out
-#define ENABLE_LED_MATRIX_SOLID_REACTIVE_MULTIWIDE // Value pulses near multiple key hits then fades out
-#define ENABLE_LED_MATRIX_SOLID_REACTIVE_CROSS     // Value pulses the same column and row of a single key hit then fades out
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_MULTICROSS // Value pulses the same column and row of multiple key hits then fades out
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_NEXUS      // Value pulses away on the same column and row of a single key hit then fades out
-// #define ENABLE_LED_MATRIX_SOLID_REACTIVE_MULTINEXUS // Value pulses away on the same column and row of multiple key hits then fades out
-#define ENABLE_LED_MATRIX_SOLID_SPLASH      // Value pulses away from a single key hit then fades out
-#define ENABLE_LED_MATRIX_SOLID_MULTISPLASH // Value pulses away from multiple key hits then fades out
-// #endif
-#define ENABLE_LED_MATRIX_WAVE_LEFT_RIGHT // Sine wave scrolling from left to right
-#define ENBALE_LED_MATRIX_WAVE_UP_DOWN    // Sine wave scrolling from up to down
-// #define ENABLE_LED_MATRIX_EFFECT_MAX
+#    define LED_MATRIX_KEYPRESSES
+#    define LED_MATRIX_KEYRELEASES
+#endif

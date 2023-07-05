@@ -15,6 +15,7 @@
  */
 
 #include "quantum.h"
+
 // clang-format off
 const matrix_row_t matrix_mask[] = {
     0b11111111111111111111,
@@ -24,7 +25,9 @@ const matrix_row_t matrix_mask[] = {
     0b11111111111111111111,
     0b11111111111111101111,
 };
+
 // clang-format on
+
 #ifdef DIP_SWITCH_ENABLE
 
 bool dip_switch_update_kb(uint8_t index, bool active) {
@@ -39,7 +42,7 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 
 #endif // DIP_SWITCH_ENABLE
 
-#if (defined(RGB_MATRIX_ENABLE) || defined(LED_MATRIX_ENABLE)) && defined(NUM_LOCK_INDEX) && defined(CAPS_LOCK_INDEX) && defined(MAC_OS_LED_INDEX) && defined(WIN_OS_LED_INDEX)
+#if (defined(RGB_MATRIX_ENABLE) || defined(LED_MATRIX_ENABLE))
 
 #    ifdef RGB_MATRIX_ENABLE
 #        define LED_MATRIX_INDICATORS_KB rgb_matrix_indicators_kb
@@ -69,34 +72,26 @@ bool LED_MATRIX_INDICATORS_KB(void) {
     if (!LED_MATRIX_INDICATORS_USER()) {
         return false;
     }
-#    if defined(CAPS_LOCK_INDEX)
     if (host_keyboard_led_state().caps_lock) {
-        LED_MATRIX_SET_COLOR(CAPS_LOCK_INDEX, COLOR_WHITE);
+        LED_MATRIX_SET_COLOR(CAPS_LED_INDEX, COLOR_WHITE);
     } else {
-        LED_MATRIX_SET_COLOR(CAPS_LOCK_INDEX, COLOR_BLACK);
+        LED_MATRIX_SET_COLOR(CAPS_LED_INDEX, COLOR_BLACK);
     }
-#    endif // CAPS_LOCK_INDEX
-#    if defined(NUM_LOCK_INDEX)
     if (host_keyboard_led_state().num_lock) {
-        LED_MATRIX_SET_COLOR(NUM_LOCK_INDEX, COLOR_WHITE);
+        LED_MATRIX_SET_COLOR(NUM_LED_INDEX, COLOR_WHITE);
     } else {
-        LED_MATRIX_SET_COLOR(NUM_LOCK_INDEX, COLOR_BLACK);
+        LED_MATRIX_SET_COLOR(NUM_LED_INDEX, COLOR_BLACK);
     }
-#    endif // NUM_LOCK_INDEX
-#    if defined(MAC_OS_LED_INDEX)
     if (default_layer_state == (1 << 0)) {
-        LED_MATRIX_SET_COLOR(MAC_OS_LED_INDEX, COLOR_WHITE);
+        LED_MATRIX_SET_COLOR(MAC_LED_INDEX, COLOR_WHITE);
     } else {
-        LED_MATRIX_SET_COLOR(MAC_OS_LED_INDEX, COLOR_BLACK);
+        LED_MATRIX_SET_COLOR(MAC_LED_INDEX, COLOR_BLACK);
     }
-#    endif // MAC_OS_LED_INDEX
-#    if defined(WIN_OS_LED_INDEX)
     if (default_layer_state == (1 << 2)) {
-        LED_MATRIX_SET_COLOR(WIN_OS_LED_INDEX, COLOR_WHITE);
+        LED_MATRIX_SET_COLOR(WIN_LED_INDEX, COLOR_WHITE);
     } else {
-        LED_MATRIX_SET_COLOR(WIN_OS_LED_INDEX, COLOR_BLACK);
+        LED_MATRIX_SET_COLOR(WIN_LED_INDEX, COLOR_BLACK);
     }
-#    endif // WIN_OS_LED_INDEX
     return true;
 }
 
@@ -125,43 +120,33 @@ bool led_update_kb(led_t led_state) {
     }
 
     if (res) {
-#    if defined(NUM_LOCK_INDEX)
         if (led_state.num_lock) {
-            LED_MATRIX_SET_COLOR(NUM_LOCK_INDEX, COLOR_WHITE);
+            LED_MATRIX_SET_COLOR(NUM_LED_INDEX, COLOR_WHITE);
         } else {
-            LED_MATRIX_SET_COLOR(NUM_LOCK_INDEX, COLOR_BLACK);
+            LED_MATRIX_SET_COLOR(NUM_LED_INDEX, COLOR_BLACK);
         }
-#    endif // NUM_LOCK_INDEX
-#    if defined(CAPS_LOCK_INDEX)
         if (led_state.caps_lock) {
-            LED_MATRIX_SET_COLOR(CAPS_LOCK_INDEX, COLOR_WHITE);
+            LED_MATRIX_SET_COLOR(CAPS_LED_INDEX, COLOR_WHITE);
         } else {
-            LED_MATRIX_SET_COLOR(CAPS_LOCK_INDEX, COLOR_BLACK);
+            LED_MATRIX_SET_COLOR(CAPS_LED_INDEX, COLOR_BLACK);
         }
-#    endif // CAPS_LOCK_INDEX
-
         LED_MATRIX_UPDATE_PWN_BUFFERS();
     }
-
     return res;
 }
 
 void housekeeping_task_kb(void) {
     if (!LED_MATRIX_IS_ENABLED()) {
-#    if defined(MAC_OS_LED_INDEX)
         if (default_layer_state == (1 << 0)) {
-            LED_MATRIX_SET_COLOR(MAC_OS_LED_INDEX, COLOR_WHITE);
+            LED_MATRIX_SET_COLOR(MAC_LED_INDEX, COLOR_WHITE);
         } else {
-            LED_MATRIX_SET_COLOR(MAC_OS_LED_INDEX, COLOR_BLACK);
+            LED_MATRIX_SET_COLOR(MAC_LED_INDEX, COLOR_BLACK);
         }
-#    endif // MAC_OS_LED_INDEX
-#    if defined(WIN_OS_LED_INDEX)
         if (default_layer_state == (1 << 2)) {
-            LED_MATRIX_SET_COLOR(WIN_OS_LED_INDEX, COLOR_WHITE);
+            LED_MATRIX_SET_COLOR(WIN_LED_INDEX, COLOR_WHITE);
         } else {
-            LED_MATRIX_SET_COLOR(WIN_OS_LED_INDEX, COLOR_BLACK);
+            LED_MATRIX_SET_COLOR(WIN_LED_INDEX, COLOR_BLACK);
         }
-#    endif // WIN_OS_LED_INDEX
         LED_MATRIX_UPDATE_PWN_BUFFERS();
     }
 }

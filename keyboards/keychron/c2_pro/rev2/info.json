@@ -1,23 +1,7 @@
 {
-    "keyboard_name": "Keychron C2 Pro",
-    "manufacturer": "Keychron",
-    "url": "https://github.com/Keychron",
-    "maintainer": "lalalademaxiya1",
     "processor": "STM32F401",
     "bootloader": "stm32-dfu",
     "board": "GENERIC_STM32_F402XC",
-    "usb": {
-        "vid": "0x3434"
-    },
-    "features": {
-        "bootmagic": true,
-        "command": false,
-        "console": false,
-        "extrakey": true,
-        "mousekey": true,
-        "dip_switch": true,
-        "nkro": true
-    },
     "matrix_pins": {
         "cols": ["A0", "A1", "A2", "A3", "C0", "C1", "C2", "C3", "A8", "C12", "B9", "C6", "C7", "C4", "C5","A15", "B10", "B12", "B13", "B14", "B15"],
         "rows": ["B0", "B1", "B8", "B3", "B4", "B5"]

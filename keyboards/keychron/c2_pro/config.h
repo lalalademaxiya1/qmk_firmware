@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2023 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,13 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
-#undef STM32_I2C_USE_I2C1
-#define STM32_I2C_USE_I2C1 TRUE
+/* Old default behavior of mod-taps */
+#define HOLD_ON_OTHER_KEY_PRESS
+
+/* Factory test keys */
+#define FN_KEY1 MO(1)
+#define FN_KEY2 MO(3)

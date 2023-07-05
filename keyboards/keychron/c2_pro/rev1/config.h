@@ -16,16 +16,19 @@
 
 #pragma once
 
+/* turn off effects when suspended */
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
+#define LED_DISABLE_WHEN_USB_SUSPENDED
+
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
 #define SCAN_COUNT_MAX 100
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
-
-/* EEPROM Driver Configuration */
-#define WEAR_LEVELING_LOGICAL_SIZE 2048
-#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 /* Increase I2C speed to 1000 KHz */
 #define I2C1_TIMINGR_PRESC 0U
@@ -34,10 +37,13 @@
 #define I2C1_TIMINGR_SCLH 15U
 #define I2C1_TIMINGR_SCLL 51U
 
-/* Factory test keys */
-#define FN_KEY1 MO(1)
-#define FN_KEY2 MO(3)
+/* Enable indicator LED*/
+#define NUM_LED_INDEX 16
+#define CAPS_LED_INDEX 17
+#define MAC_LED_INDEX 18
+#define WIN_LED_INDEX 19
 
+/* HC595 driver definition */
 #define HC595_STCP A0
 #define HC595_SHCP A1
 #define HC595_DS C15
