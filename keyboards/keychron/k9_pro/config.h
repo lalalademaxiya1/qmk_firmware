@@ -90,5 +90,4 @@
 #define HOLD_ON_OTHER_KEY_PRESS
 
 /* Factory test keys */
-#define FN_KEY1 MO(2)
-#define FN_KEY2 MO(3)
+#define FN_KEY1 MO(4)

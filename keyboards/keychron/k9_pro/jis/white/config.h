@@ -20,8 +20,7 @@
 /* LED Matrix Driver Configuration */
 #    define DRIVER_COUNT 1
 #    define DRIVER_ADDR_1 0b1110100
-#    define DRIVER_1_LED_TOTAL 62
-#    define LED_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
+#    define LED_MATRIX_LED_COUNT 65
 
 /* Set to infinit, which is use in USB mode by default */
 #    define LED_MATRIX_TIMEOUT LED_MATRIX_TIMEOUT_INFINITE
@@ -34,7 +33,13 @@
 
 #    define DIM_CAPS_LOCK
 #    define CAPS_LOCK_INDEX 28
-#    define LOW_BAT_IND_INDEX 56
+#    define LOW_BAT_IND_INDEX 59
+
+#    ifdef KC_BLUETOOTH_ENABLE
+#        undef HOST_LED_MATRIX_LIST
+#        define HOST_LED_MATRIX_LIST \
+            { 16, 17, 18 }
+#    endif
 
 // LED Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -42,6 +47,9 @@
 // #if defined(LED_MATRIX_KEYPRESSES) || defined(LED_MATRIX_KEYRELEASES)
 #    define LED_MATRIX_KEYPRESSES
 #    define LED_MATRIX_KEYRELEASES
+
+/* Use first 5 channels of LED driver */
+#    define PHASE_CHANNEL MSKPHASE_5CHANNEL
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
