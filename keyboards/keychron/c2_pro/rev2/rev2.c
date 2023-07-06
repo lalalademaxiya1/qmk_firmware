@@ -45,3 +45,9 @@ void housekeeping_task_kb(void) {
         writePin(LED_WIN_OS_PIN, LED_PIN_ON_STATE);
     }
 }
+
+void suspend_power_down_kb(void) {
+    suspend_power_down_user();
+    writePin(LED_WIN_OS_PIN, !LED_PIN_ON_STATE);
+    writePin(LED_MAC_OS_PIN, !LED_PIN_ON_STATE);
+}
