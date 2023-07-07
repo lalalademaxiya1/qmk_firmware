@@ -22,7 +22,7 @@
 #    define DRIVER_ADDR_1 0b1110100
 
 /* RGB Matrix Configuration */
-#    define RGB_MATRIX_LED_COUNT 104
+#    define LED_MATRIX_LED_COUNT 104
 
 /* Use the first 8 channels of led driver */
 #    define PHASE_CHANNEL MSKPHASE_8CHANNEL

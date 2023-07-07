@@ -31,6 +31,8 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
 void keyboard_post_init_kb(void) {
     setPinOutputPushPull(LED_MAC_OS_PIN);
     setPinOutputPushPull(LED_WIN_OS_PIN);
+    writePin(LED_MAC_OS_PIN, !LED_PIN_ON_STATE);
+    writePin(LED_WIN_OS_PIN, !LED_PIN_ON_STATE);
 
     keyboard_post_init_user();
 }
