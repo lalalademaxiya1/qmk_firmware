@@ -23,6 +23,11 @@
 #define DIP_SWITCH_PINS \
     { A8 }
 
+/* Encoder Configuration */
+#ifdef ENCODER_ENABLE
+#    define ENCODER_DEFAULT_POS 0x3
+#endif
+
 #ifdef KC_BLUETOOTH_ENABLE
 /* Hardware configuration */
 #    define USB_BT_MODE_SELECT_PIN C15

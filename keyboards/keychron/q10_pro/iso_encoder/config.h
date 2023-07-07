@@ -16,11 +16,6 @@
 
 #pragma once
 
-/* Encoder Configuration */
-#ifdef ENCODER_ENABLE
-#    define ENCODER_DEFAULT_POS 0x3
-#endif
-
 #ifdef RGB_MATRIX_ENABLE
 /* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 2
@@ -37,7 +32,7 @@
 #    define I2C1_TIMINGR_SCLH 15U
 #    define I2C1_TIMINGR_SCLL 51U
 
-/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+/* Use the first 9 channels of led driver */
 #    define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* Set LED driver current */

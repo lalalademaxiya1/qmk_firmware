@@ -18,7 +18,6 @@
         "encoder": true,
         "nkro": true,
         "rgb_matrix": true,
-        "bluetooth": false,
         "raw": true
     },
     "rgb_matrix": {
