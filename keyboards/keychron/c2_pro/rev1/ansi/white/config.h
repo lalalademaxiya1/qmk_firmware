@@ -24,6 +24,9 @@
 /* RGB Matrix Configuration */
 #    define LED_MATRIX_LED_COUNT 108
 
+/* Use the first 8 channels of led driver */
+#    define PHASE_CHANNEL MSKPHASE_8CHANNEL
+
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
         { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }

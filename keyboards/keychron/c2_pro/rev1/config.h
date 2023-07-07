@@ -16,10 +16,6 @@
 
 #pragma once
 
-/* turn off effects when suspended */
-#define RGB_DISABLE_WHEN_USB_SUSPENDED
-#define LED_DISABLE_WHEN_USB_SUSPENDED
-
 /* DIP switch */
 #define DIP_SWITCH_MATRIX_GRID \
     {                          \

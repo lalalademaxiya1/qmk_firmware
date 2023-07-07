@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 
 #include "quantum.h"
 
+// clang-format off
 #ifdef LED_MATRIX_ENABLE
 const ckled2001_led PROGMEM g_ckled2001_leds[LED_MATRIX_LED_COUNT] = {
 /* Refer to CKLED2001 manual for these locations
@@ -38,11 +39,6 @@ const ckled2001_led PROGMEM g_ckled2001_leds[LED_MATRIX_LED_COUNT] = {
     {0, A_2 },
     {0, A_1 },
     {0, G_1 },
-
-    {0, G_2 }, // CapsLock
-    {0, G_3 }, // NumLock
-    {0, G_4 }, // Mac
-    {0, G_5 }, // Win
 
     {0, B_16},
     {0, B_15},
