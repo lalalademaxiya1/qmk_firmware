@@ -49,12 +49,12 @@ static inline void HC595_delay(uint16_t n) {
     }
 }
 
-static void HC595_output(uint16_t data, bool bit) {
-    uint8_t n = 1;
+static void HC595_output(uint16_t data) {
     uint8_t i;
+    uint8_t n = 1;
 
-    writePinLow(HC595_SHCP);
     for (i = 1; i < (MATRIX_COLS - DIRECT_COL_NUM); i++) {
+        writePinLow(HC595_SHCP);
         if (data & 0x1) {
             writePinHigh(HC595_DS);
         } else {
@@ -63,54 +63,65 @@ static void HC595_output(uint16_t data, bool bit) {
         HC595_delay(n);
         writePinHigh(HC595_SHCP);
         HC595_delay(n);
-        if (bit) {
-            break;
-        } else {
-            data = data >> 1;
-        }
+
+        data = data >> 1;
     }
     writePinLow(HC595_STCP);
     HC595_delay(n);
     writePinHigh(HC595_STCP);
 }
 
-static void select_col(uint8_t col) {
-    pin_t pin = col_pins[col];
+static void HC595_output_bit(uint8_t data) {
+    uint8_t n = 1;
 
+    writePinLow(HC595_SHCP);
+    if (data & 0x1) {
+        writePinHigh(HC595_DS);
+    } else {
+        writePinLow(HC595_DS);
+    }
+    HC595_delay(n);
+
+    writePinHigh(HC595_SHCP);
+    HC595_delay(n);
+
+    writePinLow(HC595_STCP);
+    HC595_delay(n);
+    writePinHigh(HC595_STCP);
+}
+
+static void select_col(uint8_t col) {
     if (col < DIRECT_COL_NUM) {
-        setPinOutput_writeLow(pin);
+        setPinOutput_writeLow(col_pins[col]);
     } else {
         if (col == DIRECT_COL_NUM) {
-            HC595_output(0x00, 1);
+            HC595_output_bit(0x00);
         }
     }
 }
 
 static void unselect_col(uint8_t col) {
-    pin_t pin = col_pins[col];
-
     if (col < DIRECT_COL_NUM) {
 #ifdef MATRIX_UNSELECT_DRIVE_HIGH
-        setPinOutput_writeHigh(pin);
+        setPinOutput_writeHigh(col_pins[col]);
 #else
-        setPinInputHigh(pin);
+        setPinInputHigh(col_pins[col]);
 #endif
     } else {
-        HC595_output(0x01, 1);
+        HC595_output_bit(0x01);
     }
 }
 
 static void unselect_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        pin_t pin = col_pins[x];
         if (x < DIRECT_COL_NUM) {
 #ifdef MATRIX_UNSELECT_DRIVE_HIGH
-            setPinOutput_writeHigh(pin);
+            setPinOutput_writeHigh(col_pins[x]);
 #else
-            setPinInputHigh(pin);
+            setPinInputHigh(col_pins[x]);
 #endif
         } else {
-            if (x == DIRECT_COL_NUM) HC595_output(0xFFFF, 0);
+            if (x == DIRECT_COL_NUM) HC595_output(0xFFFF);
             break;
         }
     }
@@ -118,11 +129,10 @@ static void unselect_cols(void) {
 
 void select_all_cols(void) {
     for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        pin_t pin = col_pins[x];
         if (x < DIRECT_COL_NUM) {
-            setPinOutput_writeLow(pin);
+            setPinOutput_writeLow(col_pins[x]);
         } else {
-            if (x == DIRECT_COL_NUM) HC595_output(0x0000, 0);
+            if (x == DIRECT_COL_NUM) HC595_output(0x0000);
             break;
         }
     }
@@ -130,7 +140,7 @@ void select_all_cols(void) {
 
 static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col, matrix_row_t row_shifter) {
     // Select col
-    select_col(current_col); // select col
+    select_col(current_col);
     HC595_delay(200);
 
     // For each row...
