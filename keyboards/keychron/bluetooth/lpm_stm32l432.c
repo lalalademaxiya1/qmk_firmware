@@ -248,6 +248,7 @@ void enter_power_mode(pm_t mode) {
     lpm_wakeup();
     lpm_timer_reset();
     report_buffer_init();
+    matrix_init();
     power_mode = PM_RUN;
 }
 

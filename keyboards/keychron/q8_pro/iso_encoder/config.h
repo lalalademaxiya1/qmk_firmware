@@ -36,11 +36,17 @@
 
 /* Indication led */
 #    define CAPS_LOCK_INDEX 28
+<<<<<<< HEAD
 #    define LOW_BAT_IND_INDEX 62
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
 // https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
+=======
+#    define LOW_BAT_IND_INDEX 61
+
+/* Enable Reactive Animation */
+>>>>>>> temp
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #    define RGB_MATRIX_KEYPRESSES
 

@@ -17,7 +17,6 @@
         "nkro": true,
         "rgb_matrix": true,
         "dip_switch": true,
-        "bluetooth": false,
         "encoder": true,
         "raw": true
     },

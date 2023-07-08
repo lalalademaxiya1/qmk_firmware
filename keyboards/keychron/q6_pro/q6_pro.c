@@ -29,19 +29,17 @@
 #    include "factory_test.h"
 #endif
 
-#ifdef BAT_LOW_LED_PIN
-static uint32_t power_on_indicator_timer_buffer;
-#    define POWER_ON_LED_DURATION 3000
-#endif
+#define POWER_ON_LED_DURATION 3000
 
 typedef struct PACKED {
     uint8_t len;
     uint8_t keycode[3];
 } key_combination_t;
 
-static uint32_t factory_timer_buffer = 0;
-static uint32_t siri_timer_buffer    = 0;
-static uint8_t  mac_keycode[4]       = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
+static uint32_t factory_timer_buffer            = 0;
+static uint32_t power_on_indicator_timer_buffer = 0;
+static uint32_t siri_timer_buffer               = 0;
+static uint8_t  mac_keycode[4]                  = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_TAB}},        // Task (win)
@@ -191,7 +189,7 @@ void matrix_scan_kb(void) {
         if (bt_factory_reset) {
             bt_factory_reset = false;
             palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
-            wait_ms(10);
+            wait_ms(5);
             palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
         }
     }
@@ -220,7 +218,6 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
     wait_ms(10);
     /* Set bluetooth parameters */

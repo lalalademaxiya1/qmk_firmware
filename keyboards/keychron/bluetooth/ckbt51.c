@@ -212,11 +212,14 @@ void ckbt51_send_consumer(uint16_t report) {
 }
 
 void ckbt51_send_system(uint16_t report) {
+    /* CKBT51 supports only System Sleep */
+    if ((report & 0xFF) != 0x82) return;
+
     uint8_t i = 0;
     memset(payload, 0, PACKET_MAX_LEN);
 
     payload[i++] = CKBT51_CMD_SEND_SYSTEM;
-    payload[i++] = report & 0xFF;
+    payload[i++] = 0x01 << ((report & 0xFF) - 0x82);
 
     ckbt51_send_cmd(payload, i, true, false);
 }

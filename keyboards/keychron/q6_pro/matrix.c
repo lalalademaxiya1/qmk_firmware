@@ -50,10 +50,10 @@ static inline void HC595_delay(uint16_t n) {
 }
 
 static void HC595_output(uint32_t data) {
-    uint8_t n = 1;
     uint8_t i;
+    uint8_t n = 1;
 
-    for (i = 1; i < (MATRIX_COLS - DIRECT_COL_NUM); i++) {
+    for (i = 0; i < (MATRIX_COLS - DIRECT_COL_NUM); i++) {
         writePinLow(HC595_SHCP);
         if (data & 0x1) {
             writePinHigh(HC595_DS);
@@ -71,7 +71,7 @@ static void HC595_output(uint32_t data) {
     writePinHigh(HC595_STCP);
 }
 
-static void HC595_output_bit(uint16_t data) {
+static void HC595_output_bit(uint8_t data) {
     uint8_t n = 1;
 
     writePinLow(HC595_SHCP);
@@ -94,9 +94,7 @@ static void select_col(uint8_t col) {
     if (col < DIRECT_COL_NUM) {
         setPinOutput_writeLow(col_pins[col]);
     } else {
-        if (col == DIRECT_COL_NUM) {
-            HC595_output_bit(0x00);
-        }
+        if (col == DIRECT_COL_NUM) HC595_output_bit(0x00);
     }
 }
 
