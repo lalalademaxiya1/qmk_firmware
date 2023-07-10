@@ -1,6 +1,6 @@
 {
     "manufacturer": "Keychron",
-    "keyboard_name": "Keychron Q14 Pro",
+    "keyboard_name": "Keychron Q15 Pro",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
     "processor": "STM32L432",
@@ -47,18 +47,30 @@
         }
     },
     "bootmagic": {
-        "matrix": [0, 4]
+        "matrix": [0, 1]
     },
     "matrix_pins": {
-        "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ],
-        "rows": ["B5", "B4", "B3", "A15", "A14", "A13"],
+        "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+        "rows": ["A13", "A14", "A15", "B3", "B4"],
         "custom": true,
         "custom_lite": true
     },
     "diode_direction": "ROW2COL",
     "encoder": {
         "rotary": [
-            {"pin_a": "A0", "pin_b": "A10"}
+            {
+                "pin_a": "A10",
+                "pin_b": "A8",
+                "resolution": 4
+            },
+            {
+                "pin_a": "B5",
+                "pin_b": "A0",
+                "resolution": 4
+            }
         ]
+    },
+    "dynamic_keymap": {
+        "layer_count": 5
     }
 }

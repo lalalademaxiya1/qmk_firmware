@@ -59,9 +59,9 @@ static void pairing_key_timer_cb(void *arg) {
 bool dip_switch_update_kb(uint8_t index, bool active) {
     if (index == 0) {
 #ifdef INVERT_OS_SWITCH_STATE
-        default_layer_set(1UL << (!active ? 2 : 0));
+        default_layer_set(1UL << (!active ? 0 : 2));
 #else
-        default_layer_set(1UL << (active ? 2 : 0));
+        default_layer_set(1UL << (active ? 0 : 2));
 #endif
     }
     dip_switch_update_user(index, active);
@@ -145,7 +145,6 @@ void keyboard_post_init_kb(void) {
 
 #ifdef KC_BLUETOOTH_ENABLE
     /* Currently we don't use this reset pin */
-    // palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_UNCONNECTED);
     palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
     palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
 
@@ -198,7 +197,6 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
     wait_ms(10);
     /* Set bluetooth parameters */

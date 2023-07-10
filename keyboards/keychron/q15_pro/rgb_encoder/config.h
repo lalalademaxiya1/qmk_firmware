@@ -21,8 +21,10 @@
 #    define DRIVER_COUNT 2
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
-#    define DRIVER_1_LED_TOTAL 56
-#    define DRIVER_2_LED_TOTAL 48
+
+/* RGB Matrix Configuration */
+#    define DRIVER_1_LED_TOTAL 26
+#    define DRIVER_2_LED_TOTAL 40
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Set to infinit, which is use in USB mode by default */
@@ -35,9 +37,8 @@
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
 /* Indication led */
-#    define NUM_LOCK_INDEX 18
-#    define CAPS_LOCK_INDEX 59
-#    define LOW_BAT_IND_INDEX 98
+#    define CAPS_LOCK_INDEX 26
+#    define LOW_BAT_IND_INDEX 59
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -45,7 +46,10 @@
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #    define RGB_MATRIX_KEYPRESSES
 
+/* Use the first 9 channels of led driver */
+#    define PHASE_CHANNEL MSKPHASE_9CHANNEL
+
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
+        { 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30 }
 #endif

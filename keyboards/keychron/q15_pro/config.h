@@ -48,10 +48,10 @@
 #        define LED_DRIVER_SHUTDOWN_PIN C14
 
 #        define HOST_LED_MATRIX_LIST \
-            { 23, 24, 25 }
+            { 13, 14, 15 }
 
 #        define BAT_LEVEL_LED_LIST \
-            { 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 }
+            { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 
 /* Backlit disable timeout when keyboard is disconnected(unit: second) */
 #        define DISCONNECTED_BACKLIGHT_DISABLE_TIMEOUT 40
@@ -77,13 +77,8 @@
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
-
 /* Encoder Configuration */
-#ifdef ENCODER_ENABLE
-#    define ENCODER_DEFAULT_POS 0x3
-#endif
+#define ENCODER_DEFAULT_POS 0x3
 
 /* Factory test keys */
 #define FN_KEY1 MO(2)
