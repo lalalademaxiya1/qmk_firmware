@@ -1,6 +1,6 @@
 # Keychron K3 Pro
 
-![Keychron K3 Pro](https://drive.google.com/file/d/106D9XIteQUf03WZreI1-oRYJ8iSz34qm/view?usp=share_link)
+![Keychron K3 Pro](https://i.imgur.com/6GojhUq.jpg)
 
 A customizable 84 keys TKL keyboard.
 
@@ -11,10 +11,20 @@ A customizable 84 keys TKL keyboard.
 Make example for this keyboard (after setting up your build environment):
 
     make keychron/k3_pro/ansi/rgb:default
+    make keychron/k3_pro/ansi/white:default
+    make keychron/k3_pro/iso/rgb:default
+    make keychron/k3_pro/iso/white:default
+    make keychron/k3_pro/jis/rgb:default
+    make keychron/k3_pro/jis/white:default
 
 Flashing example for this keyboard:
 
     make keychron/k3_pro/ansi/rgb:default:flash
+    make keychron/k3_pro/ansi/white:default:flash
+    make keychron/k3_pro/iso/rgb:default:flash
+    make keychron/k3_pro/iso/white:default:flash
+    make keychron/k3_pro/jis/rgb:default:flash
+    make keychron/k3_pro/jis/white:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 

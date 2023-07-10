@@ -17,11 +17,12 @@
 #pragma once
 
 #ifdef RGB_MATRIX_ENABLE
-/* RGB Matrix driver configuration */
+/* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 2
-
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
+
+/* RGB Matrix Configuration */
 #    define DRIVER_1_LED_COUNT 46
 #    define DRIVER_2_LED_COUNT 38
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_COUNT + DRIVER_2_LED_COUNT)
@@ -31,28 +32,26 @@
 
 /* Allow shutdown of led driver to save power */
 #    define RGB_MATRIX_DRIVER_SHUTDOWN_ENABLE
+
 /* Turn off backlight on low brightness to save power */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
-/* Caps lock indicating led */
+/* Indication led index */
 #    define DIM_CAPS_LOCK
 #    define CAPS_LOCK_INDEX 46
 #    define LOW_BAT_IND_INDEX 77
-
-#    ifdef VIA_ENABLE
-#        define VIA_QMK_RGBLIGHT_ENABLE
-#    endif
 
 /* RGB Matrix Animation modes. Explicitly enabled
  * For full list of effects, see:
  * https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
  */
-
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+
+/* Use the first 9 channels of led driver */
+#    define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
         { 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14 }
-
 #endif

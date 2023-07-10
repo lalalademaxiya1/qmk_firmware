@@ -10,13 +10,14 @@
     },
     "features": {
         "bootmagic": true,
+        "command": false,
+        "console": false,
         "mousekey": true,
         "extrakey": true,
         "nkro": true,
         "dip_switch": true,
         "raw": true
     },
-    "diode_direction": "ROW2COL",
     "matrix_size": {
         "rows": 6,
         "cols": 16
@@ -27,6 +28,7 @@
         "custom": true,
         "custom_lite": true
     },
+    "diode_direction": "ROW2COL",
     "layouts": {
         "LAYOUT_ansi_84": {
             "layout": [
@@ -215,7 +217,7 @@
                 {"matrix":[5,15], "x":15, "y":5}
             ]
         },
-        "LAYOUT": {
+        "LAYOUT_jis_87": {
             "layout": [
                 {"matrix":[0, 0], "x":0, "y":0},
                 {"matrix":[0, 1], "x":1, "y":0},
