@@ -23,7 +23,6 @@
 /* DIP switch for Mac/win OS switch */
 #define DIP_SWITCH_PINS \
     { A8 }
-#define INVERT_OS_SWITCH_STATE
 
 /* Caps lock LED Pin */
 #define LED_CAPS_LOCK_PIN A0
