@@ -17,9 +17,11 @@
 #pragma once
 
 #ifdef LED_MATRIX_ENABLE
-/* LED matrix driver configuration */
+/* LED Matrix Driver Configuration */
 #    define DRIVER_COUNT 1
 #    define DRIVER_ADDR_1 0b1110100
+
+/* LED Matrix Configuration */
 #    define LED_MATRIX_LED_COUNT 69
 
 /* Set to infinit, which is use in USB mode by default */
@@ -31,7 +33,7 @@
 /* Turn off backlight on low brightness to save power */
 #    define LED_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
-/* Indication led */
+/* Indication led index */
 #    define CAPS_LOCK_INDEX 30
 #    define LOW_BAT_IND_INDEX 61
 
@@ -42,10 +44,10 @@
 #    define LED_MATRIX_KEYPRESSES
 #    define LED_MATRIX_KEYRELEASES
 
-/* Use first 5 channels of LED driver */
+/* Use the first 5 channels of LED driver */
 #    define PHASE_CHANNEL MSKPHASE_5CHANNEL
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30 }
+        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
 #endif

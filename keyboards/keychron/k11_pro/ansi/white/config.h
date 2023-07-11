@@ -17,9 +17,11 @@
 #pragma once
 
 #ifdef LED_MATRIX_ENABLE
-/* LED matrix driver configuration */
+/* LED Matrix Driver Configuration */
 #    define DRIVER_COUNT 1
 #    define DRIVER_ADDR_1 0b1110100
+
+/* LED Matrix Configuration */
 #    define LED_MATRIX_LED_COUNT 69
 
 /* Set to infinit, which is use in USB mode by default */
@@ -47,5 +49,5 @@
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30 }
+        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
 #endif

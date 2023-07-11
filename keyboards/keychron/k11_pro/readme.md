@@ -1,6 +1,6 @@
 # Keychron K11 Pro
 
-![Keychron K11 Pro]()
+![Keychron K11 Pro]
 
 A customizable 65% and ergonomic keyboard.
 

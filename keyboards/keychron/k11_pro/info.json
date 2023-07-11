@@ -15,7 +15,8 @@
         "dip_switch": true,
         "extrakey": true,
         "mousekey": true,
-        "nkro": true
+        "nkro": true,
+        "raw": true
     },
     "matrix_pins": {
         "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
@@ -23,5 +24,8 @@
         "custom": true,
         "custom_lite": true
     },
-    "diode_direction": "ROW2COL"
+    "diode_direction": "ROW2COL",
+    "dynamic_keymap": {
+        "layer_count": 5
+    }
 }
