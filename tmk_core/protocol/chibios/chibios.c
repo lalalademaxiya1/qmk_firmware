@@ -34,7 +34,7 @@
 #include "debug.h"
 #include "print.h"
 
-#define USB_WAKEUP_WATI_MS 200
+#define USB_WAKEUP_WATI_MS 500
 
 #ifndef EARLY_INIT_PERFORM_BOOTLOADER_JUMP
 // Change this to be TRUE once we've migrated keyboards to the new init system
