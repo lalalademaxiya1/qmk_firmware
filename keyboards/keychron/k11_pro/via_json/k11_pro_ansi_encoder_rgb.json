@@ -1,7 +1,7 @@
 {
-  "name": "Keychron K11 Pro ANSI",
+  "name": "Keychron K11 Pro ANSI RGB Knob",
   "vendorId": "0x3434",
-  "productId": "0x02B0",
+  "productId": "0x02B6",
   "keycodes": ["qmk_lighting"],
   "menus": [
     {
@@ -172,8 +172,8 @@
           "y": -0.85,
           "x": 12.75
         },
+        "2,10",
         "2,11",
-        "2,12",
         {
           "c": "#777777",
           "w": 2.25
@@ -321,10 +321,10 @@
         {
           "x": 8.25
         },
+        "2,6",
         "2,7",
         "2,8",
-        "2,9",
-        "2,10"
+        "2,9"
       ],
       [
         {
