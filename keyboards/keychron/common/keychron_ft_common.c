@@ -139,9 +139,13 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
 }
 
 static void factory_reset(void) {
-    timer_300ms_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+    timer_300ms_buffer = timer_read32();
     factory_reset_count++;
+#ifdef KEYBOARD_keychron_c3_pro_ansi_white
+    layer_state_t default_layer = 1 << 2;
+#else
     layer_state_t default_layer = default_layer_state;
+#endif
     eeconfig_init();
     default_layer_set(default_layer);
     led_test_mode = LED_TEST_MODE_OFF;
@@ -190,7 +194,7 @@ static void timer_3s_task(void) {
 }
 
 static void timer_300ms_task(void) {
-    if (sync_timer_elapsed32(timer_300ms_buffer) > 300) {
+    if (timer_elapsed32(timer_300ms_buffer) > 300) {
         if (factory_reset_count++ > 6) {
             timer_300ms_buffer  = 0;
             factory_reset_count = 0;
@@ -199,7 +203,7 @@ static void timer_300ms_task(void) {
             rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
 #endif
         } else {
-            timer_300ms_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+            timer_300ms_buffer = timer_read32();
         }
     }
 }

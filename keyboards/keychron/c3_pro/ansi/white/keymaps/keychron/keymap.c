@@ -73,6 +73,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keychron_ft(keycode, record)) {
         return false;
     }
-
     return true;
 }
