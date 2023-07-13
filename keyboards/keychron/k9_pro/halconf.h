@@ -16,9 +16,9 @@
 
 #pragma once
 
-#define HAL_USE_I2C TRUE
-
 #define _CHIBIOS_HAL_CONF_VER_8_0_
+
+#define HAL_USE_I2C TRUE
 
 #ifdef KC_BLUETOOTH_ENABLE
 #    define PAL_USE_CALLBACKS TRUE
