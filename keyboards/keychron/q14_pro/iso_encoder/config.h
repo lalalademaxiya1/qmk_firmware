@@ -24,7 +24,7 @@
 
 /* RGB Matrix Configuration */
 #    define DRIVER_1_LED_TOTAL 56
-#    define DRIVER_2_LED_TOTAL 48
+#    define DRIVER_2_LED_TOTAL 49
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Set to infinit, which is use in USB mode by default */
@@ -38,8 +38,8 @@
 
 /* Indication led */
 #    define NUM_LOCK_INDEX 18
-#    define CAPS_LOCK_INDEX 59
-#    define LOW_BAT_IND_INDEX 98
+#    define CAPS_LOCK_INDEX 58
+#    define LOW_BAT_IND_INDEX 99
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
