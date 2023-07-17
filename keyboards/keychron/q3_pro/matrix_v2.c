@@ -71,7 +71,7 @@ static void HC595_output(uint16_t data) {
     writePinHigh(HC595_STCP);
 }
 
-static void HC595_output_bit(uint16_t data) {
+static void HC595_output_bit(uint8_t data) {
     uint8_t n = 1;
 
     writePinLow(HC595_SHCP);

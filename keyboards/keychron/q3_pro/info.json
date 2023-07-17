@@ -16,25 +16,9 @@
         "dip_switch": true,
         "raw": true,
         "encoder": true,
-        "encoder_map": true,
         "rgb_matrix": true
     },
     "diode_direction": "ROW2COL",
-    "matrix_size": {
-        "rows": 6,
-        "cols": 18
-    },
-    "matrix_pins": {
-        "rows": ["B5", "B4", "B3", "A15", "A14", "A13"],
-        "cols": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-        "custom": true,
-        "custom_lite": true
-    },
-    "encoder": {
-        "rotary": [
-            {"pin_a": "A10", "pin_b": "A0", "resolution": 4}
-        ]
-    },
     "rgb_matrix": {
         "driver": "CKLED2001",
         "animations": {
@@ -60,10 +44,5 @@
             "splash": true,
             "solid_splash": true
         }
-<<<<<<< HEAD
-    },
-    "diode_direction": "ROW2COL"
-=======
     }
->>>>>>> temp
 }

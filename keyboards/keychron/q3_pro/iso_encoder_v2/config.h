@@ -17,12 +17,14 @@
 #pragma once
 
 #ifdef RGB_MATRIX_ENABLE
-/* RGB Matrix driver configuration */
+/* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 2
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
+
+/* RGB Matrix Configuration */
 #    define DRIVER_1_LED_COUNT 47
-#    define DRIVER_2_LED_COUNT 40
+#    define DRIVER_2_LED_COUNT 41
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_COUNT + DRIVER_2_LED_COUNT)
 
 /* Set to infinit, which is use in USB mode by default */
@@ -35,8 +37,8 @@
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 32
 
 /* Indication led */
-#    define CAPS_LOCK_INDEX 50
-#    define LOW_BAT_IND_INDEX 79
+#    define CAPS_LOCK_INDEX 49
+#    define LOW_BAT_IND_INDEX 80
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
@@ -49,7 +51,7 @@
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 }
+        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
 #endif
 
 #ifdef KC_BLUETOOTH_ENABLE
