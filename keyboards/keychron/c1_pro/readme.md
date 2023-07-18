@@ -2,7 +2,7 @@
 
 ![Keychron C1 Pro](https://i.imgur.com/Svdm4lp.jpg)
 
-A customizable 100% keyboard.
+A customizable TKL keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron C1 Pro
@@ -10,13 +10,17 @@ A customizable 100% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/c1/ansi/rgb:default
-    make keychron/c1/ansi/white:default
+    make keychron/c1/ansi_v1/rgb:default
+    make keychron/c1/ansi_v1/white:default
+    make keychron/c1/ansi_v2/rgb:default
+    make keychron/c1/ansi_v2/white:default
 
 Flashing example for this keyboard:
 
-    make keychron/c1/ansi/rgb:default:flash
-    make keychron/c1/ansi/rbg:default:flash
+    make keychron/c1/ansi_v1/rgb:default:flash
+    make keychron/c1/ansi_v1/white:default:flash
+    make keychron/c1/ansi_v1/rgb:default:flash
+    make keychron/c1/ansi_v2/white:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
