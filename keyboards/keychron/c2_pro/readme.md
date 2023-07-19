@@ -12,17 +12,17 @@ Rev1 is based on STM32L432 and rev2 is based on STM32F402.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/c2_pro/rev1/ansi/rgb:default
-    make keychron/c2_pro/rev1/ansi/white:default
-    make keychron/c2_pro/rev2/ansi/rgb:default
-    make keychron/c2_pro/rev2/ansi/white:default
+    make keychron/c2_pro/ansi_v1/rgb:default
+    make keychron/c2_pro/ansi_v1/white:default
+    make keychron/c2_pro/ansi_v2/rgb:default
+    make keychron/c2_pro/ansi_v2/white:default
 
 Flashing example for this keyboard:
 
-    make keychron/c2_pro/rev1/ansi/rgb:default:flash
-    make keychron/c2_pro/rev1/ansi/white:default:flash
-    make keychron/c2_pro/rev2/ansi/rgb:default:flash
-    make keychron/c2_pro/rev2/ansi/white:default:flash
+    make keychron/c2_pro/ansi_v1/rgb:default:flash
+    make keychron/c2_pro/ansi_v1/white:default:flash
+    make keychron/c2_pro/ansi_v2/rgb:default:flash
+    make keychron/c2_pro/ansi_V2/white:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

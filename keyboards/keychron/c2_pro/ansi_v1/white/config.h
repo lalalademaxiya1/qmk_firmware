@@ -16,24 +16,28 @@
 
 #pragma once
 
-#ifdef RGB_MATRIX_ENABLE
-/* RGB Matrix Driver Configuration */
-#    define DRIVER_COUNT 2
-#    define DRIVER_ADDR_1 0b1110111
-#    define DRIVER_ADDR_2 0b1110100
+#ifdef LED_MATRIX_ENABLE
+/* LED Matrix Driver Configuration */
+#    define DRIVER_COUNT 1
+#    define DRIVER_ADDR_1 0b1110100
 
 /* RGB Matrix Configuration */
-#    define DRIVER_1_LED_TOTAL 60
-#    define DRIVER_2_LED_TOTAL 48
-#    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#    define LED_MATRIX_LED_COUNT 108
+
+/* turn off effects when suspended */
+#    define LED_DISABLE_WHEN_USB_SUSPENDED
+
+/* Use the first 8 channels of led driver */
+#    define PHASE_CHANNEL MSKPHASE_8CHANNEL
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56, 0xAA, 0xAA, 0x56 }
+        { 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0, 0xA0 }
 
-// RGB Matrix Animation modes. Explicitly enabled
+// LED Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
-// https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
-#    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#    define RGB_MATRIX_KEYPRESSES
+// https://docs.qmk.fm/#/feature_led_matrix?id=led-matrix-effects
+// #if defined(LED_MATRIX_KEYPRESSES) || defined(LED_MATRIX_KEYRELEASES)
+#    define LED_MATRIX_KEYPRESSES
+#    define LED_MATRIX_KEYRELEASES
 #endif

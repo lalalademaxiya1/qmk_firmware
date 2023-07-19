@@ -16,16 +16,9 @@
 
 #pragma once
 
-/* turn off effects when suspended */
-#define RGB_DISABLE_WHEN_USB_SUSPENDED
-#define LED_DISABLE_WHEN_USB_SUSPENDED
-
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
-
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
 
 /* Factory test keys */
 #define FN_KEY1 MO(1)
