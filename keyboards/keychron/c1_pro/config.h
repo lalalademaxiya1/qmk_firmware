@@ -16,10 +16,6 @@
 
 #pragma once
 
-/* DIP switch */
-#define DIP_SWITCH_PINS \
-    { D2 }
-
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)

@@ -17,7 +17,6 @@
 #include "quantum.h"
 
 // clang-format off
-
 const matrix_row_t matrix_mask[] = {
     0b1111111111111111,
     0b1111111111111111,
@@ -28,9 +27,7 @@ const matrix_row_t matrix_mask[] = {
 };
 
 // clang-format on
-
 #ifdef DIP_SWITCH_ENABLE
-
 bool dip_switch_update_kb(uint8_t index, bool active) {
     if (!dip_switch_update_user(index, active)) {
         return false;
@@ -40,8 +37,7 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
     }
     return true;
 }
-
-#endif // DIP_SWITCH_ENABLE
+#endif
 
 #if defined(RGB_MATRIX_ENABLE) && defined(CAPS_MAC_WIN_LOCK_LED_INDEX)
 
