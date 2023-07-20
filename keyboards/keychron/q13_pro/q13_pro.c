@@ -197,7 +197,6 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
     wait_ms(10);
     /* Set bluetooth parameters */
@@ -312,7 +311,3 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
     }
 }
 #endif
-
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}
