@@ -508,11 +508,17 @@ endif
         QUANTUM_LIB_SRC += i2c_master.c
     endif
 
+    # ifeq ($(strip $(RGB_MATRIX_DRIVER)), CKLED2001)
+    #     OPT_DEFS += -DCKLED2001 -DSTM32_I2C -DHAL_USE_I2C=TRUE
+    #     COMMON_VPATH += $(DRIVER_PATH)/led
+    #     SRC += ckled2001.c
+    #     QUANTUM_LIB_SRC += i2c_master.c
+    # endif
     ifeq ($(strip $(RGB_MATRIX_DRIVER)), CKLED2001)
-        OPT_DEFS += -DCKLED2001 -DSTM32_I2C -DHAL_USE_I2C=TRUE
+        OPT_DEFS += -DCKLED2001 -DSTM32_SPI -DHAL_USE_SPI=TRUE
         COMMON_VPATH += $(DRIVER_PATH)/led
-        SRC += ckled2001.c
-        QUANTUM_LIB_SRC += i2c_master.c
+        SRC += ckled2001_spi.c
+        QUANTUM_LIB_SRC += spi_master.c
     endif
 
     ifeq ($(strip $(RGB_MATRIX_DRIVER)), WS2812)

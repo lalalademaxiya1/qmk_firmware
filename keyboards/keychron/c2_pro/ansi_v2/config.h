@@ -28,13 +28,13 @@
 #define LED_PIN_ON_STATE 1
 
 /* The I2C Driver Configuration */
-#define I2C1_CLOCK_SPEED 400000
-#define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
+// #define I2C1_CLOCK_SPEED 400000
+// #define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
 
 /* The SPI Driver Configuration */
-// #define SPI_DRIVER SPID1
-// #define SPI_SCK_PIN A5
-// #define SPI_MOSI_PIN A7
-// #define SPI_MISO_PIN A6
-// #define SPI_CS1 A4
-// #define SPI_CS2 C14
+#define SPI_DRIVER SPID1
+#define SPI_SCK_PIN A5
+#define SPI_MOSI_PIN A7
+#define SPI_MISO_PIN A6
+#define DRIVER_1_CS A4
+#define DRIVER_2_CS C14

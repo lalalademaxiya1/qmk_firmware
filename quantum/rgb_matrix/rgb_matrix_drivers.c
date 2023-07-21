@@ -24,7 +24,11 @@
  */
 
 #if defined(IS31FL3731) || defined(IS31FL3733) || defined(IS31FL3737) || defined(IS31FL3741) || defined(IS31FLCOMMON) || defined(CKLED2001)
-#    include "i2c_master.h"
+#    if defined(HAL_USE_SPI)
+#        include "spi_master.h"
+#    else
+#        include "i2c_master.h"
+#    endif
 
 // TODO: Remove this at some later date
 #    if defined(DRIVER_ADDR_1) && defined(DRIVER_ADDR_2)
@@ -34,7 +38,11 @@
 #    endif
 
 static void init(void) {
+#    if defined(HAL_USE_SPI)
+    spi_init();
+#    else
     i2c_init();
+#    endif
 
 #    if defined(IS31FL3731)
     IS31FL3731_init(DRIVER_ADDR_1);
@@ -100,13 +108,20 @@ static void init(void) {
 #        endif
 
 #    elif defined(CKLED2001)
+#        if defined(HAL_USE_SPI)
+    CKLED2001_init(DRIVER_1_CS);
+#            if defined(DRIVER_2_CS)
+    CKLED2001_init(DRIVER_2_CS);
+#            endif
+#        else
     CKLED2001_init(DRIVER_ADDR_1);
-#        if defined(DRIVER_ADDR_2)
+#            if defined(DRIVER_ADDR_2)
     CKLED2001_init(DRIVER_ADDR_2);
-#            if defined(DRIVER_ADDR_3)
+#                if defined(DRIVER_ADDR_3)
     CKLED2001_init(DRIVER_ADDR_3);
-#                if defined(DRIVER_ADDR_4)
+#                    if defined(DRIVER_ADDR_4)
     CKLED2001_init(DRIVER_ADDR_4);
+#                    endif
 #                endif
 #            endif
 #        endif
@@ -187,13 +202,20 @@ static void init(void) {
 #        endif
 
 #    elif defined(CKLED2001)
+#        if defined(HAL_USE_SPI)
+    CKLED2001_update_led_control_registers(DRIVER_1_CS, 0);
+#            if defined(DRIVER_2_CS)
+    CKLED2001_update_led_control_registers(DRIVER_2_CS, 1);
+#            endif
+#        else
     CKLED2001_update_led_control_registers(DRIVER_ADDR_1, 0);
-#        if defined(DRIVER_ADDR_2)
+#            if defined(DRIVER_ADDR_2)
     CKLED2001_update_led_control_registers(DRIVER_ADDR_2, 1);
-#            if defined(DRIVER_ADDR_3)
+#                if defined(DRIVER_ADDR_3)
     CKLED2001_update_led_control_registers(DRIVER_ADDR_3, 2);
-#                if defined(DRIVER_ADDR_4)
+#                    if defined(DRIVER_ADDR_4)
     CKLED2001_update_led_control_registers(DRIVER_ADDR_4, 3);
+#                    endif
 #                endif
 #            endif
 #        endif
@@ -236,9 +258,9 @@ static void flush(void) {
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_color = IS31FL3733_set_color,
+    .init          = init,
+    .flush         = flush,
+    .set_color     = IS31FL3733_set_color,
     .set_color_all = IS31FL3733_set_color_all,
 };
 
@@ -257,9 +279,9 @@ static void flush(void) {
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_color = IS31FL3737_set_color,
+    .init          = init,
+    .flush         = flush,
+    .set_color     = IS31FL3737_set_color,
     .set_color_all = IS31FL3737_set_color_all,
 };
 
@@ -272,9 +294,9 @@ static void flush(void) {
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_color = IS31FL3741_set_color,
+    .init          = init,
+    .flush         = flush,
+    .set_color     = IS31FL3741_set_color,
     .set_color_all = IS31FL3741_set_color_all,
 };
 
@@ -293,30 +315,37 @@ static void flush(void) {
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_color = IS31FL_RGB_set_color,
+    .init          = init,
+    .flush         = flush,
+    .set_color     = IS31FL_RGB_set_color,
     .set_color_all = IS31FL_RGB_set_color_all,
 };
 
 #    elif defined(CKLED2001)
 static void flush(void) {
+#        if defined(HAL_USE_SPI)
+    CKLED2001_update_pwm_buffers(DRIVER_1_CS, 0);
+#            if defined(DRIVER_2_CS)
+    CKLED2001_update_pwm_buffers(DRIVER_2_CS, 1);
+#            endif
+#        else
     CKLED2001_update_pwm_buffers(DRIVER_ADDR_1, 0);
-#        if defined(DRIVER_ADDR_2)
+#            if defined(DRIVER_ADDR_2)
     CKLED2001_update_pwm_buffers(DRIVER_ADDR_2, 1);
-#            if defined(DRIVER_ADDR_3)
+#                if defined(DRIVER_ADDR_3)
     CKLED2001_update_pwm_buffers(DRIVER_ADDR_3, 2);
-#                if defined(DRIVER_ADDR_4)
+#                    if defined(DRIVER_ADDR_4)
     CKLED2001_update_pwm_buffers(DRIVER_ADDR_4, 3);
+#                    endif
 #                endif
 #            endif
 #        endif
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_color = CKLED2001_set_color,
+    .init          = init,
+    .flush         = flush,
+    .set_color     = CKLED2001_set_color,
     .set_color_all = CKLED2001_set_color_all,
 };
 #    endif
