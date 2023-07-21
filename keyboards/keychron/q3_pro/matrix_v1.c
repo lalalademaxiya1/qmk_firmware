@@ -28,7 +28,6 @@ pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
 extern indicator_config_t indicator_config;
 static uint32_t           power_on_indicator_timer_buffer;
 extern bool               bat_low_led_pin_state;
-uint16_t                  matrix_delay = 100;
 
 #define POWER_ON_LED_DURATION 3000
 
@@ -65,17 +64,16 @@ static void HC595_output(uint32_t data) {
 }
 
 static inline void setPinOutput_writeLow(pin_t pin) {
-    setPinOutput(pin);
-    writePinLow(pin);
-}
-
-static inline void setPinOutput_writeHigh(pin_t pin) {
-    setPinOutput(pin);
-    writePinHigh(pin);
+    ATOMIC_BLOCK_FORCEON {
+        setPinOutput(pin);
+        writePinLow(pin);
+    }
 }
 
 static inline void setPinInput_high(pin_t pin) {
-    setPinInputHigh(pin);
+    ATOMIC_BLOCK_FORCEON {
+        setPinInputHigh(pin);
+    }
 }
 
 static inline uint8_t readMatrixPin(pin_t pin) {
@@ -245,12 +243,7 @@ void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col)
     if (!select_col(current_col)) { // select col
         return;                     // skip NO_PIN col
     }
-<<<<<<< HEAD
-
-    HC595_delay(matrix_delay);
-=======
     HC595_delay(200);
->>>>>>> temp
 
     // For each row...
     for (uint8_t row_index = 0; row_index < MATRIX_ROWS; row_index++) {
@@ -266,12 +259,7 @@ void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col)
     }
 
     unselect_col(current_col);
-<<<<<<< HEAD
-
-    HC595_delay(matrix_delay);
-=======
     HC595_delay(200);
->>>>>>> temp
 }
 
 void matrix_init_custom(void) {

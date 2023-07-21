@@ -15,15 +15,9 @@
         "nkro": true,
         "dip_switch": true,
         "encoder": true,
-<<<<<<< HEAD
-        "rgb_matrix": true
-    },
-    "diode_direction": "ROW2COL",
-=======
         "rgb_matrix": true,
         "raw": true
     },
->>>>>>> temp
     "rgb_matrix": {
         "driver": "CKLED2001",
         "animations": {
