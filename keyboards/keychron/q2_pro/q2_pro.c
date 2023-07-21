@@ -34,8 +34,9 @@ typedef struct PACKED {
     uint8_t keycode[3];
 } key_combination_t;
 
-static uint32_t siri_timer_buffer = 0;
-static uint8_t  mac_keycode[4]    = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
+static uint32_t factory_timer_buffer = 0;
+static uint32_t siri_timer_buffer    = 0;
+static uint8_t  mac_keycode[4]       = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_TAB}},        // Task (win)
@@ -133,10 +134,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#ifdef KC_BLUETOOTH_ENABLE
-static void encoder0_pad_cb(void *param) {
-    (void)param;
-    encoder_inerrupt_read(0);
+#if defined(KC_BLUETOOTH_ENABLE) && defined(ENCODER_ENABLE)
+static void encoder_pad_cb(void *param) {
+    encoder_inerrupt_read((uint32_t)param & 0XFF);
 }
 #endif
 
@@ -145,7 +145,8 @@ void keyboard_post_init_kb(void) {
 
 #ifdef KC_BLUETOOTH_ENABLE
     /* Currently we don't use this reset pin */
-    palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_UNCONNECTED);
+    palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
+    palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
 
     /* IMPORTANT: DO NOT enable internal pull-up resistor
      * as there is an external pull-down resistor.
@@ -155,20 +156,32 @@ void keyboard_post_init_kb(void) {
     ckbt51_init(false);
     bluetooth_init();
 
+#    ifdef ENCODER_ENABLE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
-    for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
+    for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
         palEnableLineEvent(encoders_pad_a[i], PAL_EVENT_MODE_BOTH_EDGES);
         palEnableLineEvent(encoders_pad_b[i], PAL_EVENT_MODE_BOTH_EDGES);
-        palSetLineCallback(encoders_pad_a[i], encoder0_pad_cb, NULL);
-        palSetLineCallback(encoders_pad_b[i], encoder0_pad_cb, NULL);
+        palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, (void *)i);
+        palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
     }
+#    endif
 #endif
 
     keyboard_post_init_user();
 }
 
 void matrix_scan_kb(void) {
+    if (factory_timer_buffer && timer_elapsed32(factory_timer_buffer) > 2000) {
+        factory_timer_buffer = 0;
+        if (bt_factory_reset) {
+            bt_factory_reset = false;
+            palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
+            wait_ms(5);
+            palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
+        }
+    }
+
     if (siri_timer_buffer && sync_timer_elapsed32(siri_timer_buffer) > 500) {
         siri_timer_buffer = 0;
         unregister_code(KC_LGUI);
@@ -184,7 +197,6 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
     /* Set bluetooth parameters */
     module_param_t param = {.event_mode             = 0x02,
@@ -201,8 +213,8 @@ static void ckbt51_param_init(void) {
 
 void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
     if (bt_factory_reset) {
-        bt_factory_reset = false;
         ckbt51_param_init();
+        factory_timer_buffer = timer_read32();
     }
     /* CKBT51 bluetooth module boot time is slower, it enters disconnected after boot,
        so we place initialization here. */
@@ -297,7 +309,3 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
     }
 }
 #endif
-
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
-}

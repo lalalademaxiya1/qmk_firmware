@@ -72,8 +72,13 @@
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
+<<<<<<< HEAD
 /* For automatic testing to pass */
 #define MATRIX_DELAY_ENABLE
+=======
+/* Old default behavior of mod-taps */
+#define HOLD_ON_OTHER_KEY_PRESS
+>>>>>>> temp
 
 /* Factory test keys */
 #define FN_KEY1 MO(1)

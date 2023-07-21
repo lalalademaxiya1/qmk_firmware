@@ -20,8 +20,9 @@
 /* RGB Matrix Driver Configuration */
 #    define DRIVER_COUNT 1
 #    define DRIVER_ADDR_1 0b1110100
-#    define DRIVER_1_LED_TOTAL 62
-#    define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
+
+/* RGB Matrix Configuration */
+#    define RGB_MATRIX_LED_COUNT 62
 
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
@@ -36,14 +37,10 @@
 #    define CAPS_LOCK_INDEX 27   // Caps Lock
 #    define LOW_BAT_IND_INDEX 57 // Space
 
-/* RGB Matrix Animation modes. Explicitly enabled
- * For full list of effects, see:
- * https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
- */
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
+        { 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50 }
 #endif

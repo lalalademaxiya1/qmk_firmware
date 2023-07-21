@@ -1,6 +1,6 @@
 # Keychron K13 Pro
 
-![Keychron K13 Pro](https://i.imgur.com/JCyRwoS.jpg)
+![Keychron K13 Pro](https://github.com/Keychron/ProductImage/blob/main/K_Pro/k13_pro.jpg?raw=true)
 
 A low profile wireless mechanical keyboard with a numpad TKL layout.
 

@@ -1,12 +1,12 @@
 # Keychron Q4 Pro
 
-![Keychron Q4 Pro]
+![Keychron Q4 Pro](https://i.imgur.com/0ERzbOa.jpg)
 
-A customizable 60% keyboard.
+A wireless custom mechanical 60% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q4 Pro
-* Hardware Availability:
+* Hardware Availability:[Keychron Q4 Pro QMK/VIA Wireless Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q4-pro-qmk-via-wireless-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

@@ -42,7 +42,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {0, L_5,    J_5,    K_5},
     {0, L_6,    J_6,    K_6},
     {0, L_7,    J_7,    K_7},
-    // {0, L_8,    J_8,    K_8}, // Knob
 
     {0, C_1,    A_1,    B_1},
     {0, C_2,    A_2,    B_2},

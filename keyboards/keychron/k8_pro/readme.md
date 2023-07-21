@@ -1,6 +1,6 @@
 # Keychron K8 Pro
 
-![Keychron K8 Pro](https://drive.google.com/file/d/1UWZKX_vN2O5VxjHdVP0XIJjG4KnvBpjo/view?usp=share_link)
+![Keychron K8 Pro](https://github.com/Keychron/ProductImage/blob/main/K_Pro/k8_pro.jpg?raw=true)
 
 A customizable 87 keys TKL keyboard.
 

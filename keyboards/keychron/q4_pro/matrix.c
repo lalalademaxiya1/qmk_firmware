@@ -71,7 +71,7 @@ static void HC595_output(uint16_t data) {
     writePinHigh(HC595_STCP);
 }
 
-static void HC595_output_bit(uint16_t data) {
+static void HC595_output_bit(uint8_t data) {
     uint8_t n = 1;
 
     writePinLow(HC595_SHCP);
@@ -128,15 +128,14 @@ static void unselect_cols(void) {
 }
 
 void select_all_cols(void) {
-    // for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-    //     if (x < DIRECT_COL_NUM) {
-    //         setPinOutput_writeLow(col_pins[x]);
-    //     } else {
-    //         if (x == DIRECT_COL_NUM) HC595_output(0x0000);
-    //         break;
-    //     }
-    // }
-    HC595_output(0x0000);
+    for (uint8_t x = 0; x < MATRIX_COLS; x++) {
+        if (x < DIRECT_COL_NUM) {
+            setPinOutput_writeLow(col_pins[x]);
+        } else {
+            if (x == DIRECT_COL_NUM) HC595_output(0x0000);
+            break;
+        }
+    }
 }
 
 static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col, matrix_row_t row_shifter) {

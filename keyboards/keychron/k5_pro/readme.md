@@ -1,6 +1,6 @@
 # Keychron K5 Pro
 
-![Keychron K5 Pro]([img]<https://i.imgur.com/R1lcavH.jpg)
+![Keychron K5 Pro](https://github.com/Keychron/ProductImage/blob/main/K_Pro/K5_Pro.JPG?raw=true)
 
 A customizable 100% keyboard.
 

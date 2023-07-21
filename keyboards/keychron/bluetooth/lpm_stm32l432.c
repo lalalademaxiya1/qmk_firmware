@@ -31,6 +31,7 @@
 #include "battery.h"
 #include "report_buffer.h"
 #include "stm32_bd.inc"
+#include "debounce.h"
 
 extern pin_t                 row_pins[MATRIX_ROWS];
 extern void                  select_all_cols(void);
@@ -248,6 +249,11 @@ void enter_power_mode(pm_t mode) {
     lpm_wakeup();
     lpm_timer_reset();
     report_buffer_init();
+
+    /* Call debounce_free() to avoid memory leak as debounce_init() invoked in matrix_init() allocates
+     * new memory when using per row/key debounce
+     */
+    debounce_free();
     matrix_init();
     power_mode = PM_RUN;
 }

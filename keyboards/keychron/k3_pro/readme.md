@@ -1,6 +1,6 @@
 # Keychron K3 Pro
 
-![Keychron K3 Pro](https://i.imgur.com/6GojhUq.jpg)
+![Keychron K3 Pro](https://github.com/Keychron/ProductImage/blob/main/K_Pro/k3_pro.jpg?raw=true)
 
 A customizable 84 keys TKL keyboard.
 

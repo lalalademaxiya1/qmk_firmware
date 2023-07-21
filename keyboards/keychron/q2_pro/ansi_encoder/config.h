@@ -24,7 +24,9 @@
 #    define DRIVER_COUNT 2
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
-#    define DRIVER_1_LED_TOTAL 30
+
+/* RGB Matrix Configuration */
+#    define DRIVER_1_LED_TOTAL 29
 #    define DRIVER_2_LED_TOTAL 37
 #    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
@@ -37,22 +39,17 @@
 /* Turn off backllit if brightness value is low */
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
-#    define CAPS_LOCK_INDEX 30
-
-#    define LOW_BAT_IND_INDEX 60
-
-// RGB Matrix Animation modes. Explicitly enabled
-// For full list of effects, see:
-// https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
+/* Indication led index */
+#    define CAPS_LOCK_INDEX 29
+#    define LOW_BAT_IND_INDEX 59
 
 #    define RGB_MATRIX_KEYPRESSES
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 
-/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+/* Use the first 9 channels of led driver */
 #    define PHASE_CHANNEL MSKPHASE_9CHANNEL
 
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30 }
-
+        { 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40 }
 #endif

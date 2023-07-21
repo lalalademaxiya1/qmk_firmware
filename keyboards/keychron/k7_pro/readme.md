@@ -1,6 +1,6 @@
 # Keychron K7 Pro
 
-![Keychron K7 Pro]([img]<https://i.imgur.com/TJZjaN2.jpg)
+![Keychron K7 Pro](https://github.com/Keychron/ProductImage/blob/main/K_Pro/k7_pro.jpg?raw=true)
 
 A customizable 68 keys low profile switch keyboard.
 

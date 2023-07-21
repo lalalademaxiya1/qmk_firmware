@@ -1,6 +1,6 @@
 # Keychron Q3 Pro
 
-![Keychron Q3 Pro](https://i.imgur.com/MHzANbD.jpg)
+![Keychron Q3 Pro](https://i.imgur.com/wTueyKr.jpg)
 
 A customizable 80% TKL keyboard.
 The rev1 has four macro keys on the left while rev2 does not, Go to Keychron official website to see more.
@@ -11,13 +11,15 @@ The rev1 has four macro keys on the left while rev2 does not, Go to Keychron off
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/q3_pro/rev1/ansi_encoder:default
-    make keychron/q3_pro/rev2/ansi_encoder:default
+    make keychron/q3_pro/ansi_encoder_se:default
+    make keychron/q3_pro/iso_encoder_se:default
+    make keychron/q3_pro/ansi_encoder:default
 
 Flashing example for this keyboard:
 
-    make keychron/q3_pro/rev1/ansi_encoder:default:flash
-    make keychron/q3_pro/rev2/ansi_encoder:default:flash
+    make keychron/q3_pro/ansi_encoder_se:default:flash
+    make keychron/q3_pro/iso_encoder_se:default:flash
+    make keychron/q3_pro/ansi_encoder:default:flash
 
 **Reset Key**: Connect the USB cable, toggle mode switch to "Off", hold down the *Esc* key or reset button underneath space bar, then toggle then switch to "Cable".
 

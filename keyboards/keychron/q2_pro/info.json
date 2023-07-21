@@ -14,9 +14,9 @@
         "extrakey": true,
         "nkro": true,
         "dip_switch": true,
-        "raw": true,
         "encoder": true,
-        "rgb_matrix": true
+        "rgb_matrix": true,
+        "raw": true
     },
     "diode_direction": "ROW2COL",
     "matrix_size": {
@@ -33,6 +33,9 @@
         "rotary": [
             {"pin_a": "A10", "pin_b": "A0", "resolution": 4}
         ]
+    },
+    "dynamic_keymap": {
+        "layer_count": 5
     },
     "rgb_matrix": {
         "driver": "CKLED2001",

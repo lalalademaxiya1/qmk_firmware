@@ -29,11 +29,6 @@
 #    include "factory_test.h"
 #endif
 
-#ifdef BAT_LOW_LED_PIN
-static uint32_t power_on_indicator_timer_buffer;
-#    define POWER_ON_LED_DURATION 3000
-#endif
-
 typedef struct PACKED {
     uint8_t len;
     uint8_t keycode[3];
@@ -150,7 +145,6 @@ void keyboard_post_init_kb(void) {
 
 #ifdef KC_BLUETOOTH_ENABLE
     /* Currently we don't use this reset pin */
-    // palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_UNCONNECTED);
     palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
     palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
 
@@ -203,9 +197,8 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
-    wait_ms(10);
+    wait_ms(5);
     /* Set bluetooth parameters */
     module_param_t param = {.event_mode             = 0x02,
                             .connected_idle_timeout = 7200,

@@ -1,6 +1,6 @@
 # Keychron K1 Pro
 
-![Keychron K1 Pro](https://i.imgur.com/E6KPWBD.jpg)
+![Keychron K1 Pro](https://github.com/Keychron/ProductImage/blob/main/K_Pro/k1_pro.jpg?raw=true)
 
 A customizable 80% TKL keyboard.
 

@@ -25,7 +25,7 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
  *   |  |       G location
  *   |  |       |       B location
  *   |  |       |       | */
-//    {0, I_1,    G_1,     H_1},
+    {0, I_1,    G_1,    H_1},
     {0, I_2,    G_2,    H_2},
     {0, I_3,    G_3,    H_3},
     {0, I_4,    G_4,    H_4},
@@ -38,7 +38,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {0, I_11,   G_11,   H_11},
     {0, I_12,   G_12,   H_12},
     {0, I_13,   G_13,   H_13},
-    {0, I_14,   G_14,   H_14},
     {0, I_15,   G_15,   H_15},
     {0, I_16,   G_16,   H_16},
     {1, C_4,    A_4,    B_4},  // 16
@@ -61,7 +60,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {0, C_16,   A_16,   B_16},
     {1, C_2,    A_2,    B_2},  // 17
 
-    {1, F_13,   D_13,   E_13},
     {0, F_1,    D_1,    E_1},
     {0, F_2,    D_2,    E_2},
     {0, F_3,    D_3,    E_3},
@@ -80,7 +78,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {0, F_16,   D_16,   E_16},
     {1, C_1,    A_1,    B_1},  // 17
 
-    {1, F_12,   D_12,   E_12},
     {1, C_16,   A_16,   B_16},
     {1, C_15,   A_15,   B_15},
     {1, C_14,   A_14,   B_14},
@@ -95,7 +92,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {1, C_5,    A_5,    B_5},
     {1, C_3,    A_3,    B_3},  // 13
 
-    {1, F_8,    D_8,    E_8},
     {1, I_16,   G_16,   H_16},
     {1, I_14,   G_14,   H_14},
     {1, I_13,   G_13,   H_13},
@@ -110,7 +106,6 @@ const ckled2001_led g_ckled2001_leds[RGB_MATRIX_LED_COUNT] = {
     {1, I_3,    G_3,    H_3},
     {1, I_1,    G_1,    H_1},  // 13
 
-    {1, F_7,    D_7,    E_7},
     {1, F_16,   D_16,   E_16},
     {1, F_15,   D_15,   E_15},
     {1, F_14,   D_14,   E_14},
