@@ -31,7 +31,7 @@
 #endif
 
 #ifndef CKLED2001_SPI_DIVISOR
-#    define CKLED2001_SPI_DIVISOR 4
+#    define CKLED2001_SPI_DIVISOR 8
 #endif
 
 // These buffers match the CKLED2001 PWM registers.
@@ -46,7 +46,7 @@ bool    g_pwm_buffer_update_required[DRIVER_COUNT] = {false};
 uint8_t g_led_control_registers[DRIVER_COUNT][24]             = {0};
 bool    g_led_control_registers_update_required[DRIVER_COUNT] = {false};
 
-bool CKLED2001_write(pin_t cs_pin, uint8_t page, uint8_t reg, uint8_t *data, uint8_t len) {
+bool CKLED2001_write(pin_t cs_pin, uint8_t page, uint8_t reg, uint8_t *data, uint16_t len) {
     // If the transaction fails function returns false.
     static uint8_t s_spi_transfer_buffer[2] = {0};
 
