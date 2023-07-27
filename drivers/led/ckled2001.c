@@ -115,6 +115,7 @@ void CKLED2001_init(uint8_t addr) {
     CKLED2001_write_register(addr, SLEW_RATE_CONTROL_MODE2_REG, MSKDRIVING_SINKING_CHHANNEL_SLEWRATE_ENABLE);
     // Setting Iref
     CKLED2001_write_register(addr, SOFTWARE_SLEEP_REG, MSKSLEEP_DISABLE);
+    
     // Set LED CONTROL PAGE (Page 0)
     CKLED2001_write_register(addr, CONFIGURE_CMD_PAGE, LED_CONTROL_PAGE);
     for (int i = 0; i < LED_CONTROL_ON_OFF_LENGTH; i++) {

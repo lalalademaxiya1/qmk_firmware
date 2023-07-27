@@ -46,7 +46,7 @@ bool    g_pwm_buffer_update_required[DRIVER_COUNT] = {false};
 uint8_t g_led_control_registers[DRIVER_COUNT][24]             = {0};
 bool    g_led_control_registers_update_required[DRIVER_COUNT] = {false};
 
-bool CKLED2001_write(pin_t cs_pin, uint8_t page, uint8_t reg, uint8_t *data, uint16_t len) {
+bool CKLED2001_write(pin_t cs_pin, uint8_t page, uint8_t reg, uint8_t *data, uint8_t len) {
     // If the transaction fails function returns false.
     static uint8_t s_spi_transfer_buffer[2] = {0};
 
@@ -98,22 +98,26 @@ void CKLED2001_init(pin_t cs_pin) {
         s_spi_transfer_buffer[i] = 0;
     }
     CKLED2001_write(cs_pin, LED_CONTROL_PAGE, LED_CONTROL_ON_OFF_FIRST_ADDR, s_spi_transfer_buffer, LED_CONTROL_PAGE_LENGTH);
+    // CKLED2001_write(cs_pin, CONFIGURE_CMD_PAGE, LED_CONTROL_PAGE, s_spi_transfer_buffer, LED_CONTROL_ON_OFF_LENGTH);
 
     // Set PWM PAGE (Page 1)
     for (int i = 0; i < LED_PWM_LENGTH; i++) {
         s_spi_transfer_buffer[i] = 0;
     }
     CKLED2001_write(cs_pin, LED_PWM_PAGE, LED_PWM_FIRST_ADDR, s_spi_transfer_buffer, LED_PWM_LENGTH);
+    // CKLED2001_write(cs_pin, CONFIGURE_CMD_PAGE, LED_PWM_PAGE, s_spi_transfer_buffer, LED_PWM_LENGTH);
 
     // Set CURRENT PAGE (Page 4)
     uint8_t current_tuen_reg_list[LED_CURRENT_TUNE_LENGTH] = CKLED2001_CURRENT_TUNE;
-    CKLED2001_write(cs_pin, CONFIGURE_CMD_PAGE, LED_CURRENT_TUNE_FIRST_ADDR, current_tuen_reg_list, LED_CURRENT_TUNE_LENGTH);
+    CKLED2001_write(cs_pin, CURRENT_TUNE_PAGE, LED_CURRENT_TUNE_FIRST_ADDR, current_tuen_reg_list, LED_CURRENT_TUNE_LENGTH);
+    // CKLED2001_write(cs_pin, CONFIGURE_CMD_PAGE, CURRENT_TUNE_PAGE, current_tuen_reg_list, LED_CURRENT_TUNE_LENGTH);
 
     // Enable LEDs ON/OFF
     for (int i = 0; i < LED_CONTROL_ON_OFF_LENGTH; i++) {
-        s_spi_transfer_buffer[i] = 0;
+        s_spi_transfer_buffer[i] = 0xFF;
     }
     CKLED2001_write(cs_pin, LED_CONTROL_PAGE, LED_CONTROL_ON_OFF_FIRST_ADDR, s_spi_transfer_buffer, LED_CONTROL_ON_OFF_LENGTH);
+    // CKLED2001_write(cs_pin, CONFIGURE_CMD_PAGE, LED_CONTROL_PAGE, s_spi_transfer_buffer, LED_CONTROL_ON_OFF_LENGTH);
 
     // Setting LED driver to normal mode
     CKLED2001_write_register(cs_pin, FUNCTION_PAGE, CONFIGURATION_REG, MSKSW_NORMAL_MODE);
