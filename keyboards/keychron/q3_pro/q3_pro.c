@@ -191,6 +191,7 @@ void matrix_scan_kb(void) {
         }
     }
 
+#if defined(BAT_LOW_LED_PIN)
     if (power_on_indicator_timer_buffer) {
         if (sync_timer_elapsed32(power_on_indicator_timer_buffer) > POWER_ON_LED_DURATION) {
             power_on_indicator_timer_buffer = 0;
@@ -199,6 +200,7 @@ void matrix_scan_kb(void) {
             writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
         }
     }
+#endif
 
     if (siri_timer_buffer && sync_timer_elapsed32(siri_timer_buffer) > 500) {
         siri_timer_buffer = 0;

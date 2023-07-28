@@ -1,7 +1,7 @@
 {
-  "name": "Keychron Q3 Pro",
+  "name": "Keychron Q3 Pro JIS Knob",
   "vendorId": "0x3434",
-  "productId": "0x0630",
+  "productId": "0x0632",
   "keycodes": ["qmk_lighting"],
   "menus": [
     {
@@ -69,8 +69,6 @@
     {"name": "Right Option", "title": "Right Option", "shortName": "ROpt"},
     {"name": "Left Cmd", "title": "Left Command", "shortName": "LCmd"},
     {"name": "Right Cmd", "title": "Right Command", "shortName": "RCmd"},
-    {"name": "Misson Control", "title": "Misson Control, availabe in macOS", "shortName": "MCtrl"},
-    {"name": "Launch pad", "title": "Launch pad, availabe in macOS", "shortName": "LPad"},
     {"name": "Task View", "title": "Task View in Windows", "shortName": "Task"},
     {"name": "File Explorer", "title": "File Explorer in Windows", "shortName": "File"},
     {"name": "Screen shot", "title": "Screenshot in macOS", "shortName": "SShot"},
@@ -151,10 +149,10 @@
         "1,11",
         "1,12",
         {
-          "c": "#aaaaaa",
-          "w": 2
+          "c": "#aaaaaa"
         },
         "1,13",
+        "3,12",
         {
           "x": 0.25
         },
@@ -193,12 +191,18 @@
         "2,11",
         "2,12",
         {
-          "c": "#aaaaaa",
-          "w": 1.5
+          "x": 0.25,
+          "c": "#777777",
+          "w": 1.25,
+          "h": 2,
+          "w2": 1.5,
+          "h2": 1,
+          "x2": -0.25
         },
         "2,13",
         {
-          "x": 0.25
+          "x": 0.25,
+          "c": "#aaaaaa"
         },
         "2,14",
         "2,15",
@@ -234,8 +238,7 @@
         "3,10",
         "3,11",
         {
-          "c": "#777777",
-          "w": 2.25
+          "c": "#aaaaaa"
         },
         "3,13"
       ],
@@ -268,8 +271,11 @@
         "4,10",
         "4,11",
         {
-          "c": "#aaaaaa",
-          "w": 2.75
+          "c": "#aaaaaa"
+        },
+        "4,12",
+        {
+          "w": 1.75
         },
         "4,13",
         {
@@ -289,21 +295,22 @@
           "w": 1.25
         },
         "5,0",
-        {
-          "w": 1.25
-        },
         "5,1",
         {
           "w": 1.25
         },
         "5,2",
+        "5,3",
         {
           "c": "#cccccc",
-          "w": 6.25
+          "w": 4.75
         },
         "5,6",
         {
-          "c": "#aaaaaa",
+          "c": "#aaaaaa"
+        },
+        "5,9",
+        {
           "w": 1.25
         },
         "5,10",
@@ -311,9 +318,6 @@
           "w": 1.25
         },
         "5,11",
-        {
-          "w": 1.25
-        },
         "5,12",
         {
           "w": 1.25
