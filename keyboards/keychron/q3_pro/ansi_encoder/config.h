@@ -52,17 +52,17 @@
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
         { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
-#endif
 
-#ifdef KC_BLUETOOTH_ENABLE
-#    define BAT_LOW_LED_PIN A10
-#    define BAT_LOW_LED_PIN_ON_STATE 1
-
-#    if defined(RGB_MATRIX_ENABLE)
+#    ifdef KC_BLUETOOTH_ENABLE
 #        define HOST_DEVICES_COUNT 3
 #        define HOST_LED_MATRIX_LIST \
             { 17, 18, 19 }
 #        define BAT_LEVEL_LED_LIST \
             { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
 #    endif
+#endif
+
+#ifdef KC_BLUETOOTH_ENABLE
+#    define BAT_LOW_LED_PIN A10
+#    define BAT_LOW_LED_PIN_ON_STATE 1
 #endif
