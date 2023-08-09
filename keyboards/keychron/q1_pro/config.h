@@ -26,6 +26,8 @@
 #ifdef KC_BLUETOOTH_ENABLE
 /* Hardware configuration */
 #    define USB_BT_MODE_SELECT_PIN C15
+
+#    define CKBT51_RESET_PIN A9
 #    define CKBT51_INT_INPUT_PIN A5
 #    define BLUETOOTH_INT_INPUT_PIN A6
 
@@ -71,5 +73,6 @@
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
+#define BL_TEST_KEY2 KC_END
 
 #define INVERT_OS_SWITCH_STATE
