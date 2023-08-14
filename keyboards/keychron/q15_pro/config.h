@@ -81,5 +81,4 @@
 #define ENCODER_DEFAULT_POS 0x3
 
 /* Factory test keys */
-#define FN_KEY1 MO(2)
-#define FN_KEY2 MO(3)
+#define FN_KEY1 MO(4)
