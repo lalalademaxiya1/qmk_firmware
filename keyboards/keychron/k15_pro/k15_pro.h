@@ -24,7 +24,7 @@
 #define ___ KC_NO
 
 #ifdef VIA_ENABLE
-#    define USER_START QK_KB_0
+#    define USER_START QK_KB_2
 #else
 #    define USER_START SAFE_RANGE
 #endif
