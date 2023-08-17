@@ -80,14 +80,14 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     static uint8_t host_idx = 0;
 
     switch (keycode) {
-        case QK_KB_0:
+        case KC_MICT:
             if (record->event.pressed) {
                 register_code(KC_MISSION_CONTROL);
             } else {
                 unregister_code(KC_MISSION_CONTROL);
             }
             return false; // Skip all further processing of this key
-        case QK_KB_1:
+        case KC_LAPA:
             if (record->event.pressed) {
                 register_code(KC_LAUNCHPAD);
             } else {

@@ -22,6 +22,8 @@
 #endif
 
 #define ___ KC_NO
+#define KC_MICT QK_KB_0
+#define KC_LAPA QK_KB_1
 
 #ifdef VIA_ENABLE
 #    define USER_START QK_KB_2
