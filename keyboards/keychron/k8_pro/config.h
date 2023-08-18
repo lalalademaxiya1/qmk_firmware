@@ -79,18 +79,15 @@
 #    define BLUETOOTH_NKRO_ENABLE
 
 /* Raw hid command for factory test and bluetooth DFU */
-#   define RAW_HID_CMD 0xAA ... 0xAB
+#    define RAW_HID_CMD 0xAA ... 0xAB
 #else
 /* Raw hid command for factory test */
-#   define RAW_HID_CMD 0xAB
+#    define RAW_HID_CMD 0xAB
 #endif
 
 /* Emulated EEPROM configuration */
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
-#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR  2047
-
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
+#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
 /* Factory test keys */
 #define FN_KEY1 MO(1)
