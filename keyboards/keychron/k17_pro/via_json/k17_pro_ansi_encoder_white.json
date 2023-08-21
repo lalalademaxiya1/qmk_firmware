@@ -4,6 +4,8 @@
   "productId": "0x0209",
   "keycodes": ["qmk_lighting"],
   "customKeycodes": [
+    {"name": "Misson Control", "title": "Misson Control, availabe in macOS", "shortName": "MCtrl"},
+    {"name": "Launch pad", "title": "Launch pad, availabe in macOS", "shortName": "LPad"},
     {"name": "Left Option", "title": "Left Option", "shortName": "LOpt"},
     {"name": "Right Option", "title": "Right Option", "shortName": "ROpt"},
     {"name": "Left Cmd", "title": "Left Command", "shortName": "LCmd"},
@@ -57,11 +59,15 @@
         },
         "0,15",
         {
-          "x": 0.25
+          "x": 0.25,
+          "c": "#cccccc"
         },
         "0,16",
         "0,17",
         "0,18",
+        {
+          "c": "#aaaaaa"
+        },
         "0,19\n\n\n\n\n\n\n\n\ne0"
       ],
       [
@@ -88,7 +94,7 @@
           "c": "#aaaaaa",
           "w": 2
         },
-        "1,13",
+        "1,14",
         {
           "x": 0.25
         },
@@ -127,7 +133,7 @@
           "c": "#aaaaaa",
           "w": 1.5
         },
-        "2,13",
+        "2,14",
         {
           "x": 0.25
         },
