@@ -4,6 +4,8 @@
   "productId": "0x02A5",
   "keycodes": ["qmk_lighting"],
   "customKeycodes": [
+    {"name": "Mission Control","title": "Mission Control in macOS","shortName": "MCtrl"},
+    {"name": "Launch Pad","title": "Launch Pad in macOS","shortName": "LPad"},
     {"name": "Left Option", "title": "Left Option", "shortName": "LOpt"},
     {"name": "Right Option", "title": "Right Option", "shortName": "ROpt"},
     {"name": "Left Cmd", "title": "Left Command", "shortName": "LCmd"},
