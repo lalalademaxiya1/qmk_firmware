@@ -77,6 +77,20 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     static uint8_t host_idx = 0;
 
     switch (keycode) {
+        case KC_MICT:
+            if (record->event.pressed) {
+                register_code(KC_MISSION_CONTROL);
+            } else {
+                unregister_code(KC_MISSION_CONTROL);
+            }
+            return false; // Skip all further processing of this key
+        case KC_LAPA:
+            if (record->event.pressed) {
+                register_code(KC_LAUNCHPAD);
+            } else {
+                unregister_code(KC_LAUNCHPAD);
+            }
+            return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -145,7 +159,6 @@ void keyboard_post_init_kb(void) {
 
 #ifdef KC_BLUETOOTH_ENABLE
     /* Currently we don't use this reset pin */
-    // palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_UNCONNECTED);
     palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
     palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
 
@@ -312,3 +325,9 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
     }
 }
 #endif
+
+void suspend_wakeup_init_kb(void) {
+    // code will run on keyboard wakeup
+    clear_keyboard();
+    send_keyboard_report();
+}
