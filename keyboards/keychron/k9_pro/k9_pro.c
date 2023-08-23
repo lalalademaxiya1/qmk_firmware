@@ -141,7 +141,6 @@ void keyboard_post_init_kb(void) {
     dip_switch_read(true);
 
 #ifdef KC_BLUETOOTH_ENABLE
-    /* Currently we don't use this reset pin */
     palSetLineMode(CKBT51_RESET_PIN, PAL_MODE_OUTPUT_PUSHPULL);
     palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
 
@@ -172,6 +171,16 @@ void matrix_scan_kb(void) {
     }
 
     if (power_on_indicator_timer_buffer) {
+        if (factory_timer_buffer && timer_elapsed32(factory_timer_buffer) > 2000) {
+            factory_timer_buffer = 0;
+            if (bt_factory_reset) {
+                bt_factory_reset = false;
+                palWriteLine(CKBT51_RESET_PIN, PAL_LOW);
+                wait_ms(5);
+                palWriteLine(CKBT51_RESET_PIN, PAL_HIGH);
+            }
+        }
+
         if (sync_timer_elapsed32(power_on_indicator_timer_buffer) > POWER_ON_LED_DURATION) {
             power_on_indicator_timer_buffer = 0;
             writePin(BAT_LOW_LED_PIN, !BAT_LOW_LED_PIN_ON_STATE);

@@ -30,7 +30,7 @@
 #    define LED_MATRIX_DRIVER_SHUTDOWN_ENABLE
 
 /* Turn off backllit if brightness value is low */
-#    define LED_MATRIX_TURN_OFF_VAL 48
+#    define LED_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
 #    define LOW_BAT_IND_INDEX 99 // Space
 

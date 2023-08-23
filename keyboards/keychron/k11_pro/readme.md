@@ -1,12 +1,12 @@
 # Keychron K11 Pro
 
-![Keychron K11 Pro]
+![Keychron K11 Pro](https://i.imgur.com/9U5ajXf.jpg)
 
 A customizable 65% and ergonomic keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron K11 Pro
-* Hardware Availability:
+* Hardware Availability:[Keychron K11 Pro (Alice Layout) QMK/VIA Wireless Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-k11-pro-alice-layout-qmk-via-wireless-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

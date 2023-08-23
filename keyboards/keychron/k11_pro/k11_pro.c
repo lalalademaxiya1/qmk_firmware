@@ -157,7 +157,8 @@ void keyboard_post_init_kb(void) {
     ckbt51_init(false);
     bluetooth_init();
 
-#    ifdef ENCODER_ENBALE
+#endif
+#ifdef ENCODER_ENBALE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
@@ -166,7 +167,6 @@ void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, &i);
         palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, &i);
     }
-#    endif
 #endif
 
     power_on_indicator_timer_buffer = sync_timer_read32() | 1;
