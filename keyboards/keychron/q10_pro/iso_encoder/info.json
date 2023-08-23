@@ -1,7 +1,7 @@
 {
     "usb": {
         "pid": "0x06A1",
-        "device_version": "1.0.0"
+        "device_version": "1.0.1"
     },
     "layouts": {
         "LAYOUT_91_iso": {

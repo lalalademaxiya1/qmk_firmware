@@ -34,9 +34,9 @@ typedef struct PACKED {
     uint8_t keycode[3];
 } key_combination_t;
 
-static uint32_t factory_timer_buffer;
-static uint32_t siri_timer_buffer = 0;
-static uint8_t  mac_keycode[4]    = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
+static uint32_t factory_timer_buffer = 0;
+static uint32_t siri_timer_buffer    = 0;
+static uint8_t  mac_keycode[4]       = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_TAB}},        // Task (win)
@@ -77,6 +77,20 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     static uint8_t host_idx = 0;
 
     switch (keycode) {
+        case KC_MICT:
+            if (record->event.pressed) {
+                register_code(KC_MISSION_CONTROL);
+            } else {
+                unregister_code(KC_MISSION_CONTROL);
+            }
+            return false; // Skip all further processing of this key
+        case KC_LAPA:
+            if (record->event.pressed) {
+                register_code(KC_LAUNCHPAD);
+            } else {
+                unregister_code(KC_LAUNCHPAD);
+            }
+            return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -206,7 +220,6 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
     wait_ms(10);
     /* Set bluetooth parameters */
@@ -220,6 +233,7 @@ static void ckbt51_param_init(void) {
                             .verndor_id             = 0, // Must be 0x3434
                             .product_id             = PRODUCT_ID};
     ckbt51_set_param(&param);
+    wait_ms(10);
 }
 
 void bluetooth_enter_disconnected_kb(uint8_t host_idx) {
@@ -321,6 +335,8 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 }
 #endif
 
-void restart_usb_driver(USBDriver *usbp) {
-    (void)usbp;
+void suspend_wakeup_init_kb(void) {
+    // code will run on keyboard wakeup
+    clear_keyboard();
+    send_keyboard_report();
 }
