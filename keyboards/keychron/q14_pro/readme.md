@@ -1,12 +1,12 @@
 # Keychron Q14 Pro
 
-![Keychron Q14 Pro]
+![Keychron Q14 Pro](https://i.imgur.com/pLQVa6f.jpg)
 
 A customizable 96% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q14 Pro
-* Hardware Availability:
+* Hardware Availability:[Keychron Q14 Pro (Alice Layout) QMK/VIA Wireless Custom Mechanical Keyboard](https://www.keychron.com/products/keychron-q14-pro-alice-layout-qmk-via-wireless-custom-mechanical-keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
