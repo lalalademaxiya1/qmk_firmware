@@ -28,7 +28,7 @@
     "diode_direction": "ROW2COL",
     "encoder": {
         "rotary": [
-            {"pin_a": "A10", "pin_b": "A0"}
+            {"pin_a": "A0", "pin_b": "A10"}
         ]
     },
     "layouts": {

@@ -1,7 +1,7 @@
 {
     "usb": {
         "pid": "0x02F9",
-        "device_version": "1.0.1"
+        "device_version": "1.0.2"
     },
     "features": {
         "led_matrix": true
