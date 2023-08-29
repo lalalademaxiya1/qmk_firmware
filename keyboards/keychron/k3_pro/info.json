@@ -30,7 +30,7 @@
     },
     "diode_direction": "ROW2COL",
     "layouts": {
-        "LAYOUT_ansi_84": {
+        "LAYOUT_84_ansi": {
             "layout": [
                 {"matrix":[0, 0], "x":0, "y":0},
                 {"matrix":[0, 1], "x":1, "y":0},
