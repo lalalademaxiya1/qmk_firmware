@@ -1,7 +1,7 @@
 {
   "name": "Keychron K15 Pro ANSI knob RGB",
   "vendorId": "0x3434",
-  "productId": "0x02F0",
+  "productId": "0x02F6",
   "keycodes": ["qmk_lighting"],
   "menus": [
     {
@@ -65,6 +65,8 @@
     }
   ],
   "customKeycodes": [
+    {"name": "Misson Control", "title": "Misson Control, availabe in macOS", "shortName": "MCtrl"},
+    {"name": "Launch pad", "title": "Launch pad, availabe in macOS", "shortName": "LPad"},
     {"name": "Left Option", "title": "Left Option", "shortName": "LOpt"},
     {"name": "Right Option", "title": "Right Option", "shortName": "ROpt"},
     {"name": "Left Cmd", "title": "Left Command", "shortName": "LCmd"},
@@ -84,7 +86,8 @@
     "keymap": [
       [
         {
-          "x": 0.5
+          "x": 0.5,
+          "c": "#aaaaaa"
         },
         "0,0\n\n\n\n\n\n\n\n\ne0",
         {
