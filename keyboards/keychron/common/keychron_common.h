@@ -24,6 +24,9 @@
 #    include "via.h"
 #endif
 
+#define KC_MICT QK_KB_0
+#define KC_LAPA QK_KB_1
+
 #include "quantum_keycodes.h"
 
 enum custom_keycodes {

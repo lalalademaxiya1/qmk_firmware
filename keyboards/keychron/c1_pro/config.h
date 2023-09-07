@@ -16,22 +16,10 @@
 
 #pragma once
 
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
-
-/* Disable DIP switch in matrix data */
-#define MATRIX_MASKED
-
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
-/* Increase I2C speed to 1000 KHz */
-#define I2C1_TIMINGR_PRESC 0U
-#define I2C1_TIMINGR_SCLDEL 3U
-#define I2C1_TIMINGR_SDADEL 0U
-#define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
-
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
+/* Factory test keys */
+#define FN_KEY1 MO(1)
+#define FN_KEY2 MO(3)

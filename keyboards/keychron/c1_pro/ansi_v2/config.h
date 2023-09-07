@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2022 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,15 @@
 
 #pragma once
 
-#define HAL_USE_I2C TRUE
+/* DIP switch */
+#define DIP_SWITCH_PINS \
+    { D2 }
 
-#include_next <halconf.h>
+/* Increase I2C speed to 1000 KHz */
+#define I2C1_CLOCK_SPEED 400000
+#define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
+
+/* System indication led */
+#define LED_MAC_OS_PIN C10
+#define LED_WIN_OS_PIN C11
+#define LED_OS_PIN_ON_STATE 1

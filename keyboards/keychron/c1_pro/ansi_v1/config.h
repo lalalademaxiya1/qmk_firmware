@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2022 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,8 +14,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include QMK_KEYBOARD_H
 
-#define HAL_USE_I2C TRUE
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID \
+    {                          \
+        { 5, 4 }               \
+    }
+#define SCAN_COUNT_MAX 100
 
-#include_next <halconf.h>
+/* Disable DIP switch in matrix data */
+#define MATRIX_MASKED
+
+/* Increase I2C speed to 1000 KHz */
+#define I2C1_TIMINGR_PRESC 0U
+#define I2C1_TIMINGR_SCLDEL 3U
+#define I2C1_TIMINGR_SDADEL 0U
+#define I2C1_TIMINGR_SCLH 15U
+#define I2C1_TIMINGR_SCLL 51U
