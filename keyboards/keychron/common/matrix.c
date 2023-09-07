@@ -205,3 +205,8 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
 
     return changed;
 }
+
+void suspend_wakeup_init_kb(void) {
+    // code will run on keyboard wakeup
+    clear_keyboard();
+}
