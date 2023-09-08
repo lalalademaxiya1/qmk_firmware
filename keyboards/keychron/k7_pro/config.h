@@ -88,8 +88,9 @@
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
+/* HC595 driver configure */
+#define HC595_START_INDEX 1
+#define HC595_END_INDEX 15
 
 /* Factory test keys */
 #define FN_KEY1 MO(4)

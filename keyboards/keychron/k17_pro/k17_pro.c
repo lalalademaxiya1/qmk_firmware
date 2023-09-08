@@ -176,9 +176,8 @@ void keyboard_post_init_kb(void) {
     power_on_indicator_timer_buffer = sync_timer_read32() | 1;
     writePin(BAT_LOW_LED_PIN, BAT_LOW_LED_PIN_ON_STATE);
     writePin(LED_CAPS_LOCK_PIN, LED_PIN_ON_STATE);
-#endif
 
-#ifdef ENCODER_ENABLE
+#    ifdef ENCODER_ENABLE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint32_t i = 0; i < NUM_ENCODERS; i++) {
@@ -187,6 +186,7 @@ void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, (void *)i);
         palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
     }
+#    endif
 #endif
 
     keyboard_post_init_user();

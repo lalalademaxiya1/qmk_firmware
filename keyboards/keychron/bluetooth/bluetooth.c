@@ -406,10 +406,8 @@ void bluetooth_low_battery_shutdown(void) {
     indicator_battery_low_backlit_enable(false);
 #endif
 
-    for (uint8_t i = 5; i > 0; i--) {
-        clear_keyboard();
-        wait_ms(50);
-    }
+    clear_keyboard();
+    wait_ms(50);
 
     bluetooth_disconnect();
 }
