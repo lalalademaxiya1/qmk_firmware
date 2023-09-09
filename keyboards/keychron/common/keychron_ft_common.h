@@ -16,23 +16,22 @@
 
 #include "quantum.h"
 
-#define KEY_PRESS_STEP_0 (0x1 << 0)
-#define KEY_PRESS_STEP_1 (0x1 << 1)
-#define KEY_PRESS_STEP_2 (0x1 << 2)
-#define KEY_PRESS_STEP_3 (0x1 << 3)
-#define KEY_PRESS_STEP_4 (0x1 << 4)
-#define KEY_PRESS_FACTORY_RESET (KEY_PRESS_STEP_0 | KEY_PRESS_STEP_1 | KEY_PRESS_STEP_2)
-#define KEY_PRESS_LED_TEST (KEY_PRESS_STEP_0 | KEY_PRESS_STEP_3 | KEY_PRESS_STEP_4)
-// clang-format off
+#define KEY_PRESS_FN (0x1 << 0)
+#define KEY_PRESS_J (0x1 << 1)
+#define KEY_PRESS_Z (0x1 << 2)
+#define KEY_PRESS_HOME (0x1 << 3)
+#define KEY_PRESS_RIGHT (0x1 << 4)
+#define KEY_PRESS_FACTORY_RESET (KEY_PRESS_FN | KEY_PRESS_J | KEY_PRESS_Z)
+#define KEY_PRESS_LED_TEST (KEY_PRESS_FN | KEY_PRESS_HOME | KEY_PRESS_RIGHT)
+
 enum {
     LED_TEST_MODE_OFF,
     LED_TEST_MODE_WHITE,
     LED_TEST_MODE_RED,
     LED_TEST_MODE_GREEN,
     LED_TEST_MODE_BLUE,
-    LED_TEST_MODE_MAX
+    LED_TEST_MODE_MAX,
 } led_test_mode;
-// clang-format on
 
 extern uint16_t key_press_status;
 extern uint32_t timer_3s_buffer;

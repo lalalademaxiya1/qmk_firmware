@@ -16,14 +16,8 @@
 
 #include "quantum.h"
 
-#if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
+#if defined(RGB_MATRIX_ENABLE)
 #    if defined(CAPS_LOCK_INDEX) || defined(NUM_LOCK_INDEX)
-
-#        define LED_DRIVER rgb_matrix_driver
-#        define LED_INDICATORS_KB rgb_matrix_indicators_kb
-#        define LED_INDICATORS_USER rgb_matrix_indicators_user
-#        define LED_NONE_INDICATORS_KB rgb_matrix_none_indicators_kb
-#        define LED_SET_COLOR(idx, r, g, b) rgb_matrix_set_color(idx, r, g, b)
 
 enum via_capslock_value {
     id_capslock_brightness = 1,
@@ -69,28 +63,28 @@ void eeconfig_init_kb(void) {
     eeconfig_init_user();
 }
 
-bool LED_INDICATORS_KB(void) {
+bool rgb_matrix_indicators_kb(void) {
 #        if defined(CAPS_LOCK_INDEX)
     if (host_keyboard_led_state().caps_lock && g_indicator_control.caps.status) {
         RGB rgb = hsv_to_rgb(g_indicator_control.caps.hsv);
 #            if defined(DIM_CAPS_LOCK)
-        LED_SET_COLOR(CAPS_LOCK_INDEX, 0, 0, 0);
+        rgb_matrix_set_color(CAPS_LOCK_INDEX, 0, 0, 0);
 #            else
-        LED_SET_COLOR(CAPS_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
+        rgb_matrix_set_color(CAPS_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
 #            endif
     }
 #        endif
 #        if defined(NUM_LOCK_INDEX)
     if (host_keyboard_led_state().num_lock && g_indicator_control.num.status) {
         RGB rgb = hsv_to_rgb(g_indicator_control.num.hsv);
-        LED_SET_COLOR(NUM_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
+        rgb_matrix_set_color(NUM_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
     }
 #        endif
     return true;
 }
 
-void LED_NONE_INDICATORS_KB(void) {
-    LED_INDICATORS_KB();
+void rgb_matrix_none_indicators_kb(void) {
+    rgb_matrix_indicators_kb();
 }
 
 bool led_update_kb(led_t led_state) {
@@ -114,20 +108,20 @@ bool led_update_kb(led_t led_state) {
 #        if defined(CAPS_LOCK_INDEX)
         if (led_state.caps_lock) {
             RGB rgb = hsv_to_rgb(g_indicator_control.caps.hsv);
-            LED_SET_COLOR(CAPS_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
+            rgb_matrix_set_color(CAPS_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
         } else {
-            LED_SET_COLOR(CAPS_LOCK_INDEX, 0, 0, 0);
+            rgb_matrix_set_color(CAPS_LOCK_INDEX, 0, 0, 0);
         }
 #        endif
 #        if defined(NUM_LOCK_INDEX)
         if (led_state.num_lock) {
             RGB rgb = hsv_to_rgb(g_indicator_control.caps.hsv);
-            LED_SET_COLOR(NUM_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
+            rgb_matrix_set_color(NUM_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
         } else {
-            LED_SET_COLOR(NUM_LOCK_INDEX, 0, 0, 0);
+            rgb_matrix_set_color(NUM_LOCK_INDEX, 0, 0, 0);
         }
 #        endif
-        LED_DRIVER.flush();
+        rgb_matrix_driver.flush();
     }
     return res;
 }

@@ -15,23 +15,22 @@
  */
 
 #include "keychron_common.h"
-#include "sync_timer.h"
 
-bool is_siri_active = false;
-uint32_t siri_timer = 0;
+bool     is_siri_active = false;
+uint32_t siri_timer     = 0;
 
 key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_TAB}},
     {2, {KC_LWIN, KC_E}},
     {3, {KC_LSFT, KC_LCMD, KC_4}},
-    {2, {KC_LWIN, KC_C}}
+    {2, {KC_LWIN, KC_C}},
 };
 
-static uint8_t mac_keycode[4] = { KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD };
+static uint8_t mac_keycode[4] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 void housekeeping_task_keychron(void) {
     if (is_siri_active) {
-        if (sync_timer_elapsed32(siri_timer) >= 500) {
+        if (timer_elapsed32(siri_timer) >= 500) {
             unregister_code(KC_LCMD);
             unregister_code(KC_SPACE);
             is_siri_active = false;
@@ -47,14 +46,14 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(KC_MISSION_CONTROL);
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case QK_KB_1:
             if (record->event.pressed) {
                 register_code(KC_LAUNCHPAD);
             } else {
                 unregister_code(KC_LAUNCHPAD);
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -64,7 +63,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(mac_keycode[keycode - KC_LOPTN]);
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_SIRI:
             if (record->event.pressed) {
                 if (!is_siri_active) {
@@ -72,11 +71,11 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
                     register_code(KC_LCMD);
                     register_code(KC_SPACE);
                 }
-                siri_timer = sync_timer_read32();
+                siri_timer = timer_read32();
             } else {
                 // Do something else when release
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         case KC_TASK:
         case KC_FLXP:
         case KC_SNAP:
@@ -90,8 +89,8 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
                     unregister_code(key_comb_list[keycode - KC_TASK].keycode[i]);
                 }
             }
-            return false;  // Skip all further processing of this key
+            return false; // Skip all further processing of this key
         default:
-            return true;  // Process all other keycodes normally
+            return true; // Process all other keycodes normally
     }
 }

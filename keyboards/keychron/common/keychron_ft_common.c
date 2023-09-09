@@ -38,7 +38,6 @@
 #    define F_RESET_KEY2 KC_Z
 #endif
 
-// clang-format off
 enum {
     OS_SWITCH = 0x01,
 };
@@ -47,7 +46,7 @@ enum {
     FACTORY_TEST_CMD_BACKLIGHT = 0x01,
     FACTORY_TEST_CMD_OS_SWITCH,
     FACTORY_TEST_CMD_JUMP_TO_BL,
-    FACTORY_TEST_CMD_EEPROM_CLEAR
+    FACTORY_TEST_CMD_EEPROM_CLEAR,
 };
 // clang-format on
 
@@ -76,60 +75,60 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
         case FN_KEY2:
 #    endif
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_STEP_0;
+                key_press_status |= KEY_PRESS_FN;
             } else {
-                key_press_status &= ~KEY_PRESS_STEP_0;
+                key_press_status &= ~KEY_PRESS_FN;
                 timer_3s_buffer = 0;
             }
             return true;
 #endif
         case F_RESET_KEY1:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_STEP_1;
+                key_press_status |= KEY_PRESS_J;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                    timer_3s_buffer = timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_STEP_1;
+                key_press_status &= ~KEY_PRESS_J;
                 timer_3s_buffer = 0;
             }
             return true;
         case F_RESET_KEY2:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_STEP_2;
+                key_press_status |= KEY_PRESS_Z;
                 if (key_press_status == KEY_PRESS_FACTORY_RESET) {
-                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                    timer_3s_buffer = timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_STEP_2;
+                key_press_status &= ~KEY_PRESS_Z;
                 timer_3s_buffer = 0;
             }
             return true;
         case BL_TEST_KEY1:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_STEP_3;
+                key_press_status |= KEY_PRESS_HOME;
                 if (led_test_mode) {
                     if (++led_test_mode >= LED_TEST_MODE_MAX) {
                         led_test_mode = LED_TEST_MODE_WHITE;
                     }
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                    timer_3s_buffer = timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_STEP_3;
+                key_press_status &= ~KEY_PRESS_HOME;
                 timer_3s_buffer = 0;
             }
             return true;
         case BL_TEST_KEY2:
             if (record->event.pressed) {
-                key_press_status |= KEY_PRESS_STEP_4;
+                key_press_status |= KEY_PRESS_RIGHT;
                 if (led_test_mode) {
                     led_test_mode = LED_TEST_MODE_OFF;
                 } else if (key_press_status == KEY_PRESS_LED_TEST) {
-                    timer_3s_buffer = sync_timer_read32() == 0 ? 1 : sync_timer_read32();
+                    timer_3s_buffer = timer_read32();
                 }
             } else {
-                key_press_status &= ~KEY_PRESS_STEP_4;
+                key_press_status &= ~KEY_PRESS_RIGHT;
                 timer_3s_buffer = 0;
             }
             return true;
@@ -169,7 +168,7 @@ static void factory_reset(void) {
 }
 
 static void timer_3s_task(void) {
-    if (sync_timer_elapsed32(timer_3s_buffer) > 3000) {
+    if (timer_elapsed32(timer_3s_buffer) > 3000) {
         timer_3s_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
             factory_reset();
