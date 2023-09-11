@@ -34,7 +34,7 @@
 #    include "bat_level_animation.h"
 #    include "eeprom.h"
 
-#    if defined(CAPS_LOCK_INDEX) || defined(NUM_LOCK_INDEX)
+#    if (defined(CAPS_LOCK_INDEX) || defined(NUM_LOCK_INDEX)) && defined(VIA_INDICATION_CONTROL)
 enum via_capslock_value {
     id_capslock_brightness = 1,
     id_capslock_status     = 2,
@@ -501,35 +501,38 @@ void indicator_task(void) {
 
 #if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
 __attribute__((weak)) void os_state_indicate(void) {
-// #    if defined(NUM_LOCK_INDEX)
-//     if (host_keyboard_led_state().num_lock) {
-//         SET_LED_ON(NUM_LOCK_INDEX);
-//     }
-// #    endif
-// #    if defined(CAPS_LOCK_INDEX)
-//     if (host_keyboard_led_state().caps_lock) {
-// #        if defined(DIM_CAPS_LOCK)
-//         SET_LED_OFF(CAPS_LOCK_INDEX);
-// #        else
-//         SET_LED_ON(CAPS_LOCK_INDEX);
-// #        endif
-//     }
-// #    endif
-#    if defined(CAPS_LOCK_INDEX)
+#    if defined(VIA_INDICATION_CONTROL)
+#        if defined(CAPS_LOCK_INDEX)
     if (host_keyboard_led_state().caps_lock && g_indicator_control.caps.status) {
         RGB rgb = hsv_to_rgb(g_indicator_control.caps.hsv);
-#        if defined(DIM_CAPS_LOCK)
+#            if defined(DIM_CAPS_LOCK)
         rgb_matrix_set_color(CAPS_LOCK_INDEX, 0, 0, 0);
-#        else
+#            else
         rgb_matrix_set_color(CAPS_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
-#        endif
+#            endif
     }
-#    endif
-#    if defined(NUM_LOCK_INDEX)
+#        endif
+#        if defined(NUM_LOCK_INDEX)
     if (host_keyboard_led_state().num_lock && g_indicator_control.num.status) {
         RGB rgb = hsv_to_rgb(g_indicator_control.num.hsv);
         rgb_matrix_set_color(NUM_LOCK_INDEX, rgb.r, rgb.g, rgb.b);
     }
+#        endif
+#    else
+#        if defined(NUM_LOCK_INDEX)
+    if (host_keyboard_led_state().num_lock) {
+        SET_LED_ON(NUM_LOCK_INDEX);
+    }
+#        endif
+#        if defined(CAPS_LOCK_INDEX)
+    if (host_keyboard_led_state().caps_lock) {
+#            if defined(DIM_CAPS_LOCK)
+        SET_LED_OFF(CAPS_LOCK_INDEX);
+#            else
+        SET_LED_ON(CAPS_LOCK_INDEX);
+#            endif
+    }
+#        endif
 #    endif
 #    if defined(SCROLL_LOCK_INDEX)
     if (host_keyboard_led_state().scroll_lock) {
@@ -646,7 +649,7 @@ bool LED_DRIVER_ALLOW_SHUTDOWN(void) {
 
 #endif
 
-#if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
+#if (defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)) && defined(VIA_INDICATION_CONTROL)
 #    if defined(CAPS_LOCK_INDEX) || defined(NUM_LOCK_INDEX)
 
 void keyboard_post_init_user() {
