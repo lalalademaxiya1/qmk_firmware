@@ -17,10 +17,19 @@
 #include "ckled2001-simple-spi.h"
 #include "spi_master.h"
 #include "wait.h"
+#include "util.h"
 
-#define CKLED_LED_COUNT 192
+#define CKLED2001_LED_COUNT 192
 
-static pin_t cs_pins[DRIVER_COUNT] = SPI_CS_PINS;
+#define CKLED2001_WRITE (0 << 7)
+#define CKLED2001_READ (1 << 7)
+#define CKLED2001_PATTERN (2 << 4)
+
+#ifdef DRIVER_CS_PINS
+pin_t cs_pins[] = DRIVER_CS_PINS;
+#else
+error "no DRIVER_CS_PINS defined"
+#endif
 
 #ifndef CKLED2001_CURRENT_TUNE
 #    define CKLED2001_CURRENT_TUNE \
@@ -39,16 +48,20 @@ bool    g_pwm_buffer_update_required[DRIVER_COUNT] = {false};
 uint8_t g_led_control_registers[DRIVER_COUNT][24]             = {0};
 bool    g_led_control_registers_update_required[DRIVER_COUNT] = {false};
 
-bool ckled2001_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t *data, uint8_t len) {
+bool ckled2001_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t *value, uint8_t len) {
     // If the transaction fails function returns false.
     static uint8_t s_spi_transfer_buffer[19] = {0};
 
-    if (!spi_start(cs_pins[index], false, CKLED2001_SPI_MODE, CKLED2001_SPI_DIVISOR)) {
+    if (index > ARRAY_SIZE(((pin_t[])DRIVER_CS_PINS)) - 1) {
+        return false;
+    }
+
+    if (!spi_start(cs_pins[index], false, 0, CKLED2001_SPI_DIVISOR)) {
         spi_stop();
         return false;
     }
 
-    s_spi_transfer_buffer[0] = 0x20 | (page & 0x0F);
+    s_spi_transfer_buffer[0] = CKLED2001_WRITE | CKLED2001_PATTERN | (page & 0x0F);
     s_spi_transfer_buffer[1] = reg;
 
     if (spi_transmit(s_spi_transfer_buffer, 2) != SPI_STATUS_SUCCESS) {
@@ -56,13 +69,12 @@ bool ckled2001_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t *data, ui
         return false;
     }
 
-    if (spi_transmit(data, len) != SPI_STATUS_SUCCESS) {
+    if (spi_transmit(value, len) != SPI_STATUS_SUCCESS) {
         spi_stop();
         return false;
     }
 
     spi_stop();
-
     return true;
 }
 
@@ -72,7 +84,7 @@ bool ckled2001_write_register(uint8_t index, uint8_t page, uint8_t reg, uint8_t 
 
 bool ckled2001_write_pwm_buffer(uint8_t index, uint8_t *pwm_buffer) {
     if (g_pwm_buffer_update_required[index]) {
-        ckled2001_write(index, LED_PWM_PAGE, 0, g_pwm_buffer[index], CKLED_LED_COUNT);
+        ckled2001_write(index, LED_PWM_PAGE, 0, g_pwm_buffer[index], CKLED2001_LED_COUNT);
     }
     g_pwm_buffer_update_required[index] = false;
     return true;
@@ -100,7 +112,8 @@ void ckled2001_init(uint8_t index) {
     ckled2001_write(index, LED_CONTROL_PAGE, LED_CONTROL_ON_OFF_FIRST_ADDR, led_on_off_reg, LED_CONTROL_ON_OFF_LENGTH);
 
     // Set PWM PAGE (Page 1)
-    uint8_t pwm_reg[LED_PWM_LENGTH] = {0};
+    uint8_t pwm_reg[LED_PWM_LENGTH];
+    memset(pwm_reg, 0, LED_PWM_LENGTH);
     ckled2001_write(index, LED_PWM_PAGE, LED_PWM_FIRST_ADDR, pwm_reg, LED_PWM_LENGTH);
 
     // Set CURRENT PAGE (Page 4)
@@ -157,9 +170,21 @@ void ckled2001_update_pwm_buffers(uint8_t index) {
 
 void ckled2001_update_led_control_registers(uint8_t index) {
     if (g_led_control_registers_update_required[index]) {
-        for (int i = 0; i < 24; i++) {
-            ckled2001_write(index, LED_CONTROL_PAGE, 0, g_led_control_registers[index], 24);
-        }
+        ckled2001_write(index, LED_CONTROL_PAGE, 0, g_led_control_registers[index], 24);
     }
     g_led_control_registers_update_required[index] = false;
+}
+
+void ckled2001_sw_return_normal(uint8_t index) {
+    // Select to function page
+    // Setting LED driver to normal mode
+    ckled2001_write_register(index, FUNCTION_PAGE, CONFIGURATION_REG, MSKSW_NORMAL_MODE);
+}
+
+void ckled2001_sw_shutdown(uint8_t index) {
+    // Select to function page
+    // Setting LED driver to shutdown mode
+    ckled2001_write_register(index, FUNCTION_PAGE, CONFIGURATION_REG, MSKSW_SHUT_DOWN_MODE);
+    // Write SW Sleep Register
+    ckled2001_write_register(index, FUNCTION_PAGE, SOFTWARE_SLEEP_REG, MSKSLEEP_ENABLE);
 }

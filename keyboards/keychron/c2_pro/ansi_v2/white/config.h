@@ -18,7 +18,7 @@
 
 #ifdef LED_MATRIX_ENABLE
 /* LED Matrix Driver Configuration */
-#    define DRIVER_COUNT 2
+#    define DRIVER_COUNT 1
 
 /* LED Matrix Configuration */
 #    define LED_MATRIX_LED_COUNT 104

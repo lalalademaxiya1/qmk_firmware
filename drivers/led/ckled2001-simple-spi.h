@@ -43,6 +43,9 @@ void ckled2001_set_led_control_register(uint8_t index, bool value);
 void ckled2001_update_pwm_buffers(uint8_t index);
 void ckled2001_update_led_control_registers(uint8_t index);
 
+void ckled2001_sw_return_normal(uint8_t index);
+void ckled2001_sw_shutdown(uint8_t index);
+
 // Registers Page Define
 #define CONFIGURE_CMD_PAGE 0xFD
 #define LED_CONTROL_PAGE 0x00
