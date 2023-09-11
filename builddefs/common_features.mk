@@ -348,7 +348,7 @@ ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)
 endif
 
 LED_MATRIX_ENABLE ?= no
-VALID_LED_MATRIX_TYPES := is31fl3731 is31fl3742a is31fl3743a is31fl3745 is31fl3746a ckled2001 custom
+VALID_LED_MATRIX_TYPES := is31fl3731 is31fl3742a is31fl3743a is31fl3745 is31fl3746a ckled2001 ckled2001_spi custom
 # TODO: is31fl3733 is31fl3737 is31fl3741
 
 ifeq ($(strip $(LED_MATRIX_ENABLE)), yes)
@@ -410,6 +410,13 @@ endif
         COMMON_VPATH += $(DRIVER_PATH)/led
         SRC += ckled2001-simple.c
         QUANTUM_LIB_SRC += i2c_master.c
+    endif
+
+	ifeq ($(strip $(LED_MATRIX_DRIVER)), ckled2001_spi)
+        OPT_DEFS += -DCKLED2001_SPI -DSTM32_SPI -DHAL_USE_SPI=TRUE
+        COMMON_VPATH += $(DRIVER_PATH)/led
+        SRC += ckled2001-simple-spi.c
+        QUANTUM_LIB_SRC += spi_master.c
     endif
 
 endif

@@ -180,8 +180,6 @@ void protocol_post_init(void) {
 }
 
 void protocol_pre_task(void) {
-    usb_event_queue_task();
-
 #if !defined(NO_USB_STARTUP_CHECK)
     if (USB_DRIVER.state == USB_SUSPENDED) {
         dprintln("suspending keyboard");
@@ -191,7 +189,7 @@ void protocol_pre_task(void) {
             /* Remote wakeup */
             if ((USB_DRIVER.status & USB_GETSTATUS_REMOTE_WAKEUP_ENABLED) && suspend_wakeup_condition()) {
                 usbWakeupHost(&USB_DRIVER);
-                restart_usb_driver(&USB_DRIVER);
+                wait_ms(300);
             }
         }
         /* Woken up */
@@ -202,6 +200,7 @@ void protocol_pre_task(void) {
 #    endif /* MOUSEKEY_ENABLE */
     }
 #endif
+    usb_event_queue_task();
 }
 
 void protocol_post_task(void) {

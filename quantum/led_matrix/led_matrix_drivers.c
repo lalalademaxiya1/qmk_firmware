@@ -197,9 +197,9 @@ static void flush(void) {
 }
 
 const led_matrix_driver_t led_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_value = is31fl3733_set_value,
+    .init          = init,
+    .flush         = flush,
+    .set_value     = is31fl3733_set_value,
     .set_value_all = is31fl3733_set_value_all,
 };
 
@@ -218,9 +218,9 @@ static void flush(void) {
 }
 
 const led_matrix_driver_t led_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_value = IS31FL_simple_set_brightness,
+    .init          = init,
+    .flush         = flush,
+    .set_value     = IS31FL_simple_set_brightness,
     .set_value_all = IS31FL_simple_set_brigntness_all,
 };
 #    elif defined(CKLED2001)
@@ -238,10 +238,73 @@ static void flush(void) {
 }
 
 const led_matrix_driver_t led_matrix_driver = {
-    .init = init,
-    .flush = flush,
-    .set_value = ckled2001_set_value,
+    .init          = init,
+    .flush         = flush,
+    .set_value     = ckled2001_set_value,
     .set_value_all = ckled2001_set_value_all,
 };
 #    endif
+
+#elif defined(CKLED2001_SPI)
+
+#    include "spi_master.h"
+
+static void init(void) {
+#    if defined(LED_DRIVER_SHUTDOWN_PIN)
+    setPinOutput(LED_DRIVER_SHUTDOWN_PIN);
+    writePinHigh(LED_DRIVER_SHUTDOWN_PIN);
+#    endif
+
+    spi_init();
+
+    for (uint8_t i = 0; i < DRIVER_COUNT; i++) {
+        ckled2001_init(i);
+    }
+
+    for (int index = 0; index < LED_MATRIX_LED_COUNT; index++) {
+        bool enabled = true;
+
+        ckled2001_set_led_control_register(index, enabled);
+    }
+
+    for (uint8_t i = 0; i < DRIVER_COUNT; i++) {
+        ckled2001_update_led_control_registers(i);
+    }
+}
+
+static void flush(void) {
+    for (uint8_t i = 0; i < DRIVER_COUNT; i++)
+        ckled2001_update_pwm_buffers(i);
+}
+
+#    if defined(LED_MATRIX_DRIVER_SHUTDOWN_ENABLE)
+static void shutdown(void) {
+#        if defined(LED_DRIVER_SHUTDOWN_PIN)
+    writePinLow(LED_DRIVER_SHUTDOWN_PIN);
+#        else
+    for (uint8_t i = 0; i < DRIVER_COUNT; i++)
+        ckled2001_sw_shutdown(i);
+#        endif
+}
+
+static void exit_shutdown(void) {
+#        if defined(LED_DRIVER_SHUTDOWN_PIN)
+    writePinHigh(LED_DRIVER_SHUTDOWN_PIN);
+#        else
+    for (uint8_t i = 0; i < DRIVER_COUNT; i++)
+        ckled2001_sw_return_normal(i);
+#        endif
+}
+#    endif
+
+const led_matrix_driver_t led_matrix_driver = {.init          = init,
+                                               .flush         = flush,
+                                               .set_value     = ckled2001_set_value,
+                                               .set_value_all = ckled2001_set_value_all,
+#    if defined(LED_MATRIX_DRIVER_SHUTDOWN_ENABLE)
+                                               .shutdown      = shutdown,
+                                               .exit_shutdown = exit_shutdown
+#    endif
+};
+
 #endif

@@ -1,4 +1,4 @@
-/* Copyright 2023 @ Keychron(https://www.keychron.com)
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,10 +16,21 @@
 
 #pragma once
 
-/* EEPROM Driver Configuration */
-#define WEAR_LEVELING_LOGICAL_SIZE 2048
-#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+#include_next <mcuconf.h>
 
-/* Factory Reset Key Definition */
-#define FN_KEY1 MO(1)
-#define FN_KEY2 MO(3)
+#undef STM32_HSECLK
+#define STM32_HSECLK 16000000U
+
+#undef STM32_PLLM_VALUE
+#define STM32_PLLM_VALUE 8
+#undef STM32_PLLN_VALUE
+#define STM32_PLLN_VALUE 168
+#undef STM32_PLLP_VALUE
+#define STM32_PLLP_VALUE 4
+#undef STM32_PLLQ_VALUE
+#define STM32_PLLQ_VALUE 7
+
+// #undef STM32_I2C_USE_I2C1
+// #define STM32_I2C_USE_I2C1 TRUE
+#undef STM32_SPI_USE_SPI1
+#define STM32_SPI_USE_SPI1 TRUE

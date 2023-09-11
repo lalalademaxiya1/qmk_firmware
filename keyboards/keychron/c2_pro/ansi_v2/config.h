@@ -1,4 +1,4 @@
-/* Copyright 2023 @ Keychron(https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,10 +16,26 @@
 
 #pragma once
 
-/* EEPROM Driver Configuration */
-#define WEAR_LEVELING_LOGICAL_SIZE 2048
-#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+/* DIP switch */
+#define DIP_SWITCH_PINS \
+    { D2 }
 
-/* Factory Reset Key Definition */
-#define FN_KEY1 MO(1)
-#define FN_KEY2 MO(3)
+/* Indication led */
+#define LED_NUM_LOCK_PIN C8
+#define LED_CAPS_LOCK_PIN C9
+#define LED_MAC_OS_PIN C10
+#define LED_WIN_OS_PIN C11
+#define LED_OS_PIN_ON_STATE 1
+
+/* The I2C Driver Configuration */
+// #define I2C1_CLOCK_SPEED 400000
+// #define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
+
+/* The SPI Driver Configuration */
+#define SPI_DRIVER SPID1
+#define SPI_SCK_PIN A5
+#define SPI_MOSI_PIN A7
+#define SPI_MISO_PIN A6
+#define SPI_CS_PINS {A4, C14}
+#define CKLED2001_SPI_MODE 0
+#define CKLED2001_SPI_DIVISOR 2
