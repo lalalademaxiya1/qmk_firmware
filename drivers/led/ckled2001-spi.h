@@ -30,8 +30,9 @@ typedef struct ckled2001_led {
 extern const ckled2001_led PROGMEM g_ckled2001_leds[RGB_MATRIX_LED_COUNT];
 
 void ckled2001_init(uint8_t index);
+bool ckled2001_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t* data, uint8_t len);
 bool ckled2001_write_register(uint8_t index, uint8_t page, uint8_t reg, uint8_t data);
-bool ckled2001_write_pwm_buffer(uint8_t index, uint8_t *pwm_buffer);
+bool ckled2001_write_pwm_buffer(uint8_t index, uint8_t* pwm_buffer);
 
 void ckled2001_set_color(int index, uint8_t red, uint8_t green, uint8_t blue);
 void ckled2001_set_color_all(uint8_t red, uint8_t green, uint8_t blue);
