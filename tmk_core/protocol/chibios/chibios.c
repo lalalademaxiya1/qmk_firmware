@@ -179,8 +179,9 @@ void protocol_post_init(void) {
     host_set_driver(driver);
 }
 
+#if defined(STM32_USB_USE_OTG1)
 void protocol_pre_task(void) {
-#if !defined(NO_USB_STARTUP_CHECK)
+#    if !defined(NO_USB_STARTUP_CHECK)
     if (USB_DRIVER.state == USB_SUSPENDED) {
         dprintln("suspending keyboard");
         while (USB_DRIVER.state == USB_SUSPENDED) {
@@ -195,13 +196,39 @@ void protocol_pre_task(void) {
         /* Woken up */
         // variables has been already cleared by the wakeup hook
         send_keyboard_report();
-#    ifdef MOUSEKEY_ENABLE
+#        ifdef MOUSEKEY_ENABLE
         mousekey_send();
-#    endif /* MOUSEKEY_ENABLE */
+#        endif /* MOUSEKEY_ENABLE */
     }
-#endif
+#    endif
     usb_event_queue_task();
 }
+#else
+void protocol_pre_task(void) {
+    usb_event_queue_task();
+
+#    if !defined(NO_USB_STARTUP_CHECK)
+    if (USB_DRIVER.state == USB_SUSPENDED) {
+        dprintln("suspending keyboard");
+        while (USB_DRIVER.state == USB_SUSPENDED) {
+            /* Do this in the suspended state */
+            suspend_power_down(); // on AVR this deep sleeps for 15ms
+            /* Remote wakeup */
+            if ((USB_DRIVER.status & USB_GETSTATUS_REMOTE_WAKEUP_ENABLED) && suspend_wakeup_condition()) {
+                usbWakeupHost(&USB_DRIVER);
+                restart_usb_driver(&USB_DRIVER);
+            }
+        }
+        /* Woken up */
+        // variables has been already cleared by the wakeup hook
+        send_keyboard_report();
+#        ifdef MOUSEKEY_ENABLE
+        mousekey_send();
+#        endif /* MOUSEKEY_ENABLE */
+    }
+#    endif
+}
+#endif
 
 void protocol_post_task(void) {
 #ifdef CONSOLE_ENABLE

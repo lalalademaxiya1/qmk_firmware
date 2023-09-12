@@ -131,14 +131,16 @@ void host_system_send(uint16_t usage) {
     last_system_usage = usage;
 
     if (!driver) return;
-
-    // report_extra_t report = {
-    //     .report_id = REPORT_ID_SYSTEM,
-    //     .usage     = usage,
-    // };
+#if defined(STM32_USB_USE_OTG1)
     static report_extra_t report;
     report.report_id = REPORT_ID_SYSTEM;
     report.usage     = usage;
+#else
+    report_extra_t report = {
+        .report_id = REPORT_ID_SYSTEM,
+        .usage     = usage,
+    };
+#endif
     (*driver->send_extra)(&report);
 }
 
@@ -154,14 +156,16 @@ void host_consumer_send(uint16_t usage) {
 #endif
 
     if (!driver) return;
-
-    // report_extra_t report = {
-    //     .report_id = REPORT_ID_CONSUMER,
-    //     .usage     = usage,
-    // };
+#if defined(STM32_USB_USE_OTG1)
     static report_extra_t report;
     report.report_id = REPORT_ID_CONSUMER;
     report.usage     = usage;
+#else
+    report_extra_t report = {
+        .report_id = REPORT_ID_CONSUMER,
+        .usage     = usage,
+    };
+#endif
     (*driver->send_extra)(&report);
 }
 
