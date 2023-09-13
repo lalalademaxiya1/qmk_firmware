@@ -28,7 +28,7 @@
         { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }
 #endif
 
-#define CLKED2001_LED_COUNT 192
+#define CKLED2001_LED_COUNT 192
 #define CKLED2001_WRITE (0 << 7)
 #define CKLED2001_READ (1 << 7)
 #define CKLED2001_PATTERN (2 << 4)
@@ -61,12 +61,12 @@ bool ckled2001_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t* data, ui
         return false;
     }
 
-    if (!spi_start(cs_pins[index], false, 0, CKLED_SPI_DIVISOR)) {
+    if (!spi_start(cs_pins[index], false, 0, CKLED2001_SPI_DIVISOR)) {
         spi_stop();
         return false;
     }
 
-    spi_transfer_buffer[0] = CKLED_WRITE | CKLED_PATTERN | (page & 0x0F);
+    spi_transfer_buffer[0] = CKLED2001_WRITE | CKLED2001_PATTERN | (page & 0x0F);
     spi_transfer_buffer[1] = reg;
 
     if (spi_transmit(spi_transfer_buffer, 2) != SPI_STATUS_SUCCESS) {
@@ -84,10 +84,10 @@ bool ckled2001_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t* data, ui
 }
 
 bool ckled2001_write_register(uint8_t index, uint8_t page, uint8_t reg, uint8_t data) {
-    return CKLED2001_write(index, page, reg, &data, 1);
+    return ckled2001_write(index, page, reg, &data, 1);
 }
 
-bool ckled2001_write_pwm_buffer(uint8_t addr, uint8_t* pwm_buffer) {
+bool ckled2001_write_pwm_buffer(uint8_t index, uint8_t* pwm_buffer) {
     if (g_pwm_buffer_update_required[index]) {
         ckled2001_write(index, LED_PWM_PAGE, 0, g_pwm_buffer[index], CKLED2001_LED_COUNT);
     }
@@ -191,7 +191,7 @@ void ckled2001_update_pwm_buffers(uint8_t index) {
 
 void ckled2001_update_led_control_registers(uint8_t index) {
     if (g_led_control_registers_update_required[index]) {
-        ckled2001_write_register(addr, LED_CONTROL_PAGE, 0, g_led_control_registers[index], 24);
+        ckled2001_write(index, LED_CONTROL_PAGE, 0, g_led_control_registers[index], 24);
     }
     g_led_control_registers_update_required[index] = false;
 }

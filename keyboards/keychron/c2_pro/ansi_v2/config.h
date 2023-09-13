@@ -36,6 +36,4 @@
 #define SPI_SCK_PIN A5
 #define SPI_MOSI_PIN A7
 #define SPI_MISO_PIN A6
-#define DRIVER_CS_PINS \
-    { C14 }
 #define CKLED2001_SPI_DIVISOR 21

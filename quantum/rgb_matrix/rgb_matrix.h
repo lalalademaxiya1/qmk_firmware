@@ -38,6 +38,8 @@
 #    include "is31flcommon.h"
 #elif defined(CKLED2001)
 #    include "ckled2001.h"
+#elif defined(CKLED2001_SPI)
+#    include "ckled2001-spi.h"
 #elif defined(AW20216)
 #    include "aw20216.h"
 #elif defined(WS2812)

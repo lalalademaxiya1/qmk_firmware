@@ -523,7 +523,7 @@ endif
     ifeq ($(strip $(RGB_MATRIX_DRIVER)), ckled2001_spi)
         OPT_DEFS += -DCKLED2001_SPI -DSTM32_SPI -DHAL_USE_SPI=TRUE
         COMMON_VPATH += $(DRIVER_PATH)/led
-        SRC += ckled2001_spi.c
+        SRC += ckled2001-spi.c
         QUANTUM_LIB_SRC += spi_master.c
     endif
 

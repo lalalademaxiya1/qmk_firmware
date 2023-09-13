@@ -401,28 +401,28 @@ static void init(void) {
     spi_init();
 
     for (uint8_t i = 0; i < DRIVER_COUNT; i++)
-        CKLED2001_init(i);
+        ckled2001_init(i);
 
     for (int index = 0; index < RGB_MATRIX_LED_COUNT; index++) {
         bool enabled = true;
 
-        CKLED2001_set_led_control_register(index, enabled, enabled, enabled);
+        ckled2001_set_led_control_register(index, enabled, enabled, enabled);
     }
 
     for (uint8_t i = 0; i < DRIVER_COUNT; i++)
-        CKLED2001_update_led_control_registers(i);
+        ckled2001_update_led_control_registers(i);
 }
 
 static void flush(void) {
     for (uint8_t i = 0; i < DRIVER_COUNT; i++)
-        CKLED2001_update_pwm_buffers(i);
+        ckled2001_update_pwm_buffers(i);
 }
 
 const rgb_matrix_driver_t rgb_matrix_driver = {
     .init          = init,
     .flush         = flush,
-    .set_color     = CKLED2001_set_color,
-    .set_color_all = CKLED2001_set_color_all,
+    .set_color     = ckled2001_set_color,
+    .set_color_all = ckled2001_set_color_all,
 };
 
 #elif defined(AW20216)
