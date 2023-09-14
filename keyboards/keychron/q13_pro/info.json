@@ -19,7 +19,7 @@
         "raw": true
     },
     "rgb_matrix": {
-        "driver": "ckled2001",
+        "driver": "CKLED2001",
         "animations": {
             "breathing": true,
             "band_spiral_val": true,
