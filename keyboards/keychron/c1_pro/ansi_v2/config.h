@@ -28,3 +28,10 @@
 #define LED_MAC_OS_PIN C10
 #define LED_WIN_OS_PIN C11
 #define LED_OS_PIN_ON_STATE 1
+
+/* The SPI Driver Configuration */
+// #define SPI_DRIVER SPID1
+// #define SPI_SCK_PIN A5
+// #define SPI_MOSI_PIN A7
+// #define SPI_MISO_PIN A6
+// #define CKLED2001_SPI_DIVISOR 21

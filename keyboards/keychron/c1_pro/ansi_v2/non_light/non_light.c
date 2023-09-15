@@ -17,29 +17,27 @@
 #include "quantum.h"
 #include "keychron_ft_c1v2.h"
 
-#ifdef DIP_SWITCH_ENABLE
-bool dip_switch_update_kb(uint8_t index, bool active) {
-    if (!dip_switch_update_user(index, active)) {
-        return false;
+void housekeeping_task_kb(void) {
+    if (!factory_reset_flag) {
+        if (default_layer_state == (1 << 0)) {
+            writePin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
+            writePin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
+        }
+        if (default_layer_state == (1 << 2)) {
+            writePin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
+            writePin(LED_WIN_OS_PIN, LED_OS_PIN_ON_STATE);
+        }
     }
-    if (index == 0) {
-        default_layer_set(1UL << (active ? 0 : 2));
-    }
-    return true;
+    factory_reset_task();
+    factory_reset_ind_task();
 }
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+    if (res && (!factory_reset_flag)) {
+#ifdef LED_CAPS_LOCK_PIN
+        writePin(LED_CAPS_LOCK_PIN, led_state.caps_lock);
 #endif
-
-void keyboard_post_init_kb(void) {
-    setPinOutputPushPull(LED_MAC_OS_PIN);
-    setPinOutputPushPull(LED_WIN_OS_PIN);
-    writePin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
-    writePin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
-
-    keyboard_post_init_user();
-}
-
-void suspend_power_down_kb(void) {
-    suspend_power_down_user();
-    writePin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
-    writePin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
+    }
+    return res;
 }

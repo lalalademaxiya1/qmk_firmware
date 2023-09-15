@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -117,3 +117,25 @@ const ckled2001_led PROGMEM g_ckled2001_leds[LED_MATRIX_LED_COUNT] = {
     {0, G_13},
 };
 #endif
+
+// clang-format on
+void housekeeping_task_kb(void) {
+    if (default_layer_state == (1 << 0)) {
+        writePin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
+        writePin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
+    }
+    if (default_layer_state == (1 << 2)) {
+        writePin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
+        writePin(LED_WIN_OS_PIN, LED_OS_PIN_ON_STATE);
+    }
+}
+
+bool led_update_kb(led_t led_state) {
+    bool res = led_update_user(led_state);
+    if (res) {
+#ifdef LED_CAPS_LOCK_PIN
+        writePin(LED_CAPS_LOCK_PIN, led_state.caps_lock);
+#endif
+    }
+    return res;
+}
