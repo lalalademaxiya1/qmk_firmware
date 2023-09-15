@@ -16,8 +16,6 @@
 
 #pragma once
 
-extern void update_layer_leds(void);
-
 #include "quantum.h"
 
 #define KC_MICT QK_KB_0
