@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron(https://www.keychron.com)
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,29 +16,7 @@
 
 #pragma once
 
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    { {5, 4}, }
+#include_next <mcuconf.h>
 
-/* Disable DIP switch in matrix data */
-#define MATRIX_MASKED
-
-/* Increase I2C speed to 1000 KHz */
-#define I2C1_TIMINGR_PRESC 0U
-#define I2C1_TIMINGR_SCLDEL 3U
-#define I2C1_TIMINGR_SDADEL 0U
-#define I2C1_TIMINGR_SCLH 15U
-#define I2C1_TIMINGR_SCLL 51U
-
-/* Enable indicator LED*/
-#define NUM_LED_INDEX 16
-#define CAPS_LED_INDEX 17
-#define MAC_LED_INDEX 18
-#define WIN_LED_INDEX 19
-
-/* HC595 driver definition */
-#define HC595_STCP A0
-#define HC595_SHCP A1
-#define HC595_DS C15
-#define SHIFT_COL_START 11
-#define SHIFT_COL_END 19
+#undef STM32_I2C_USE_I2C1
+#define STM32_I2C_USE_I2C1 TRUE

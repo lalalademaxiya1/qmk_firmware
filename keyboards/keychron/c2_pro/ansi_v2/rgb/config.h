@@ -25,9 +25,7 @@
 // #    define DRIVER_ADDR_2 0b1110100
 
 /* RGB Matrix Configuration */
-#    define DRIVER_1_LED_TOTAL 56
-#    define DRIVER_2_LED_TOTAL 48
-#    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+#    define RGB_MATRIX_LED_COUNT 104
 
 /* turn off effects when suspended */
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED
