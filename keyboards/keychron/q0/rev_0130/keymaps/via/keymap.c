@@ -16,8 +16,14 @@
 
 #include QMK_KEYBOARD_H
 
-enum layers { _BASE, _FN1, _RESERVED1, _RESERVED2 };
+enum layers {
+    _BASE,
+    _FN1,
+    _RESERVED1,
+    _RESERVED2,
+};
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_numpad_6x4(
         MO(_FN1), KC_ESC,  KC_BSPC,   KC_TAB,

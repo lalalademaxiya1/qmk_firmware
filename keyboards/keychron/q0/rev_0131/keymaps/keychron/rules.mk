@@ -1,5 +1,5 @@
 VIA_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 
-VPATH += keyboards/keychron/common
-SRC += keychron_common.c
+include keyboards/keychron/common/common.mk
+SRC += keychron_ft_q0.c

@@ -16,13 +16,12 @@
 
 #include QMK_KEYBOARD_H
 
-// clang-format off
-
 enum layers {
     BASE,
-    FUNC
+    FUNC,
 };
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_numpad_6x5(
         KC_MUTE, MO(FUNC), KC_ESC,  KC_BSPC,  KC_TAB,

@@ -16,15 +16,14 @@
 
 #include QMK_KEYBOARD_H
 
- // clang-format off
-
 enum layers {
     BASE,
     FUNC,
     L2,
-    L3
+    L3,
 };
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_numpad_6x5(
         KC_MUTE,   MO(FUNC), KC_ESC,  KC_BSPC,  KC_TAB,
@@ -61,9 +60,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [BASE]      = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [FUNC]       = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
-    [L2] = { ENCODER_CCW_CW(_______, _______) },
-    [L3] = { ENCODER_CCW_CW(_______, _______) }
+    [BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [FUNC] = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [L2]   = { ENCODER_CCW_CW(_______, _______) },
+    [L3]   = { ENCODER_CCW_CW(_______, _______) }
 };
 #endif // ENCODER_MAP_ENABLE

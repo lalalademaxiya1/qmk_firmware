@@ -16,16 +16,16 @@
 
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
-
-// clang-format off
+#include "keychron_ft_common.h"
 
 enum layers {
     BASE,
     FUNC,
     L2,
-    L3
+    L3,
 };
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASE] = LAYOUT_numpad_6x5(
         KC_MUTE,   MO(FUNC), KC_ESC,  KC_BSPC,  KC_TAB,
@@ -73,10 +73,14 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 void housekeeping_task_user(void) {
     housekeeping_task_keychron();
+    housekeeping_task_keychron_ft();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keychron(keycode, record)) {
+        return false;
+    }
+    if (!process_record_keychron_ft(keycode, record)) {
         return false;
     }
     return true;
