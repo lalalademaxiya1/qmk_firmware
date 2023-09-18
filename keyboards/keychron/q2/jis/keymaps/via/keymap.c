@@ -16,16 +16,15 @@
 
 #include QMK_KEYBOARD_H
 
-// clang-format off
-
-enum layers{
+enum layers {
     MAC_BASE,
     WIN_BASE,
     _FN1,
     _FN2,
-    _FN3
+    _FN3,
 };
 
+// clang-format off
 #define KC_TASK LGUI(KC_TAB)
 #define KC_FLXP LGUI(KC_E)
 
@@ -45,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LWIN,  KC_LALT,  KC_INT5,                   KC_SPC,                    KC_INT4, KC_RALT,  MO(_FN2), MO(_FN3), KC_LEFT, KC_DOWN, KC_RGHT),
 
     [_FN1] = LAYOUT_jis_71(
-        KC_GRV,  KC_BRID,  KC_BRIU,  KC_NO,   KC_NO,   RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE,  KC_VOLD,  KC_VOLU,  _______, _______, _______,
+        KC_GRV,  KC_BRID,  KC_BRIU,  KC_MCTL, KC_LPAD, RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE,  KC_VOLD,  KC_VOLU,  _______, _______, _______,
         RGB_TOG, RGB_MOD,  RGB_VAI,  RGB_HUI, RGB_SAI, RGB_SPI, _______, _______, _______, _______, _______,  _______,  _______,                    _______,
         _______, RGB_RMOD, RGB_VAD,  RGB_HUD, RGB_SAD, RGB_SPD, _______, _______, _______, _______, _______,  _______,  _______,  _______,          _______,
         _______,           _______,  _______, _______, _______, _______, NK_TOGG, _______, _______, _______,  _______,  _______,  _______, _______,
