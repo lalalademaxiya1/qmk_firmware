@@ -56,4 +56,13 @@
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
 
-#define HOLD_ON_OTHER_KEY_PRESS // Old default behavior of mod-taps
+/* HC595 Driver Configuration */
+#define HC595_STCP B0
+#define HC595_SHCP B1
+#define HC595_DS A7
+#define HC595_START_INDEX 8
+#define HC595_END_INDEX 15
+
+/* Factory test keys */
+#define FN_KEY1 MO(1)
+#define FN_KEY2 MO(3)
