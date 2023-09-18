@@ -27,6 +27,9 @@
         "custom": true,
         "custom_lite": true
     },
+    "dynamic_keymap": {
+        "layer_count": 5
+    },
     "layouts": {
         "LAYOUT_ansi_68": {
             "layout": [
