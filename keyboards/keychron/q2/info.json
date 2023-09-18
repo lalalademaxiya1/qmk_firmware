@@ -51,5 +51,10 @@
     "diode_direction": "ROW2COL",
     "dynamic_keymap": {
         "layer_count": 5
+    },
+    "eeprom": {
+        "wear_leveling": {
+            "backing_size": 4096
+        }
     }
 }

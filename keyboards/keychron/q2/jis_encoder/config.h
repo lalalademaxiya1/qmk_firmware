@@ -21,8 +21,3 @@
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 30
-
-/* Encoder Configuration*/
-#ifdef ENCODER_ENABLE
-#    define ENCODER_DEFAULT_POS 0x3
-#endif
