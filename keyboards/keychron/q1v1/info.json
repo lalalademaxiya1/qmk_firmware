@@ -1,0 +1,54 @@
+{
+    "keyboard_name": "Q1",
+    "manufacturer": "Keychron",
+    "url": "https://github.com/Keychron",
+    "maintainer": "lalalademaxiya1",
+    "processor": "atmega32u4",
+    "bootloader": "atmel-dfu",
+    "usb": {
+        "vid": "0x3434",
+        "force_nkro": true
+    },
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "dip_switch": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "rgb_matrix": true,
+        "lto": true
+    },
+    "rgb_matrix": {
+        "driver": "is31fl3733",
+        "animations": {
+            "band_spiral_val": true,
+            "breathing": true,
+            "cycle_all": true,
+            "cycle_left_right": true,
+            "cycle_up_down": true,
+            "rainbow_moving_chevron": true,
+            "cycle_out_in": true,
+            "cycle_out_in_dual": true,
+            "cycle_pinwheel": true,
+            "cycle_spiral": true,
+            "dual_beacon": true,
+            "rainbow_beacon": true,
+            "jellybean_raindrops": true,
+            "pixel_rain": true,
+            "typing_heatmap": true,
+            "digital_rain": true,
+            "solid_reactive_simple": true,
+            "solid_reactive_multiwide": true,
+            "solid_reactive_multinexus": true,
+            "splash": true,
+            "solid_splash": true
+        }
+    },
+    "matrix_pins": {
+        "cols": ["D5", "D4", "D6", "D7", "B4", "B5", "B6", "C6", "C7", "F7", "F6", "F5", "F4", "F1", "F0"],
+        "rows": ["D3", "D2", "B3", "B2", "B1", "B0"]
+    },
+    "diode_direction": "ROW2COL"
+}
