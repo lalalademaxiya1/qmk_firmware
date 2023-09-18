@@ -36,3 +36,7 @@
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYRELEASES
+
+/* Factory test keys */
+#define FN_KEY1 MO(1)
+#define FN_KEY2 MO(3)
