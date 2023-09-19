@@ -14,5 +14,10 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true
+    },
+    "eeprom": {
+        "wear_leveling": {
+            "backing_size": 4096
+        }
     }
 }

@@ -54,5 +54,10 @@
             "splash": true,
             "solid_splash": true
         }
+    },
+    "eeprom": {
+        "wear_leveling": {
+            "backing_size": 4096
+        }
     }
 }
