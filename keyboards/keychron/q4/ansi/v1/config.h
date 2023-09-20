@@ -16,22 +16,18 @@
 
 #pragma once
 
-/* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID  { {4,4} }
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 2
+#define DRIVER_ADDR_1 0b1110111
+#define DRIVER_ADDR_2 0b1110100
 
-/* Disable DIP switch in matrix data */
-#define MATRIX_MASKED
+/* RGB Matrix Configuration */
+#define RGB_MATRIX_LED_COUNT 61
 
-/* turn off effects when suspended */
-#define RGB_DISABLE_WHEN_USB_SUSPENDED
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
+#define CKLED2001_CURRENT_TUNE \
+    { 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60, 0xCA, 0xCA, 0x60 }
 
-// RGB Matrix Animation modes. Explicitly enabled
-// For full list of effects, see:
-// https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
-
-#define RGB_MATRIX_KEYPRESSES
-#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-
-/* Factory test keys */
-#define FN_KEY1 MO(2)
-#define FN_KEY2 MO(3)
+/* Enable CapsLcok LED*/
+#define CAPS_LOCK_LED_INDEX 28
