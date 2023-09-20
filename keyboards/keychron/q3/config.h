@@ -36,10 +36,7 @@
     { 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44 }
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 5, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED

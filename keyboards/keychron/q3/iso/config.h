@@ -20,12 +20,7 @@
 // #define MATRIX_UNSELECT_DRIVE_HIGH
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 48
-#define DRIVER_2_LED_TOTAL 40
-#define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
-
-#define CKLED2001_CURRENT_TUNE \
-    { 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44, 0x9D, 0x9D, 0x44 }
+#define RGB_MATRIX_LED_COUNT 88
 
 /* Enable caps-lock LED */
 #define CAPS_LOCK_LED_INDEX 49
