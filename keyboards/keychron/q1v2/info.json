@@ -12,11 +12,11 @@
         "bootmagic": true,
         "command": false,
         "console": false,
+        "dip_switch": true,
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-        "rgb_matrix": true,
-        "dip_switch": true
+        "rgb_matrix": true
     },
     "matrix_pins": {
         "cols": ["C14", "C15", "A0", "A1", "A2", "A3", "A4", "A5", null, null, null, null, null, null, null, null],
