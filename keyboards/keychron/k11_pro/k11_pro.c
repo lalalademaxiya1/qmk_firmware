@@ -78,6 +78,20 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     static uint8_t host_idx = 0;
 
     switch (keycode) {
+        case KC_MICT:
+            if (record->event.pressed) {
+                register_code(KC_MISSION_CONTROL);
+            } else {
+                unregister_code(KC_MISSION_CONTROL);
+            }
+            return false; // Skip all further processing of this key
+        case KC_LAPA:
+            if (record->event.pressed) {
+                register_code(KC_LAUNCHPAD);
+            } else {
+                unregister_code(KC_LAUNCHPAD);
+            }
+            return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -135,8 +149,8 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#if defined(KC_BLUETOOTH_ENABLE) && defined(ENCODER_ENBALE)
-static void encoder0_pad_cb(void *param) {
+#if defined(KC_BLUETOOTH_ENABLE) && defined(ENCODER_ENABLE)
+static void encoder_pad_cb(void *param) {
     encoder_inerrupt_read((uint32_t)param & 0xFF);
 }
 #endif
@@ -157,8 +171,7 @@ void keyboard_post_init_kb(void) {
     ckbt51_init(false);
     bluetooth_init();
 
-#endif
-#ifdef ENCODER_ENBALE
+#    ifdef ENCODER_ENABLE
     pin_t encoders_pad_a[NUM_ENCODERS] = ENCODERS_PAD_A;
     pin_t encoders_pad_b[NUM_ENCODERS] = ENCODERS_PAD_B;
     for (uint8_t i = 0; i < NUM_ENCODERS; i++) {
@@ -167,6 +180,7 @@ void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_a[i], encoder_pad_cb, &i);
         palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, &i);
     }
+#    endif
 #endif
 
     power_on_indicator_timer_buffer = sync_timer_read32() | 1;
