@@ -44,10 +44,5 @@
             "typing_heatmap": true
         }
     },
-    "diode_direction": "ROW2COL",
-    "eeprom": {
-        "wear_leveling": {
-            "backing_size": 4096
-        }
-    }
+    "diode_direction": "ROW2COL"
 }

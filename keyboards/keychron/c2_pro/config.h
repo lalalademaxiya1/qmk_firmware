@@ -16,6 +16,10 @@
 
 #pragma once
 
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+
 /* Factory Reset Key Definition */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)

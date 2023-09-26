@@ -16,6 +16,10 @@
 
 #pragma once
 
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+
 /* Indication led */
 #define LED_CAPS_LOCK_PIN A3
 #define LED_MAC_OS_PIN A4
