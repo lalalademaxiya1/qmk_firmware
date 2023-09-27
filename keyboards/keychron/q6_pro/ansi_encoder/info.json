@@ -1,7 +1,7 @@
 {
-     "usb": {
-    	"pid": "0x0660",
-    	"device_version": "1.0.1"
+    "usb": {
+        "pid": "0x0660",
+        "device_version": "1.0.2"
     },
     "layouts": {
         "LAYOUT_109_ansi": {
