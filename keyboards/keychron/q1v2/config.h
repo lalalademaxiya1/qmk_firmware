@@ -29,10 +29,7 @@
 #define I2C1_TIMINGR_SCLL 51U
 
 /* DIP switch */
-#define DIP_SWITCH_MATRIX_GRID \
-    {                          \
-        { 5, 4 }               \
-    }
+#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
 
 /* Disable DIP switch in matrix data */
 #define MATRIX_MASKED
@@ -40,15 +37,15 @@
 /* Disable RGB lighting when PC is in suspend */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
+/* EEPROM Driver Configuration */
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
+
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 /* Set LED driver current */
 #define CKLED2001_CURRENT_TUNE \
     { 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50, 0xA6, 0xA6, 0x50 }
-
-/* EEPROM Driver Configuration */
-#define WEAR_LEVELING_LOGICAL_SIZE 2048
-#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
