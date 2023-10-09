@@ -16,6 +16,10 @@
 
 #pragma once
 
+/* I2C Driver Configuration */
+#define I2C1_CLOCK_SPEED 400000
+#define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
+
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)

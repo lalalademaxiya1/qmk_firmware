@@ -31,5 +31,9 @@
         "**/.build": true
     },
     "json.format.enable": false,
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
 }

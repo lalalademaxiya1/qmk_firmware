@@ -16,25 +16,17 @@
 
 #include "quantum.h"
 
-uint8_t win_lock_toggle_flag = 0;
+static uint8_t win_lock_state = 0;
 
-void keyboard_post_init_kb(void) {
-    setPinOutputPushPull(LED_WIN_LOCK_PIN);
-    eeconfig_read_user_datablock(&win_lock_toggle_flag);
-    keyboard_post_init_user();
-}
+#define SET_LED_WIN_LOCK_ON writePin(LED_WIN_LOCK_PIN, LED_PIN_ON_STATE)
+#define SET_LED_WIN_LOCK_OFF writePin(LED_WIN_LOCK_PIN, !LED_PIN_ON_STATE)
 
-void housekeeping_task_kb() {
-    if (win_lock_toggle_flag) {
-        writePin(LED_WIN_LOCK_PIN, LED_PIN_ON_STATE);
+void set_led_win_lock_state(void) {
+    if (win_lock_state) {
+        SET_LED_WIN_LOCK_ON;
     } else {
-        writePin(LED_WIN_LOCK_PIN, !LED_PIN_ON_STATE);
+        SET_LED_WIN_LOCK_OFF;
     }
-}
-
-void suspend_power_down_kb(void) {
-    suspend_power_down_user();
-    writePin(LED_WIN_LOCK_PIN, !LED_PIN_ON_STATE);
 }
 
 void eeconfig_init_kb(void) {
@@ -46,10 +38,22 @@ void eeconfig_init_kb(void) {
     keymap_config.nkro = 1;
     eeconfig_update_keymap(keymap_config.raw);
 
-    win_lock_toggle_flag = 0;
-    eeconfig_update_user_datablock(&win_lock_toggle_flag);
+    win_lock_state = 0;
+    eeconfig_update_user_datablock(&win_lock_state);
 
     eeconfig_init_user();
+}
+
+void keyboard_post_init_kb(void) {
+    setPinOutputPushPull(LED_WIN_LOCK_PIN);
+    eeconfig_read_user_datablock(&win_lock_state);
+    set_led_win_lock_state();
+
+    keyboard_post_init_user();
+}
+
+void housekeeping_task_kb() {
+    set_led_win_lock_state();
 }
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
@@ -59,16 +63,22 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case GU_TOGG:
             if (record->event.pressed) {
-                win_lock_toggle_flag = !win_lock_toggle_flag;
-                if (win_lock_toggle_flag) {
+                win_lock_state = !win_lock_state;
+                if (win_lock_state) {
                     writePin(LED_WIN_LOCK_PIN, LED_PIN_ON_STATE);
                 } else {
                     writePin(LED_WIN_LOCK_PIN, !LED_PIN_ON_STATE);
                 }
-                eeconfig_update_user_datablock(&win_lock_toggle_flag);
+                eeconfig_update_user_datablock(&win_lock_state);
             }
             return true;
         default:
             return true;
     }
+}
+
+void suspend_power_down_kb(void) {
+    SET_LED_WIN_LOCK_OFF;
+
+    suspend_power_down_user();
 }

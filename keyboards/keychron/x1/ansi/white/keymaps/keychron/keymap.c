@@ -17,7 +17,6 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 #include "keychron_ft_common.h"
-#include "keychron_ft_x1.h"
 
 enum layers {
     WIN_BASE,
