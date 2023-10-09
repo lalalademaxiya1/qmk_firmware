@@ -21,9 +21,9 @@
 #    define DRIVER_COUNT 2
 #    define DRIVER_ADDR_1 0b1110111
 #    define DRIVER_ADDR_2 0b1110100
-#    define DRIVER_1_LED_TOTAL 58
-#    define DRIVER_2_LED_TOTAL 50
-#    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+/* RGB Matrix Configuration */
+#    define RGB_MATRIX_LED_COUNT 108
 
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
@@ -35,8 +35,8 @@
 #    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
 
 /* Indication led */
-#    define NUM_LOCK_INDEX 37    // NumLock
-#    define LOW_BAT_IND_INDEX 98 // Space
+#    define NUM_LOCK_INDEX 37
+#    define LOW_BAT_IND_INDEX 98
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

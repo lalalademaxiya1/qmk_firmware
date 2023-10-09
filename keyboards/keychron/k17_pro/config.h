@@ -94,6 +94,6 @@
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
 
-/* HC595 driver configure */
+/* HC595 Driver Configuration */
 #define HC595_START_INDEX 0
 #define HC595_END_INDEX 19

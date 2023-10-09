@@ -28,7 +28,7 @@
         "custom_lite": true
     },
     "layouts": {
-        "LAYOUT_ansi_108": {
+        "LAYOUT_108_ansi": {
             "layout": [
                 {"matrix":[0,0], "x":0, "y":0},
                 {"matrix":[0,1], "x":2, "y":0},

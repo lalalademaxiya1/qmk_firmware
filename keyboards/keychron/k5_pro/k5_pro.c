@@ -83,6 +83,20 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     static uint8_t host_idx = 0;
 
     switch (keycode) {
+        case KC_MICT:
+            if (record->event.pressed) {
+                register_code(KC_MISSION_CONTROL);
+            } else {
+                unregister_code(KC_MISSION_CONTROL);
+            }
+            return false; // Skip all further processing of this key
+        case KC_LAPA:
+            if (record->event.pressed) {
+                register_code(KC_LAUNCHPAD);
+            } else {
+                unregister_code(KC_LAUNCHPAD);
+            }
+            return false; // Skip all further processing of this key
         case KC_LOPTN:
         case KC_ROPTN:
         case KC_LCMMD:
@@ -207,7 +221,6 @@ void matrix_scan_kb(void) {
 #ifdef KC_BLUETOOTH_ENABLE
 static void ckbt51_param_init(void) {
     /* Set bluetooth device name */
-    // ckbt51_set_local_name(STR(PRODUCT));
     ckbt51_set_local_name(PRODUCT);
     wait_ms(10);
     /* Set bluetooth parameters */
