@@ -25,7 +25,7 @@
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 /* Winlock indicator */
-#define LED_WIN_LOCK_PIN C11
+#define LED_WIN_LOCK_PIN C10
 #define LED_PIN_ON_STATE 1
 
 /* User used eeprom */

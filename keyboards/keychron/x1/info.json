@@ -15,7 +15,7 @@
     "diode_direction": "COL2ROW",
     "indicators": {
         "caps_lock": "C9",
-        "scroll_lock": "C10"
+        "scroll_lock": "C11"
     },
     "features": {
         "bootmagic": true,
