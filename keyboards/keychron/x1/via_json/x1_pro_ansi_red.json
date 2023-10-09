@@ -1,7 +1,7 @@
 {
-  "name": "Keychron C1 Pro V2 ANSI White",
-  "vendorId": "0x3434",
-  "productId": "0x0519",
+  "name": "Lemokey X1 ANSI Red",
+  "vendorId": "0x362D",
+  "productId": "0x0210",
   "keycodes": ["qmk_lighting"],
   "customKeycodes": [
     {"name": "Mission Control","title": "Mission Control in macOS","shortName": "MCtrl"},

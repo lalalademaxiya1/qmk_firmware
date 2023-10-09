@@ -10,11 +10,11 @@ A customizable 80% TKL keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/x1/ansi/white:default
+    make keychron/x1/ansi/red:default
 
 Flashing example for this keyboard:
 
-    make keychron/x1/ansi/white:default:flash
+    make keychron/x1/ansi/red:default:flash
 
 ## bootloader
 
