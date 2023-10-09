@@ -30,5 +30,6 @@
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "cmake.sourceDirectory": "/home/book/documents/qmk_firmware/lib/googletest"
 }
