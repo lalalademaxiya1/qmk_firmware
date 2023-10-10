@@ -21,7 +21,7 @@ static uint8_t win_lock_state = 0;
 #define SET_LED_WIN_LOCK_ON writePin(LED_WIN_LOCK_PIN, LED_PIN_ON_STATE)
 #define SET_LED_WIN_LOCK_OFF writePin(LED_WIN_LOCK_PIN, !LED_PIN_ON_STATE)
 
-void set_led_win_lock_state(void) {
+static void set_led_win_lock_state(void) {
     if (win_lock_state) {
         SET_LED_WIN_LOCK_ON;
     } else {
@@ -47,7 +47,6 @@ void eeconfig_init_kb(void) {
 void keyboard_post_init_kb(void) {
     setPinOutputPushPull(LED_WIN_LOCK_PIN);
     eeconfig_read_user_datablock(&win_lock_state);
-    set_led_win_lock_state();
 
     keyboard_post_init_user();
 }
@@ -64,12 +63,12 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         case GU_TOGG:
             if (record->event.pressed) {
                 win_lock_state = !win_lock_state;
+                eeconfig_update_user_datablock(&win_lock_state);
                 if (win_lock_state) {
                     writePin(LED_WIN_LOCK_PIN, LED_PIN_ON_STATE);
                 } else {
                     writePin(LED_WIN_LOCK_PIN, !LED_PIN_ON_STATE);
                 }
-                eeconfig_update_user_datablock(&win_lock_state);
             }
             return true;
         default:
