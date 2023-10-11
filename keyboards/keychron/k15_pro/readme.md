@@ -12,6 +12,8 @@ Make example for this keyboard (after setting up your build environment):
 
     make keychron/k5_pro/ansi_encoder/rgb:default
     make keychron/k5_pro/ansi_encoder/white:default
+    make keychron/k5_pro/iso_encoder/rgb:default
+    make keychron/k5_pro/iso_encoder/white:default
     make keychron/k5_pro/jis_encoder/rgb:default
     make keychron/k5_pro/jis_encoder/white:default
 
@@ -19,6 +21,8 @@ Flashing example for this keyboard:
 
     make keychron/k15_pro/ansi_enoder/rgb:default:flash
     make keychron/k15_pro/ansi_enoder/white:default:flash
+    make keychron/k15_pro/iso_enoder/rgb:default:flash
+    make keychron/k15_pro/iso_enoder/white:default:flash
     make keychron/k15_pro/jis_enoder/rgb:default:flash
     make keychron/k15_pro/jis_enoder/white:default:flash
 
