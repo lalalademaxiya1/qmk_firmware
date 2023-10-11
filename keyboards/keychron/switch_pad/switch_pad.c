@@ -255,15 +255,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                     factory_reset_buffer = timer_read32();
                 }
             } else {
-                if (matrix_get_row(row1) & (1 << col)) {
-                    key_press_status &= ~KEY_PRESS_STEP_2;
-                }
-                if (matrix_get_row(row2) & (1 << col)) {
-                    key_press_status &= ~KEY_PRESS_STEP_3;
-                }
-                if (matrix_get_row(row3) & (1 << col)) {
-                    key_press_status &= ~KEY_PRESS_STEP_4;
-                }
+                key_press_status &= ~KEY_PRESS_LIGHT_TEST;
                 factory_reset_buffer = 0;
             }
             return true;
