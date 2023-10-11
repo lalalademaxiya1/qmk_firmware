@@ -232,34 +232,57 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 factory_reset_buffer = 0;
             }
             return false;
+        case KC_P9:
+            if (record->event.pressed) {
+                if (matrix_get_row(row1) & (1 << col)) {
+                    key_press_status |= KEY_PRESS_STEP_2;
+                }
+                if (matrix_get_row(row2) & (1 << col)) {
+                    key_press_status |= KEY_PRESS_STEP_3;
+                    if (led_test_mode) {
+                        if (++led_test_mode >= LED_TEST_MODE_MAX) {
+                            led_test_mode = LED_TEST_MODE_WHITE;
+                        }
+                    }
+                }
+                if (matrix_get_row(row3) & (1 << col)) {
+                    key_press_status |= KEY_PRESS_STEP_4;
+                    if (led_test_mode) {
+                        led_test_mode = LED_TEST_MODE_OFF;
+                    }
+                }
+                if (key_press_status == KEY_PRESS_LIGHT_TEST) {
+                    factory_reset_buffer = timer_read32();
+                }
+            } else {
+                if (matrix_get_row(row1) & (1 << col)) {
+                    key_press_status &= ~KEY_PRESS_STEP_2;
+                }
+                if (matrix_get_row(row2) & (1 << col)) {
+                    key_press_status &= ~KEY_PRESS_STEP_3;
+                }
+                if (matrix_get_row(row3) & (1 << col)) {
+                    key_press_status &= ~KEY_PRESS_STEP_4;
+                }
+                factory_reset_buffer = 0;
+            }
+            return true;
     }
 
     return true;
 }
 
 void housekeeping_task_kb(void) {
-    if (led_test_mode) {
-        if (matrix_get_row(row2) & (1 << col)) {
-            if (++led_test_mode >= LED_TEST_MODE_MAX) {
-                led_test_mode = LED_TEST_MODE_WHITE;
-            }
-        } else if (matrix_get_row(row3) & (1 << col)) {
-            led_test_mode = LED_TEST_MODE_OFF;
-        }
-    }
-
     if (factory_reset_buffer && (timer_elapsed32(factory_reset_buffer) > 4000)) {
         factory_reset_buffer = 0;
         if (key_press_status == KEY_PRESS_FACTORY_RESET) {
             indicator_buffer = timer_read32();
             factory_reset_count++;
             eeconfig_init();
-#ifdef RGB_MATRIX_ENABLE
             if (!rgb_matrix_is_enabled()) {
                 rgb_matrix_enable();
             }
             rgb_matrix_init();
-#endif
         } else if (key_press_status == KEY_PRESS_LIGHT_TEST) {
             led_test_mode = LED_TEST_MODE_WHITE;
             if (!rgb_matrix_is_enabled()) {
@@ -313,12 +336,4 @@ bool rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
         }
     }
     return true;
-}
-
-void keyboard_post_init_kb(void) {
-    // Customise these values to desired behaviour
-    debug_enable   = true;
-    debug_matrix   = true;
-    debug_keyboard = true;
-    // debug_mouse=true;
 }
