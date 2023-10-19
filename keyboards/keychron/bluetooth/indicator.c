@@ -479,6 +479,11 @@ void indicator_task(void) {
 
 #if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
 __attribute__((weak)) void os_state_indicate(void) {
+#    if defined(RGB_DISABLE_WHEN_USB_SUSPENDED) || defined(LED_DISABLE_WHEN_USB_SUSPENDED)
+    if (USB_DRIVER.state == USB_SUSPENDED) {
+        reutern;
+    }
+#    endif
 #    if defined(NUM_LOCK_INDEX)
     if (host_keyboard_led_state().num_lock) {
         SET_LED_ON(NUM_LOCK_INDEX);
@@ -508,9 +513,6 @@ __attribute__((weak)) void os_state_indicate(void) {
         SET_LED_ON(KANA_LOCK_INDEX);
     }
 #    endif
-    if (USB_DRIVER.state == USB_SUSPENDED) {
-        SET_ALL_LED_OFF();
-    }
 }
 
 bool LED_INDICATORS_KB(void) {
