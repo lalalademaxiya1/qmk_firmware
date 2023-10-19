@@ -479,11 +479,6 @@ void indicator_task(void) {
 
 #if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
 __attribute__((weak)) void os_state_indicate(void) {
-#    if defined(RGB_DISABLE_WHEN_USB_SUSPENDED) || defined(LED_DISABLE_WHEN_USB_SUSPENDED)
-    if (USB_DRIVER.state == USB_SUSPENDED) {
-        reutern;
-    }
-#    endif
 #    if defined(NUM_LOCK_INDEX)
     if (host_keyboard_led_state().num_lock) {
         SET_LED_ON(NUM_LOCK_INDEX);
@@ -587,8 +582,14 @@ bool led_update_kb(led_t led_state) {
 }
 
 void LED_NONE_INDICATORS_KB(void) {
+    if (get_transport() == TRANSPORT_USB) {
+#    if defined(RGB_DISABLE_WHEN_USB_SUSPENDED) || defined(LED_DISABLE_WHEN_USB_SUSPENDED)
+        if (USB_DRIVER.state == USB_SUSPENDED) {
+            return;
+        }
+#    endif
+    }
     os_state_indicate();
-    LED_DRIVER.flush();
 }
 
 #    if defined(LED_MATRIX_DRIVER_SHUTDOWN_ENABLE) || defined(RGB_MATRIX_DRIVER_SHUTDOWN_ENABLE)
