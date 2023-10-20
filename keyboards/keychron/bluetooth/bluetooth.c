@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <string.h>
 #include "action.h"
 #include "quantum.h"
 #include "bluetooth.h"
@@ -291,7 +292,16 @@ uint8_t bluetooth_keyboard_leds(void) {
 extern keymap_config_t keymap_config;
 
 void bluetooth_send_keyboard(report_keyboard_t *report) {
-    if (bt_state == BLUETOOTH_PARING && !pincodeEntry) return;
+    /* Prevent keys from not bouncing back after shutdown due to low power */
+    if (battery_is_critical_low()) {
+        report_keyboard_t empty_report;
+        memset(&empty_report, 0, sizeof(empty_report));
+        if (memcmp(keyboard_report, &empty_report, sizeof(report_keyboard_t)) != 0) {
+            return;
+        }
+    }
+
+    if ((bt_state == BLUETOOTH_PARING && !pincodeEntry)) return;
 
     if (bt_state == BLUETOOTH_CONNECTED || (bt_state == BLUETOOTH_PARING && pincodeEntry)) {
 #if defined(NKRO_ENABLE)
@@ -388,14 +398,17 @@ void bluetooth_send_extra(report_extra_t *report) {
 }
 
 void bluetooth_low_battery_shutdown(void) {
+    // static report_keyboard_t *report;
+
 #if defined(BAT_LOW_LED_PIN) || defined(BAT_LOW_LED_PIN_STATE)
     indicator_battery_low_enable(false);
 #endif
 #if defined(LOW_BAT_IND_INDEX)
     indicator_battery_low_backlit_enable(false);
 #endif
+
     clear_keyboard();
-    send_keyboard_report();
+    wait_ms(50);
 
     bluetooth_disconnect();
 }

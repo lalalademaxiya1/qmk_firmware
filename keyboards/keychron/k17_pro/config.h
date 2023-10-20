@@ -21,8 +21,7 @@
 #define LED_DISABLE_WHEN_USB_SUSPENDED
 
 /* DIP switch */
-#define DIP_SWITCH_PINS \
-    { A8 }
+#define DIP_SWITCH_PINS { A8 }
 
 /* Caps lock LED Pin */
 #define LED_CAPS_LOCK_PIN A4
@@ -95,5 +94,4 @@
 #define FN_KEY2 MO(3)
 
 /* HC595 driver configure */
-#define HC595_START_INDEX 0
 #define HC595_END_INDEX 19
