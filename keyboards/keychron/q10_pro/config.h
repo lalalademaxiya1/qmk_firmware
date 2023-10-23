@@ -75,10 +75,9 @@
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
 
+/* HC595 driver configure */
+#define HC595_END_INDEX 19
+
 /* Factory test keys */
 #define FN_KEY1 MO(1)
 #define FN_KEY2 MO(3)
-
-/* HC595 driver configure */
-#define HC595_START_INDEX 0
-#define HC595_END_INDEX 19

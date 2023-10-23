@@ -76,7 +76,6 @@
 #endif
 
 /* HC595 Driver Configuration */
-#define HC595_START_INDEX 0
 #define HC595_END_INDEX 18
 
 /* Factory test keys */
