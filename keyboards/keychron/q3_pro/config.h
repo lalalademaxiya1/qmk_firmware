@@ -41,19 +41,9 @@
 #    define USB_POWER_SENSE_PIN B1
 #    define USB_POWER_CONNECTED_LEVEL 0
 
-#    define BAT_LOW_LED_PIN_STATE 1
-
-#    define HOST_DEVICES_COUNT 3
-
 #    if defined(RGB_MATRIX_ENABLE)
 
 #        define LED_DRIVER_SHUTDOWN_PIN C14
-
-#        define HOST_LED_MATRIX_LIST \
-            { 17, 18, 19 }
-
-#        define BAT_LEVEL_LED_LIST \
-            { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
 
 /* Backlit disable timeout when keyboard is disconnected(unit: second) */
 #        define DISCONNECTED_BACKLIGHT_DISABLE_TIMEOUT 40
@@ -81,9 +71,6 @@
 /* Emulated EEPROM configuration */
 #define FEE_DENSITY_BYTES FEE_PAGE_SIZE
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 2047
-
-/* Old default behavior of mod-taps */
-#define HOLD_ON_OTHER_KEY_PRESS
 
 /* Factory test keys */
 #define FN_KEY1 MO(1)

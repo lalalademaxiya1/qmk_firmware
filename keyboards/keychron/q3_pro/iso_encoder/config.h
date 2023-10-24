@@ -23,31 +23,46 @@
 #    define DRIVER_ADDR_2 0b1110100
 
 /* RGB Matrix Configuration */
-#    define RGB_MATRIX_LED_COUNT 104
+#    define DRIVER_1_LED_COUNT 47
+#    define DRIVER_2_LED_COUNT 41
+#    define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_COUNT + DRIVER_2_LED_COUNT)
 
 /* Set to infinit, which is use in USB mode by default */
 #    define RGB_MATRIX_TIMEOUT RGB_MATRIX_TIMEOUT_INFINITE
 
-/* Allow to shutdown driver to save power */
+/* Allow shutdown of led driver to save power */
 #    define RGB_MATRIX_DRIVER_SHUTDOWN_ENABLE
 
-/* Turn off backllit if brightness value is low */
-#    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
+/* Turn off backlight on low brightness to save power */
+#    define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 32
 
-/* Indication led index */
-#    define NUM_LOCK_INDEX 34
-#    define CAPS_LOCK_INDEX 56
-#    define DIM_CAPS_LOCK
-#    define LOW_BAT_IND_INDEX 95
+/* Indication led */
+#    define CAPS_LOCK_INDEX 49
+#    define LOW_BAT_IND_INDEX 80
 
-/* RGB Matrix Animation modes. Explicitly enabled
- * For full list of effects, see:
- * https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
- */
+// RGB Matrix Animation modes. Explicitly enabled
+// For full list of effects, see:
+// https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #    define RGB_MATRIX_KEYPRESSES
 
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#    define PHASE_CHANNEL MSKPHASE_9CHANNEL
+
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE \
-        { 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18 }
+        { 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28, 0x28 }
+
+#    ifdef KC_BLUETOOTH_ENABLE
+#        define HOST_DEVICES_COUNT 3
+#        define HOST_LED_MATRIX_LIST \
+            { 17, 18, 19 }
+#        define BAT_LEVEL_LED_LIST \
+            { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 }
+#    endif
+#endif
+
+#ifdef KC_BLUETOOTH_ENABLE
+#    define BAT_LOW_LED_PIN A10
+#    define BAT_LOW_LED_PIN_ON_STATE 1
 #endif

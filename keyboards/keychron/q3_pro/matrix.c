@@ -16,11 +16,41 @@
 
 #include "quantum.h"
 
-#define HC595_STCP B0
-#define HC595_SHCP A1
-#define HC595_DS A7
+#ifndef HC595_STCP
+#    define HC595_STCP B0
+#endif
+#ifndef HC595_SHCP
+#    define HC595_SHCP A1
+#endif
+#ifndef HC595_DS
+#    define HC595_DS A7
+#endif
 
-#define DIRECT_COL_NUM 0
+#ifndef HC595_START_INDEX
+#    define HC595_START_INDEX 0
+#endif
+#ifndef HC595_END_INDEX
+#    define HC595_END_INDEX 15
+#endif
+#ifndef HC595_OFFSET_INDEX
+#    define HC595_OFFSET_INDEX 0
+#endif
+
+#if defined(HC595_START_INDEX) && defined(HC595_END_INDEX)
+#    if ((HC595_END_INDEX - HC595_START_INDEX + 1) > 16)
+#        define SIZE_T uint32_t
+#        define UNSELECT_ALL_COL 0xFFFFFFFF
+#        define SELECT_ALL_COL 0x00000000
+#    elif ((HC595_END_INDEX - HC595_START_INDEX + 1) > 8)
+#        define SIZE_T uint16_t
+#        define UNSELECT_ALL_COL 0xFFFF
+#        define SELECT_ALL_COL 0x0000
+#    else
+#        define SIZE_T uint8_t
+#        define UNSELECT_ALL_COL 0xFF
+#        define SELECT_ALL_COL 0x00
+#    endif
+#endif
 
 pin_t row_pins[MATRIX_ROWS] = MATRIX_ROW_PINS;
 pin_t col_pins[MATRIX_COLS] = MATRIX_COL_PINS;
@@ -49,90 +79,77 @@ static inline void HC595_delay(uint16_t n) {
     }
 }
 
-static void HC595_output(uint16_t data) {
+static void HC595_output(SIZE_T data, bool bit_flag) {
     uint8_t n = 1;
-    uint8_t i;
 
-    for (i = 0; i < (MATRIX_COLS - DIRECT_COL_NUM); i++) {
-        writePinLow(HC595_SHCP);
-        if (data & 0x1) {
-            writePinHigh(HC595_DS);
-        } else {
-            writePinLow(HC595_DS);
+    ATOMIC_BLOCK_FORCEON {
+        for (uint8_t i = 0; i < (HC595_END_INDEX - HC595_START_INDEX + 1); i++) {
+            if (data & 0x1) {
+                writePinHigh(HC595_DS);
+            } else {
+                writePinLow(HC595_DS);
+            }
+            writePinHigh(HC595_SHCP);
+            HC595_delay(n);
+            writePinLow(HC595_SHCP);
+            HC595_delay(n);
+            if (bit_flag) {
+                break;
+            } else {
+                data = data >> 1;
+            }
         }
+        writePinHigh(HC595_STCP);
         HC595_delay(n);
-        writePinHigh(HC595_SHCP);
+        writePinLow(HC595_STCP);
         HC595_delay(n);
-
-        data = data >> 1;
     }
-    writePinLow(HC595_STCP);
-    HC595_delay(n);
-    writePinHigh(HC595_STCP);
-}
-
-static void HC595_output_bit(uint16_t data) {
-    uint8_t n = 1;
-
-    writePinLow(HC595_SHCP);
-    if (data & 0x1) {
-        writePinHigh(HC595_DS);
-    } else {
-        writePinLow(HC595_DS);
-    }
-    HC595_delay(n);
-
-    writePinHigh(HC595_SHCP);
-    HC595_delay(n);
-
-    writePinLow(HC595_STCP);
-    HC595_delay(n);
-    writePinHigh(HC595_STCP);
 }
 
 static void select_col(uint8_t col) {
-    if (col < DIRECT_COL_NUM) {
+    if (col < HC595_START_INDEX || col > HC595_END_INDEX) {
         setPinOutput_writeLow(col_pins[col]);
     } else {
-        if (col == DIRECT_COL_NUM) {
-            HC595_output_bit(0x00);
+        if (col == HC595_START_INDEX) {
+            HC595_output(0x00, true);
+            if (col < HC595_OFFSET_INDEX) HC595_output(0x01, true);
         }
     }
 }
 
 static void unselect_col(uint8_t col) {
-    if (col < DIRECT_COL_NUM) {
+    if (col < HC595_START_INDEX || col > HC595_END_INDEX) {
 #ifdef MATRIX_UNSELECT_DRIVE_HIGH
         setPinOutput_writeHigh(col_pins[col]);
 #else
         setPinInputHigh(col_pins[col]);
 #endif
     } else {
-        HC595_output_bit(0x01);
+        HC595_output(0x01, true);
     }
 }
 
 static void unselect_cols(void) {
-    for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        if (x < DIRECT_COL_NUM) {
+    for (uint8_t col = 0; col < MATRIX_COLS; col++) {
+        if (col < HC595_START_INDEX || col > HC595_END_INDEX) {
 #ifdef MATRIX_UNSELECT_DRIVE_HIGH
-            setPinOutput_writeHigh(col_pins[x]);
+            setPinOutput_writeHigh(col_pins[col]);
 #else
-            setPinInputHigh(col_pins[x]);
+            setPinInputHigh(col_pins[col]);
 #endif
         } else {
-            if (x == DIRECT_COL_NUM) HC595_output(0xFFFF);
+            if (col == HC595_START_INDEX) HC595_output(UNSELECT_ALL_COL, false);
             break;
         }
     }
 }
 
 void select_all_cols(void) {
-    for (uint8_t x = 0; x < MATRIX_COLS; x++) {
-        if (x < DIRECT_COL_NUM) {
-            setPinOutput_writeLow(col_pins[x]);
+    for (uint8_t col = 0; col < MATRIX_COLS; col++) {
+        if (col < HC595_START_INDEX || col > HC595_END_INDEX) {
+            setPinOutput_writeLow(col_pins[col]);
         } else {
-            if (x == DIRECT_COL_NUM) HC595_output(0x0000);
+            if (col == HC595_START_INDEX) HC595_output(SELECT_ALL_COL, false);
             break;
         }
     }
@@ -140,7 +157,7 @@ void select_all_cols(void) {
 
 static void matrix_read_rows_on_col(matrix_row_t current_matrix[], uint8_t current_col, matrix_row_t row_shifter) {
     // Select col
-    select_col(current_col);
+    select_col(current_col); // select col
     HC595_delay(200);
 
     // For each row...
@@ -187,4 +204,9 @@ bool matrix_scan_custom(matrix_row_t current_matrix[]) {
     if (changed) memcpy(current_matrix, curr_matrix, sizeof(curr_matrix));
 
     return changed;
+}
+
+void suspend_wakeup_init_kb(void) {
+    // code will run on keyboard wakeup
+    clear_keyboard();
 }

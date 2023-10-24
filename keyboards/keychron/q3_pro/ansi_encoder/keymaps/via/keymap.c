@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 
+// clang-format off
 enum layers{
   MAC_BASE,
   MAC_FN,
@@ -23,7 +24,6 @@ enum layers{
   WIN_FN,
 };
 
-// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAC_BASE] = LAYOUT_tkl_f13_ansi(
         KC_ESC,   KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LPAD,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,    KC_MUTE,    KC_SNAP,  KC_SIRI,  RGB_MOD,

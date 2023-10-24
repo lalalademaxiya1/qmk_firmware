@@ -3,6 +3,7 @@
 ![Keychron Q3 Pro](https://i.imgur.com/wTueyKr.jpg)
 
 A customizable 80% TKL keyboard.
+The rev1 has four macro keys on the left while rev2 does not, Go to Keychron official website to see more.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
 * Hardware Supported: Keychron Q3 Pro

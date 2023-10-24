@@ -1,7 +1,7 @@
 {
      "usb": {
-    	"pid": "0x0209",
-    	"device_version": "1.0.1"
+    	"pid": "0x020A",
+    	"device_version": "1.0.0"
     },
     "features": {
         "led_matrix": true
@@ -80,17 +80,16 @@
             {"matrix":[2, 10], "flags":4, "x":122, "y":26},
             {"matrix":[2, 11], "flags":4, "x":134, "y":26},
             {"matrix":[2, 12], "flags":4, "x":146, "y":26},
-            {"matrix":[2, 14], "flags":1, "x":160, "y":26},
             {"matrix":[2, 15], "flags":1, "x":176, "y":26},
             {"matrix":[2, 16], "flags":4, "x":189, "y":26},
             {"matrix":[2, 17], "flags":4, "x":201, "y":26},
             {"matrix":[2, 18], "flags":4, "x":212, "y":26},
             {"matrix":[2, 19], "flags":4, "x":224, "y":33},
 
-            {"matrix":[3, 0],  "flags":8, "x":4,   "y":39},
+            {"matrix":[3, 0],  "flags":1, "x":4,   "y":39},
             {"matrix":[3, 1],  "flags":4, "x":20,  "y":39},
             {"matrix":[3, 2],  "flags":4, "x":32,  "y":39},
-            {"matrix":[3, 3],  "flags":4, "x":43,  "y":39},
+            {"matrix":[3, 3],  "flags":4, "x":44,  "y":39},
             {"matrix":[3, 4],  "flags":4, "x":55,  "y":39},
             {"matrix":[3, 5],  "flags":4, "x":67,  "y":39},
             {"matrix":[3, 6],  "flags":4, "x":79,  "y":39},
@@ -99,13 +98,15 @@
             {"matrix":[3, 9],  "flags":4, "x":114, "y":39},
             {"matrix":[3, 10], "flags":4, "x":125, "y":39},
             {"matrix":[3, 11], "flags":4, "x":137, "y":39},
-            {"matrix":[3, 13], "flags":1, "x":156, "y":39},
+            {"matrix":[3, 13], "flags":1, "x":149, "y":39},
+            {"matrix":[2, 14], "flags":1, "x":162, "y":33},
             {"matrix":[3, 15], "flags":1, "x":176, "y":39},
             {"matrix":[3, 16], "flags":4, "x":189, "y":39},
             {"matrix":[3, 17], "flags":4, "x":201, "y":39},
             {"matrix":[3, 18], "flags":4, "x":212, "y":39},
 
-            {"matrix":[4, 0],  "flags":1, "x":7,   "y":51},
+            {"matrix":[4, 0],  "flags":1, "x":1,   "y":51},
+            {"matrix":[4, 1],  "flags":1, "x":15,  "y":51},
             {"matrix":[4, 2],  "flags":4, "x":26,  "y":51},
             {"matrix":[4, 3],  "flags":4, "x":38,  "y":51},
             {"matrix":[4, 4],  "flags":4, "x":50,  "y":51},
