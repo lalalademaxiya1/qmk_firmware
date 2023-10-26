@@ -292,7 +292,7 @@ uint8_t bluetooth_keyboard_leds(void) {
 extern keymap_config_t keymap_config;
 
 void bluetooth_send_keyboard(report_keyboard_t *report) {
-    /* Prevent keys from not bouncing back after shutdown due to low power */
+    /* Release all keys before  low battery shutting down */
     if (battery_is_critical_low()) {
         report_keyboard_t empty_report;
         memset(&empty_report, 0, sizeof(empty_report));
