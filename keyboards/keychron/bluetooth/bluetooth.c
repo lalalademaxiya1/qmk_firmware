@@ -292,6 +292,7 @@ uint8_t bluetooth_keyboard_leds(void) {
 extern keymap_config_t keymap_config;
 
 void bluetooth_send_keyboard(report_keyboard_t *report) {
+
     if (battery_is_critical_low()) {
         report_keyboard_t empty_report;
         memset(&empty_report, 0, sizeof(empty_report));
@@ -399,15 +400,20 @@ void bluetooth_send_extra(report_extra_t *report) {
 void bluetooth_low_battery_shutdown(void) {
     // static report_keyboard_t *report;
 
+
 #if defined(BAT_LOW_LED_PIN) || defined(BAT_LOW_LED_PIN_STATE)
     indicator_battery_low_enable(false);
 #endif
 #if defined(LOW_BAT_IND_INDEX)
     indicator_battery_low_backlit_enable(false);
-#endif
-
-    clear_keyboard();
-    wait_ms(50);
+#endif    
+    clear_keyboard();  
+    report_buffer_init();    
+    wait_ms(200);
+    report_keyboard_t empty_report;
+    memset(&empty_report, 0, sizeof(empty_report));
+    bluetooth_send_keyboard(&empty_report);
+    wait_ms(200);
 
     bluetooth_disconnect();
 }
