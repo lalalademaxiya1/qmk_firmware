@@ -158,6 +158,14 @@ static void encoder_pad_cb(void *param) {
 #endif
 
 void keyboard_post_init_kb(void) {
+
+    pin_t encoders_pad_a1[NUM_ENCODERS_MAX_PER_SIDE] = ENCODERS_PAD_A;
+    pin_t encoders_pad_b1[NUM_ENCODERS_MAX_PER_SIDE] = ENCODERS_PAD_B;
+    for (uint8_t i = 0; i < NUM_ENCODERS_MAX_PER_SIDE; i++) {
+        setPinInput(encoders_pad_a1[i]);
+        setPinInput(encoders_pad_b1[i]);
+    }
+
     dip_switch_read(true);
 
 #ifdef KC_BLUETOOTH_ENABLE
