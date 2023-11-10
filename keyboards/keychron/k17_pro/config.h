@@ -24,8 +24,8 @@
 #define DIP_SWITCH_PINS { A8 }
 
 /* Caps lock LED Pin */
-#define LED_CAPS_LOCK_PIN A4
-#define LED_PIN_ON_STATE 1
+//#define LED_CAPS_LOCK_PIN A4
+//#define LED_PIN_ON_STATE 1
 
 /* Increase I2C speed to 1000 KHz */
 #define I2C1_TIMINGR_PRESC 0U
