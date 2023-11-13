@@ -104,7 +104,7 @@ bool battery_power_on_sample(void) {
 
 void battery_task(void) {
     uint32_t t = rtc_timer_elapsed_ms(bat_monitor_timer_buffer);
-    if (get_transport() == TRANSPORT_BLUETOOTH && bluetooth_get_state() == BLUETOOTH_CONNECTED) {
+    if (get_transport() == TRANSPORT_BLUETOOTH && (bluetooth_get_state() == BLUETOOTH_CONNECTED||battery_power_on_sample())){
         if ((battery_power_on_sample()
 #if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
              && !indicator_is_enabled()

@@ -407,9 +407,14 @@ void bluetooth_low_battery_shutdown(void) {
     indicator_battery_low_backlit_enable(false);
 #endif
 
-    clear_keyboard();
-    wait_ms(50);
-
+    clear_keyboard();  
+    report_buffer_init();    
+    wait_ms(1000);
+    report_keyboard_t empty_report;
+    memset(&empty_report, 0, sizeof(empty_report));
+    bluetooth_send_keyboard(&empty_report);
+    wait_ms(1000);
+    
     bluetooth_disconnect();
 }
 
